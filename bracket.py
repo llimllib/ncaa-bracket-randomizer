@@ -182,7 +182,10 @@ out = file("out.html", "w")
 #TODO: better randomizer
 out.write("""
 <html><head><title>Bill Mill Bracket Randomizer</title>
-<script src="jquery-1.3.2.min.js" type="text/javascript"></script>
+<script src="js/jquery-1.3.2.min.js" type="text/javascript"></script>
+<link type="text/css" href="css/ui-lightness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />    
+<script type="text/javascript" src="js/jquery-ui-1.7.2.custom.min.js"></script>
+
 <script>
 rounds = {0:0, 1: 32, 2: 48, 3:56, 4:60, 5:62, 6:63};
 
@@ -232,26 +235,43 @@ function randomize() {
       }
       var topp = parsepoints(that);
       var oppp = parsepoints(opp);
-      var a = topp[1];
-      var b = oppp[1];
+
+      zomg = that;
+      zigg = opp;
+
+      var favorite = topp[1] > oppp[1] ? that : opp;
+      var underdog = topp[1] < oppp[1] ? that : opp;
+
+      var a = parsepoints(favorite)[1];
+      var b = parsepoints(underdog)[1];
 
       //use the log5 formula
       var log5 = (a - a * b) / (a + b - 2 * a * b);
 
-      var highest = (Math.max(log5, 1-log5) - .5) * 2;
-      var green = "#00" + parseInt(255 * highest).toString(16) + "00";
-      var red = "#" + parseInt(255 * highest).toString(16) + "0000";
-      if (log5 > .5) {
-        that.css("color", green);
-        opp.css("color", red);
-      } else {
-        that.css("color", red);
-        opp.css("color", green);
-      }
+      var pct = (log5 - .5) * 2;
+      var green = "#00" + parseInt(255 * pct).toString(16) + "00";
+      var red = "#" + parseInt(255 * pct).toString(16) + "0000";
+      favorite.css("color", green);
+      underdog.css("color", red);
 
       //console.log(topp[0] + " vs " + oppp[0] + " %: ", log5);
-
-      log5 > Math.random() ? that.click() : opp.click();
+      
+      if (amount_of_randomness == 0) {
+        favorite.click();
+      }
+      else {
+        for (j=0; j < (4-amount_of_randomness); j++) {
+          fav_wins = false;
+          if (log5 > Math.random()) {
+            favorite.click();
+            fav_wins = true;
+            break;
+          }
+        }
+        if (!fav_wins) {
+          underdog.click();
+        }
+      }
     });
   }
 }
@@ -262,6 +282,22 @@ $(document).ready(function() {
   }
   $("td.top > span.round-1").each(function(i) { $(this).parent().css("height", "30px").css("vertical-align", "bottom"); })
   $("#randomize").click(function() { randomize(); });
+
+  amount_of_randomness = 3;
+
+  // Slider
+  $('#slider').slider({
+    min: 0,
+    max: 3,
+    step: 1,
+    value: amount_of_randomness,
+    slide: function(event, ui) {
+      amount_of_randomness = parseInt(ui.value);
+      //console.log("amount of randomness:", amount_of_randomness, ui);
+      var labels = ["None", "Almost None", "Some", "Lots"];
+      $("#desc").html(labels[amount_of_randomness])
+    }
+  });
 });
 </script>
 <style>
@@ -270,10 +306,16 @@ $(document).ready(function() {
 .middle { border-right: 1px solid #aaaaaa; padding: 0px 5px 0px 5px; }
 tr { padding-bottom: 10px; font-size: 12px; }
 span { cursor: pointer; }
+#slider { width: 200px; }
+body { font: 16px serif; }
+/* fix the jquery UI text size changing */
+#text { font: 16px serif; padding-right: 20px;}
+#desc { margin-left: 20px; }
 </style>
 </head>
 <body>
-Check out the <a href="http://billmill.org/ncaa_randomizer.html">blog article explaining what this is about</a>.
+<p>Check out the <a href="http://billmill.org/ncaa_randomizer.html">blog article explaining what this is about</a>.
+<p><table><tr><td id="text">Randomness:</td><td><div id="slider"></div></td><td id="text"><span id="desc">Lots</span></td></tr></table>
 <p><input type="submit" id="randomize" value="randomize"><table cellspacing=0 width=1200 style='table-layout:fixed'>
 """)
 out.write(t.tableize())
