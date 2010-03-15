@@ -1,0 +1,519 @@
+
+<html><head><title>Bill Mill Bracket Randomizer</title>
+<script src="js/jquery-1.3.2.min.js" type="text/javascript"></script>
+<link type="text/css" href="css/ui-lightness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />    
+<script type="text/javascript" src="js/jquery-ui-1.7.2.custom.min.js"></script>
+
+<script>
+rounds = {0:0, 1: 16, 2: 24, 3: 28, 4:30, 5:31};
+
+function handleClick(that) {
+  var atts = that.attr("class");
+  var game = parseFloat(atts.match(/game-(\d+)/)[1]);
+  var round = parseFloat(atts.match(/round-(\d+)/)[1]);
+  var game_parity = (game - rounds[round-1]) % 2 == 0 ? 1 : 0;
+  if (round < 3) {
+    var nextgame = (Math.ceil((game-rounds[round-1])/2) + rounds[round]).toString();
+    var firstorlast = game_parity ? ":last" : ":first";
+  }
+  else {
+    if (game == 25 || game == 27) {
+      var nextgame = 29;
+      var firstorlast = game == 25 ? ":first" : ":last";
+    }
+    else if (game==26 || game==28) {
+      var nextgame = 30;
+      var firstorlast = game == 26 ? ":first" : ":last";
+    }
+    else if (game == 29 || game == 30) {
+      var nextgame = 31;
+      var firstorlast = game == 29 ? ":first" : ":last";
+    }
+    else if (game == 31) {
+      var nextgame = 32;
+      var firstorlast = ":first";
+    }
+  }
+  that.click(function() {
+    //console.log("game, round, nextgame, (g-r[r-1]) ", game, round, nextgame, game - rounds[round-1], firstorlast);
+    $(".game-" + nextgame + firstorlast).html(that.html());
+  });
+}
+
+function randomize() {
+  for (i=0; i < 6; i++) {
+    $("td.top > span.round-" + i).each(function(_) {
+      var that = $(this);
+      var atts = that.attr("class");
+      var game = atts.match(/game-\d+/)[0];
+      var opp = $("." + game + ":last");
+      function parsepoints(obj) {
+        console.log(obj);
+        p = obj.html().match(/(.*?) \((.\d+), (\d+\.\d+), (\d+\.\d+)/);
+        return [p[1], parseFloat(p[2]), parseFloat(p[3]), parseFloat(p[4])]
+      }
+      var topp = parsepoints(that);
+      var oppp = parsepoints(opp);
+
+      var favorite = topp[1] > oppp[1] ? that : opp;
+      var underdog = topp[1] < oppp[1] ? that : opp;
+
+      var a = parsepoints(favorite)[1];
+      var b = parsepoints(underdog)[1];
+
+      //use the log5 formula
+      var log5 = (a - a * b) / (a + b - 2 * a * b);
+
+      var pct = (log5 - .5) * 2;
+      var green = "#00" + parseInt(255 * pct).toString(16) + "00";
+      var red = "#" + parseInt(255 * pct).toString(16) + "0000";
+      favorite.css("color", green);
+      underdog.css("color", red);
+
+      //console.log(topp[0] + " vs " + oppp[0] + " %: ", log5);
+      
+      if (amount_of_randomness == 0) {
+        favorite.click();
+      }
+      else {
+        for (j=0; j < (4-amount_of_randomness); j++) {
+          fav_wins = false;
+          if (log5 > Math.random()) {
+            favorite.click();
+            fav_wins = true;
+            break;
+          }
+        }
+        if (!fav_wins) {
+          underdog.click();
+        }
+      }
+    });
+  }
+}
+
+$(document).ready(function() {
+  for (i=0; i < 8; i++) {
+    $(".round-" + i).each(function(i) { handleClick($(this)); });
+  }
+  $("td.top > span.round-1").each(function(i) { $(this).parent().css("height", "30px").css("vertical-align", "bottom"); })
+  $("#randomize").click(function() { randomize(); });
+
+  amount_of_randomness = 3;
+
+  // Slider
+  $('#slider').slider({
+    min: 0,
+    max: 3,
+    step: 1,
+    value: amount_of_randomness,
+    slide: function(event, ui) {
+      amount_of_randomness = parseInt(ui.value);
+      //console.log("amount of randomness:", amount_of_randomness, ui);
+      var labels = ["None", "Almost None", "Some", "Lots"];
+      $("#desc").html(labels[amount_of_randomness])
+    }
+  });
+});
+</script>
+<style>
+.top {  border-bottom: 1px solid #aaaaaa; padding: 0px 5px 0px 5px; }
+.bottom { border-bottom: 1px solid #aaaaaa; border-right: 1px solid #aaaaaa; padding: 0px 5px 0px 5px; }
+.middle { border-right: 1px solid #aaaaaa; padding: 0px 5px 0px 5px; }
+tr { padding-bottom: 10px; font-size: 12px; }
+span { cursor: pointer; }
+#slider { width: 200px; }
+body { font: 16px serif; }
+/* fix the jquery UI text size changing */
+#text { font: 16px serif; padding-right: 20px;}
+#desc { margin-left: 20px; }
+</style>
+</head>
+<body>
+<p>Go Uconn!.
+<p><table><tr><td id="text">Randomness:</td><td><div id="slider"></div></td><td id="text"><span id="desc">Lots</span></td></tr></table>
+<p><input type="submit" id="randomize" value="randomize"><table cellspacing=0 width=1200 style='table-layout:fixed'>
+<tr>
+<td class="top" width="200">1. <span class="round-1 game-1"
+                            >Illinois (.8691, 108.5, 92.0)</span></td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="middle">&nbsp;</td>
+<td class="top" width="180">&nbsp;<span
+                            class="round-2 game-17"></span>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="bottom">8. <span class="round-1 game-1"
+                            >Stony Brook (.4511, 100.8, 102.5)</span></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="top" width="200">4. <span class="round-1 game-2"
+                            >Kent St. (.7651, 105.4, 95.1)</span></td>
+<td class="middle">&nbsp;</td>
+<td class="top" width="180">&nbsp;<span
+                            class="round-3 game-25"></span>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="middle">&nbsp;</td>
+<td class="bottom">&nbsp;<span class="round-2 game-17"></span>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="bottom">5. <span class="round-1 game-2"
+                            >Tulsa (.7858, 106.0, 94.7)</span></td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="top" width="200">3. <span class="round-1 game-3"
+                            >Dayton (.8837, 106.0, 88.8)</span></td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="top" width="180">&nbsp;<span
+                            class="round-4 game-29"></span>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="middle">&nbsp;</td>
+<td class="top" width="180">&nbsp;<span
+                            class="round-2 game-18"></span>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="bottom">6. <span class="round-1 game-3"
+                            >Illinois St. (.7529, 106.7, 96.8)</span></td>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="top" width="200">2. <span class="round-1 game-4"
+                            >Cincinnati (.8123, 105.8, 93.2)</span></td>
+<td class="middle">&nbsp;</td>
+<td class="bottom">&nbsp;<span class="round-3 game-25"></span>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="middle">&nbsp;</td>
+<td class="bottom">&nbsp;<span class="round-2 game-18"></span>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="bottom">7. <span class="round-1 game-4"
+                            >Weber St. (.6844, 107.8, 100.7)</span></td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="top" width="200">1. <span class="round-1 game-9"
+                            >Arizona St. (.8922, 110.1, 91.6)</span></td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="middle">&nbsp;</td>
+<td class="top" width="180">&nbsp;<span
+                            class="round-2 game-21"></span>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="top" width="180">&nbsp;<span
+                            class="round-5 game-31"></span>
+<td class="none"></td>
+<tr>
+<td class="bottom">8. <span class="round-1 game-9"
+                            >Jacksonville (.5510, 100.3, 98.6)</span></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="top" width="200">4. <span class="round-1 game-10"
+                            >Seton Hall (.8389, 112.2, 97.2)</span></td>
+<td class="middle">&nbsp;</td>
+<td class="top" width="180">&nbsp;<span
+                            class="round-3 game-27"></span>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="middle">&nbsp;</td>
+<td class="bottom">&nbsp;<span class="round-2 game-21"></span>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="bottom">5. <span class="round-1 game-10"
+                            >Texas Tech (.7791, 107.0, 95.9)</span></td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="top" width="200">3. <span class="round-1 game-11"
+                            >Memphis (.8718, 114.1, 96.6)</span></td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="bottom">&nbsp;<span class="round-4 game-29"></span>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="middle">&nbsp;</td>
+<td class="top" width="180">&nbsp;<span
+                            class="round-2 game-22"></span>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="bottom">6. <span class="round-1 game-11"
+                            >St. John's (.8268, 105.7, 92.2)</span></td>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="top" width="200">2. <span class="round-1 game-12"
+                            >Mississippi (.8666, 112.6, 95.7)</span></td>
+<td class="middle">&nbsp;</td>
+<td class="bottom">&nbsp;<span class="round-3 game-27"></span>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="middle">&nbsp;</td>
+<td class="bottom">&nbsp;<span class="round-2 game-22"></span>
+<td class="none"></td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="bottom">7. <span class="round-1 game-12"
+                            >Troy (.4932, 103.3, 103.6)</span></td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="top" width="180">&nbsp;<span
+                            class="round-6 game-32"></span>
+<tr>
+<td class="top" width="200">1. <span class="round-1 game-5"
+                            >Virginia Tech (.9101, 107.4, 87.8)</span></td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="middle">&nbsp;</td>
+<td class="top" width="180">&nbsp;<span
+                            class="round-2 game-19"></span>
+<td class="none"></td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="bottom">8. <span class="round-1 game-5"
+                            >Quinnipiac (.4359, 101.8, 104.1)</span></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="top" width="200">4. <span class="round-1 game-6"
+                            >Connecticut (.8653, 106.8, 90.8)</span></td>
+<td class="middle">&nbsp;</td>
+<td class="top" width="180">&nbsp;<span
+                            class="round-3 game-26"></span>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="middle">&nbsp;</td>
+<td class="bottom">&nbsp;<span class="round-2 game-19"></span>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="bottom">5. <span class="round-1 game-6"
+                            >Northeastern (.7968, 104.6, 92.9)</span></td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="top" width="200">3. <span class="round-1 game-7"
+                            >Wichita St. (.8121, 108.2, 95.3)</span></td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="top" width="180">&nbsp;<span
+                            class="round-4 game-30"></span>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="middle">&nbsp;</td>
+<td class="top" width="180">&nbsp;<span
+                            class="round-2 game-20"></span>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="bottom">6. <span class="round-1 game-7"
+                            >Nevada (.7335, 111.3, 101.9)</span></td>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="top" width="200">2. <span class="round-1 game-8"
+                            >Rhode Island (.8047, 112.7, 99.7)</span></td>
+<td class="middle">&nbsp;</td>
+<td class="bottom">&nbsp;<span class="round-3 game-26"></span>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="middle">&nbsp;</td>
+<td class="bottom">&nbsp;<span class="round-2 game-20"></span>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="bottom">7. <span class="round-1 game-8"
+                            >Northwestern (.7933, 113.0, 100.6)</span></td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<tr>
+<td class="top" width="200">1. <span class="round-1 game-13"
+                            >Mississippi St. (.8926, 109.3, 90.9)</span></td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="bottom">&nbsp;<span class="round-5 game-31"></span>
+<td class="none"></td>
+<tr>
+<td class="middle">&nbsp;</td>
+<td class="top" width="180">&nbsp;<span
+                            class="round-2 game-23"></span>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="bottom">8. <span class="round-1 game-13"
+                            >Jackson St. (.1682, 90.7, 104.2)</span></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="top" width="200">4. <span class="round-1 game-14"
+                            >North Carolina (.8341, 106.6, 92.7)</span></td>
+<td class="middle">&nbsp;</td>
+<td class="top" width="180">&nbsp;<span
+                            class="round-3 game-28"></span>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="middle">&nbsp;</td>
+<td class="bottom">&nbsp;<span class="round-2 game-23"></span>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="bottom">5. <span class="round-1 game-14"
+                            >William & Mary (.6677, 107.6, 101.3)</span></td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="top" width="200">3. <span class="round-1 game-15"
+                            >South Florida (.7861, 106.6, 95.2)</span></td>
+<td class="none"></td>
+<td class="middle">&nbsp;</td>
+<td class="bottom">&nbsp;<span class="round-4 game-30"></span>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="middle">&nbsp;</td>
+<td class="top" width="180">&nbsp;<span
+                            class="round-2 game-24"></span>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="bottom">6. <span class="round-1 game-15"
+                            >North Carolina St. (.8438, 107.0, 92.4)</span></td>
+<td class="middle">&nbsp;</td>
+<td class="middle">&nbsp;</td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="top" width="200">2. <span class="round-1 game-16"
+                            >UAB (.8184, 103.5, 90.8)</span></td>
+<td class="middle">&nbsp;</td>
+<td class="bottom">&nbsp;<span class="round-3 game-28"></span>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="middle">&nbsp;</td>
+<td class="bottom">&nbsp;<span class="round-2 game-24"></span>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<tr>
+<td class="bottom">7. <span class="round-1 game-16"
+                            >Coastal Carolina (.5621, 100.4, 98.3)</span></td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td>
+<td class="none"></td></table></body></html>
