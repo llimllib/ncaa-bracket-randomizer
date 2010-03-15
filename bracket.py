@@ -236,9 +236,6 @@ function randomize() {
       var topp = parsepoints(that);
       var oppp = parsepoints(opp);
 
-      zomg = that;
-      zigg = opp;
-
       var favorite = topp[1] > oppp[1] ? that : opp;
       var underdog = topp[1] < oppp[1] ? that : opp;
 
