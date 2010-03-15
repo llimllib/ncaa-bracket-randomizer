@@ -238,7 +238,7 @@ function randomize() {
       //use the log5 formula
       var log5 = (a - a * b) / (a + b - 2 * a * b);
 
-      var highest = Math.max(log5, 1-log5);
+      var highest = (Math.max(log5, 1-log5) - .5) * 2;
       var green = "#00" + parseInt(255 * highest).toString(16) + "00";
       var red = "#" + parseInt(255 * highest).toString(16) + "0000";
       if (log5 > .5) {
