@@ -181,7 +181,7 @@ out = file("out.html", "w")
 #TODO: color teams based on pythagorean diff
 #TODO: better randomizer
 out.write("""
-<html><head>
+<html><head><title>Bill Mill Bracket Randomizer</title>
 <script src="jquery-1.3.2.min.js" type="text/javascript"></script>
 <script>
 rounds = {0:0, 1: 32, 2: 48, 3:56, 4:60, 5:62, 6:63};
@@ -269,7 +269,9 @@ tr { padding-bottom: 10px; font-size: 12px; }
 span { cursor: pointer; }
 </style>
 </head>
-<body><input type="submit" id="randomize" value="randomize"><table cellspacing=0 width=1200 style='table-layout:fixed'>
+<body>
+Check out the <a href="http://billmill.org/ncaa_randomizer.html">blog article explaining what this is about</a>.
+<p><input type="submit" id="randomize" value="randomize"><table cellspacing=0 width=1200 style='table-layout:fixed'>
 """)
 out.write(t.tableize())
 out.write("</table></body></html>")
