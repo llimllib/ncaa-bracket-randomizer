@@ -1,10 +1,10 @@
 import re
 from math import ceil, floor
 
-bracket = eval(file("teams.dat").read())
+bracket = eval(file("2010teams.dat").read())
 
 teamre = '\s*(\d+) <a href="[^"]+">([^<]+)</a>\s*<a href=.*?</a></a>\s*(\d+-\d+)\s*(\.\d+)\s*([\d.]*)\/(\d+)\s*([\d.]*)\/(\d+)'
-kenpom = [x.groups() for x in [re.search(teamre, line) for line in file("kenpom.html")] if x]
+kenpom = [x.groups() for x in [re.search(teamre, line) for line in file("pom2010.html")] if x]
 #kenpom is a list of tuples:
 #(rank, name, record, pythagorean score, adjusted O, adj O rank, adjusted D, adj D rank)
 kenpom = dict((x[1], x) for x in kenpom)
@@ -246,7 +246,7 @@ function randomize() {
         that.css("color", "#" + parseInt(255 * log5).toString(16) + "0000");
       }
 
-      console.log(topp[0] + " vs " + oppp[0] + " %: ", log5);
+      //console.log(topp[0] + " vs " + oppp[0] + " %: ", log5);
 
       log5 > Math.random() ? that.click() : opp.click();
     });
