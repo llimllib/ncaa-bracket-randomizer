@@ -30,7 +30,8 @@ class Game(object):
         self.rows = [None, None]
 
     def advance(self, team):
-        assert (self.team1 == team) or (self.team2 == team)
+        assert team in (self.team1, self.team2)
+
         if self.isupper:
             self.child.team1 = team
         else:

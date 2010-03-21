@@ -2,6 +2,7 @@ from get_games import get_games, get_kenpom
 from results import actual_winners
 from random import Random
 from copy import deepcopy
+from cPickle import load, dump
 
 rand = Random().random
 
@@ -106,34 +107,102 @@ def possible_points(games):
                     p += this_rounds_pts
     return p
 
-for model in models:
-    repetitions = 1000 if model.mutable else 1
-    ncorrect_bins = {}
-    possible_point_bins = {}
+def test_models(n_reps):
+    results = {}
+    for model in models:
+        repetitions = n_reps if model.mutable else 1
+        ncorrect_bins = {}
+        possible_point_bins = {}
 
-    for i in range(repetitions):
-        ncorrect = 0
-        for round in range(1,7):
-            for game in (g for g in games if g.round==round):
-                game.predicted = model(game)
-                game.advance(game.predicted)
-                if hasattr(game, 'winner') and game.winner == game.predicted:
-                    ncorrect += 1
+        for i in range(repetitions):
+            ncorrect = 0
+            for round in range(1,7):
+                for game in (g for g in games if g.round==round):
+                    game.predicted = model(game)
+                    game.advance(game.predicted)
+                    if hasattr(game, 'winner') and game.winner == game.predicted:
+                        ncorrect += 1
 
-        if ncorrect not in ncorrect_bins:
-            ncorrect_bins[ncorrect] = 1
-        else:
-            ncorrect_bins[ncorrect] += 1
+            if ncorrect not in ncorrect_bins:
+                ncorrect_bins[ncorrect] = 1
+            else:
+                ncorrect_bins[ncorrect] += 1
 
-        p = possible_points(games)
-        if not p in possible_point_bins:
-            possible_point_bins[p] = 1
-        else:
-            possible_point_bins[p] += 1
+            p = possible_points(games)
+            if not p in possible_point_bins:
+                possible_point_bins[p] = 1
+            else:
+                possible_point_bins[p] += 1
 
+        if repetitions == 1:
+            ncorrect_bins[ncorrect_bins.keys()[0]] *= n_reps / 2
+            possible_point_bins[possible_point_bins.keys()[0]] *= n_reps / 4
 
-    print "model %s avg: %s, distribution: %s, possible points: %s" % (
-        str(model),
-        average(list(ncorrect_bins.iteritems())),
-        sorted([(k,v) for k,v in ncorrect_bins.iteritems()]),
-        sorted([(k,v) for k,v in possible_point_bins.iteritems()]))
+        ncorrect_list = sorted([[k,v] for k,v in ncorrect_bins.iteritems()])
+        possible_list = sorted([[k,v] for k,v in possible_point_bins.iteritems()])
+
+        print "model %s avg: %s, distribution: %s" % (
+            str(model), average(list(ncorrect_bins.iteritems())), ncorrect_list)
+
+        results[str(model)] = (ncorrect_list, possible_list)
+
+    return results
+
+#dump(test_models(10000), file("test_models.pkl", "w"))
+results = load(file("test_models.pkl"))
+
+out = file("analyze.html", "w")
+
+ncorrect_data = []
+possible_data = []
+for model, (ncorrect, possible) in results.iteritems():
+    if len(ncorrect) > 1:
+        ncorrect_data.append("{label: '%(model)s', data: %(ncorrect)s}" % locals())
+        possible_data.append("{label: '%(model)s', data: %(possible)s}" % locals())
+    else:
+        #this makes it so that a line will be drawn to the single point.
+        k,v = ncorrect[0]
+        ncorrect.append([k-.0001, 0])
+        k,v = possible[0]
+        possible.append([k-.0001, 0])
+
+        ncorrect_data.append("{label: '%(model)s', data: %(ncorrect)s}" % locals())
+        possible_data.append("{label: '%(model)s', data: %(possible)s}" % locals())
+ncorrect_data = ",".join(ncorrect_data)
+possible_data = ",".join(possible_data)
+
+out.write("""
+<html><head><title>Analyze</title>
+<script language="javascript" type="text/javascript" src="flot/jquery.js"></script> 
+<script language="javascript" type="text/javascript" src="flot/jquery.flot.js"></script> 
+<script>
+function log10 (arg) {
+    return Math.log(arg)/Math.LN10;
+}
+
+$(function () {
+    var options = {
+        legend: {position: 'nw'},
+        /*yaxis: {
+            transform: function (v) { return log10(v); },
+            inverseTransform: function (v) { return Math.pow(10, v); }
+        },*/
+        series: {
+            lines: { show: true },
+        }}
+    $.plot($("#ncorrect"), [%(ncorrect_data)s], options);
+    $.plot($("#possible"), [%(possible_data)s], options);
+    options.xaxis = {min:100, max:200}
+    $.plot($("#possiblezoom"), [%(possible_data)s], options);
+});
+</script>
+</head>
+<body>
+    <div id="ncorrect" style="width:600px;height:400px"></div> 
+    <div id="possible" style="width:600px;height:400px"></div> 
+    <div id="possiblezoom" style="width:600px;height:400px"></div> 
+</body>
+</html>
+""" % locals())
+
+out.close()
