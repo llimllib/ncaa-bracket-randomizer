@@ -31,4 +31,22 @@ actual_winners = {
         "Wake Forest",
         "Kansas",
         "New Mexico",
-        "Tennessee"])}
+        "Tennessee"]),
+2: set(["St. Mary's",
+        "Butler",
+        "Northern Iowa",
+        "Tennessee",
+        "Baylor",
+        "Washington",
+        "Kentucky",
+        "Kansas St.",
+        "Ohio St.",
+        "Michigan St.",
+        "Cornell",
+        "West Virginia",
+        "Xavier",
+        "Purdue",
+        "Duke",
+        "Syracuse",
+      ])
+}

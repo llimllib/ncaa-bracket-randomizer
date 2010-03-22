@@ -28,9 +28,22 @@ class Game(object):
         #is this the upper game or the lower game? <bool>
         self.isupper = None
         self.rows = [None, None]
+        self.winner = None
+
+    def advance_predicted(self, team):
+        assert team in (self.team1, self.team2)
+        
+        self.predicted_winner = team
+
+        if self.isupper:
+            self.child.team1 = team
+        else:
+            self.child.team2 = team
 
     def advance(self, team):
         assert team in (self.team1, self.team2)
+        
+        self.winner = team
 
         if self.isupper:
             self.child.team1 = team
@@ -38,8 +51,10 @@ class Game(object):
             self.child.team2 = team
 
     def __repr__(self):
-        return "%s vs %s round %s game %s region %s rows %s" % (self.team1[0],
-            self.team2[0], self.round, self.gameno, self.region, self.rows)
+        n1 = self.team1.name if self.team1 else ""
+        n2 = self.team2.name if self.team2 else ""
+        return "%s vs %s round %s game %s region %s rows %s" % (n1,
+            n2, self.round, self.gameno, self.region, self.isupper)
 
 def get_kenpom():
     """return a list of tuples:

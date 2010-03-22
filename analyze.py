@@ -46,7 +46,7 @@ class KenPomRandomModel(object):
 
 class SeedModel(object):
     def __init__(self):
-        self.mutable = False
+        self.mutable = True 
 
     def __call__(self, game):
         t1, t2 = game.team1, game.team2
@@ -66,7 +66,7 @@ class PureRandomModel(object):
     def __str__(self): return "Pure Random Model"
 
 models = [KenPomStrictModel(), KenPomRandomModel(1), KenPomRandomModel(2),
-          KenPomRandomModel(3), SeedModel(), PureRandomModel()]
+          KenPomRandomModel(3), KenPomRandomModel(4), SeedModel(), PureRandomModel()]
 #DEBUGGING TODO DELETEME
 #models = [KenPomStrictModel()]
 kenpom = get_kenpom()
@@ -76,8 +76,12 @@ for round in actual_winners:
     for team in actual_winners[round]:
         assert any(True for t in kenpom if t.name==team)
         for game in (g for g in games if g.round==round):
-            if game.team1.name == team:   game.winner = game.team1; break
-            elif game.team2.name == team: game.winner = game.team2; break
+            if game.team1 and game.team1.name == team:
+                game.advance(game.team1)
+                break
+            elif game.team2 and game.team2.name == team:
+                game.advance(game.team2)
+                break
 
 def average(a):
     """Average a list of tuples of the form (value, number of items with that value)"""
@@ -95,15 +99,16 @@ def possible_points(games):
     for round in range(1,7):
         this_rounds_pts = 2**(round-1)
         for game in (g for g in games if g.round==round):
-            if hasattr(game, 'winner'):
-                if game.winner == game.predicted:
+            #if the game has been played in real life, compare to reality
+            if game.winner:
+                if game.winner == game.predicted_winner:
                     #if the game was correctly predicted, add the points
                     p += this_rounds_pts
                 else:
                     #otherwise, the predicted team has been eliminated
-                    eliminated.add(game.predicted)
+                    eliminated.add(game.predicted_winner)
             else:
-                if game.predicted not in eliminated:
+                if game.predicted_winner not in eliminated:
                     p += this_rounds_pts
     return p
 
@@ -118,10 +123,10 @@ def test_models(n_reps):
             ncorrect = 0
             for round in range(1,7):
                 for game in (g for g in games if g.round==round):
-                    game.predicted = model(game)
-                    game.advance(game.predicted)
-                    if hasattr(game, 'winner') and game.winner == game.predicted:
-                        ncorrect += 1
+                    predicted = model(game)
+                    game.advance_predicted(predicted)
+                    if game.winner == predicted:
+                            ncorrect += 1
 
             if ncorrect not in ncorrect_bins:
                 ncorrect_bins[ncorrect] = 1
@@ -134,7 +139,7 @@ def test_models(n_reps):
             else:
                 possible_point_bins[p] += 1
 
-        if repetitions == 1:
+        if repetitions == 1 and n_reps > 1:
             ncorrect_bins[ncorrect_bins.keys()[0]] *= n_reps / 2
             possible_point_bins[possible_point_bins.keys()[0]] *= n_reps / 4
 
@@ -156,7 +161,7 @@ out = file("analyze.html", "w")
 ncorrect_data = []
 possible_data = []
 for model, (ncorrect, possible) in results.iteritems():
-    if len(ncorrect) > 1:
+    if len(possible) > 1:
         ncorrect_data.append("{label: '%(model)s', data: %(ncorrect)s}" % locals())
         possible_data.append("{label: '%(model)s', data: %(possible)s}" % locals())
     else:
@@ -168,8 +173,8 @@ for model, (ncorrect, possible) in results.iteritems():
 
         ncorrect_data.append("{label: '%(model)s', data: %(ncorrect)s}" % locals())
         possible_data.append("{label: '%(model)s', data: %(possible)s}" % locals())
-ncorrect_data = ",".join(ncorrect_data)
-possible_data = ",".join(possible_data)
+ncorrect_data = ",".join(sorted(ncorrect_data))
+possible_data = ",".join(sorted(possible_data))
 
 out.write("""
 <html><head><title>Analyze</title>
@@ -183,16 +188,13 @@ function log10 (arg) {
 $(function () {
     var options = {
         legend: {position: 'nw'},
-        /*yaxis: {
-            transform: function (v) { return log10(v); },
-            inverseTransform: function (v) { return Math.pow(10, v); }
-        },*/
         series: {
             lines: { show: true },
         }}
     $.plot($("#ncorrect"), [%(ncorrect_data)s], options);
     $.plot($("#possible"), [%(possible_data)s], options);
-    options.xaxis = {min:100, max:200}
+    options.xaxis = {min:75, max:150}
+    options.yaxis = {max:1000}
     $.plot($("#possiblezoom"), [%(possible_data)s], options);
 });
 </script>
