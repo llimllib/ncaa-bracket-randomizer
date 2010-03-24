@@ -94,8 +94,10 @@ def average(a):
 
 def possible_points(games):
     """points scored + how many points could still be scored?"""
-    p = 0
+    possible = 0
+    actual = 0
     eliminated = set([])
+
     for round in range(1,7):
         this_rounds_pts = 2**(round-1)
         for game in (g for g in games if g.round==round):
@@ -103,14 +105,16 @@ def possible_points(games):
             if game.winner:
                 if game.winner == game.predicted_winner:
                     #if the game was correctly predicted, add the points
-                    p += this_rounds_pts
+                    possible += this_rounds_pts
+                    actual += this_rounds_pts
                 else:
                     #otherwise, the predicted team has been eliminated
                     eliminated.add(game.predicted_winner)
             else:
                 if game.predicted_winner not in eliminated:
-                    p += this_rounds_pts
-    return p
+                    possible += this_rounds_pts
+
+    return (actual, possible)
 
 def test_models(n_reps):
     results = {}
@@ -118,6 +122,7 @@ def test_models(n_reps):
         repetitions = n_reps if model.mutable else 1
         ncorrect_bins = {}
         possible_point_bins = {}
+        actual_point_bins = {}
 
         for i in range(repetitions):
             ncorrect = 0
@@ -128,28 +133,25 @@ def test_models(n_reps):
                     if game.winner == predicted:
                             ncorrect += 1
 
-            if ncorrect not in ncorrect_bins:
-                ncorrect_bins[ncorrect] = 1
-            else:
-                ncorrect_bins[ncorrect] += 1
+            ncorrect_bins[ncorrect] = ncorrect_bins.setdefault(ncorrect, 0) + 1
 
-            p = possible_points(games)
-            if not p in possible_point_bins:
-                possible_point_bins[p] = 1
-            else:
-                possible_point_bins[p] += 1
+            a, p = possible_points(games)
+            possible_point_bins[p] = possible_point_bins.setdefault(p, 0) + 1
+            actual_point_bins[a] = actual_point_bins.setdefault(a, 0) + 1
 
         if repetitions == 1 and n_reps > 1:
             ncorrect_bins[ncorrect_bins.keys()[0]] *= n_reps / 2
             possible_point_bins[possible_point_bins.keys()[0]] *= n_reps / 4
+            actual_point_bins[actual_point_bins.keys()[0]] *= n_reps / 4
 
         ncorrect_list = sorted([[k,v] for k,v in ncorrect_bins.iteritems()])
         possible_list = sorted([[k,v] for k,v in possible_point_bins.iteritems()])
+        actual_list = sorted([[k,v] for k,v in actual_point_bins.iteritems()])
 
         print "model %s avg: %s, distribution: %s" % (
             str(model), average(list(ncorrect_bins.iteritems())), ncorrect_list)
 
-        results[str(model)] = (ncorrect_list, possible_list)
+        results[str(model)] = (ncorrect_list, possible_list, actual_list)
 
     return results
 
@@ -160,21 +162,33 @@ out = file("analyze.html", "w")
 
 ncorrect_data = []
 possible_data = []
-for model, (ncorrect, possible) in results.iteritems():
-    if len(possible) > 1:
+actual_data = []
+for model, (ncorrect, possible, actual) in results.iteritems():
+    if len(ncorrect) > 1:
         ncorrect_data.append("{label: '%(model)s', data: %(ncorrect)s}" % locals())
-        possible_data.append("{label: '%(model)s', data: %(possible)s}" % locals())
     else:
-        #this makes it so that a line will be drawn to the single point.
+        #draw a line as a single point.
         k,v = ncorrect[0]
         ncorrect.append([k-.0001, 0])
+        ncorrect_data.append("{label: '%(model)s', data: %(ncorrect)s}" % locals())
+
+    if len(possible) > 1:
+        possible_data.append("{label: '%(model)s', data: %(possible)s}" % locals())
+    else:
         k,v = possible[0]
         possible.append([k-.0001, 0])
-
-        ncorrect_data.append("{label: '%(model)s', data: %(ncorrect)s}" % locals())
         possible_data.append("{label: '%(model)s', data: %(possible)s}" % locals())
+
+    if len(actual) > 1:
+        actual_data.append("{label: '%(model)s', data: %(actual)s}" % locals())
+    else:
+        k,v = actual[0]
+        actual.append([k-.0001, 0])
+        actual_data.append("{label: '%(model)s', data: %(actual)s}" % locals())
+
 ncorrect_data = ",".join(sorted(ncorrect_data))
 possible_data = ",".join(sorted(possible_data))
+actual_data = ",".join(sorted(actual_data))
 
 out.write("""
 <html><head><title>Analyze</title>
@@ -188,14 +202,19 @@ function log10 (arg) {
 $(function () {
     var options = {
         legend: {position: 'nw'},
+        yaxis: {max: 5000},
         series: {
             lines: { show: true },
         }}
     $.plot($("#ncorrect"), [%(ncorrect_data)s], options);
     $.plot($("#possible"), [%(possible_data)s], options);
+    $.plot($("#actual"), [%(actual_data)s], options);
     options.xaxis = {min:75, max:150}
     options.yaxis = {max:1000}
     $.plot($("#possiblezoom"), [%(possible_data)s], options);
+    options.xaxis = {min:158}
+    options.yaxis = {max:10}
+    $.plot($("#possiblezoom2"), [%(possible_data)s], options);
 });
 </script>
 </head>
@@ -203,6 +222,8 @@ $(function () {
     <div id="ncorrect" style="width:600px;height:400px"></div> 
     <div id="possible" style="width:600px;height:400px"></div> 
     <div id="possiblezoom" style="width:600px;height:400px"></div> 
+    <div id="possiblezoom2" style="width:600px;height:400px"></div> 
+    <div id="actual" style="width:600px;height:400px"></div> 
 </body>
 </html>
 """ % locals())
