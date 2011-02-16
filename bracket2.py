@@ -9,6 +9,8 @@ table = [['<td>&nbsp;</td>']*13 for _ in range(64)]
 
 #this year the west plays the southeast and the southwest plays the east.
 #but we'll pretend with last year's data that the midwest plays the west
+#TODO assign numbers to teams
+
 upper = False
 for game in range(1,33):
     nextroundgame = int(floor((game/2.)+.5))

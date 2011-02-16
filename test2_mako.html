@@ -1,8 +1,8 @@
 <html><head><title>test</title>
 <style>
 table { border-spacing: 0px 0px; }
-[game][side="left"] { width: 140px; border-right: 1px solid black; }
-[game][side="right"] { width: 140px; border-left: 1px solid black; }
+[game][side="left"] { min-width: 140px;  min-height: 20px; border-right: 1px solid black; }
+[game][side="right"] { min-width: 140px; min-height: 20px;  border-left: 1px solid black; }
 
 /* must go after [game] so border-right: None takes effect */
 [upper][side="left"] { border-bottom: 1px solid black; border-right: None; }
