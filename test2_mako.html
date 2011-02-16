@@ -1,0 +1,88 @@
+<html><head><title>test</title>
+<style>
+table { border-spacing: 0px 0px; }
+[game][side="left"] { width: 140px; border-right: 1px solid black; }
+[game][side="right"] { width: 140px; border-left: 1px solid black; }
+
+/* must go after [game] so border-right: None takes effect */
+[upper][side="left"] { border-bottom: 1px solid black; border-right: None; }
+[upper][side="right"] { border-bottom: 1px solid black; border-left: None; }
+
+[lower][side="left"] { border-bottom: 1px solid black; border-right: 1px solid black; }
+[lower][side="right"] { border-bottom: 1px solid black; border-left: 1px solid black; }
+</style>
+<script src="js/jquery-1.5.min.js" type="text/javascript"></script>
+<script>
+//TODO: write a dummy console function so console.log doesn't kill shitty browsers
+//TODO: add all my "vars". skipping for now because it eases debug
+
+function selector(name, value) { return "[" + name + "='" + value + "']" } 
+
+/* given ints for round and game, return an array
+[next round int, next game int, "u" or "l"] */
+function nextGame(round, game) {
+    console.log("bleh: ", [round+1,
+            Math.floor((game/2)+.6),
+            game%2 == 1 ? "u"  : "l"], round, game);
+    return [round+1,
+            Math.floor((game/2)+.6),
+            game%2 == 1 ? "u"  : "l"];
+}
+
+/* clear the forward path for a team.
+
+i.e. if I click team A, but I had previously picked team B to go all the way to
+the finals, I should remove B from all games up to the finals */
+function clearForwardInvalid(opp, round) {
+    $("[game] > [team="+opp+"]").each(function(_, elt) {
+        game = $(elt).parent();
+        if (parseInt(game.attr("round")) > round) {
+            game.html("&nbsp;");
+        }
+    });
+}
+
+function teamClick(evt) {
+    console.log("clicked on ", evt.target.attributes.team);
+    link = $(evt.target);
+    
+    dest = evt.target.attributes.href.value.substr(1).split("-");
+
+    roundsel = selector("round", dest[0]);
+    gamesel = selector("game", dest[1]);
+    ulsel = selector(dest[2] == "u" ? "upper" : "lower", "");
+
+    next = nextGame(parseInt(dest[0]), parseInt(dest[1]))
+
+    copytgt = $(link.parent().html());
+    nextlink = copytgt.attr("href",  '#' + next.join("-"));
+    nextlink.click(teamClick);
+
+    nextcell = $(roundsel+gamesel+ulsel);
+
+    team = link.attr("team")
+    opp = nextcell.children().attr("team")
+    if (nextcell.children().length && opp != team) {
+        clearForwardInvalid(opp, parseInt(dest[0]));
+    }
+
+    nextcell.html(nextlink);
+}
+
+$(document).ready(function() {
+    $("a[team]").click(teamClick);
+});
+</script>
+</head>
+<body>
+<table>
+%for row in table:
+    <tr>
+    %for col in row:
+        ${col}
+    %endfor
+    </tr>
+%endfor
+</table>
+</body>
+</html>
