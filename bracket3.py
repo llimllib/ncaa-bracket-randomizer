@@ -81,7 +81,7 @@ for game in range(1, 3):
     table[row+25][col] = '<td round=5 game=%s lower="" side="%s"></td>' % (game, side)
 
 table[17][5]  = '<td round=6 game=1 upper="" side="left"></td>'
-table[27][-6] = '<td round=6 game=1 upper="" side="right"></td>'
+table[27][-6] = '<td round=6 game=1 lower="" side="right"></td>'
 
 table[22][6] = '<td round=7 game=1 upper="" side="left"></td>'
 
