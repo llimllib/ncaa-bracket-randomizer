@@ -83,6 +83,6 @@ for game in range(1, 3):
 table[17][5]  = '<td round=6 game=1 upper="" side="left"></td>'
 table[27][-6] = '<td round=6 game=1 lower="" side="right"></td>'
 
-table[22][6] = '<td round=7 game=1 upper="" side="left"></td>'
+table[22][6] = '<td round=7 game=1 upper="" lower="" side="left"></td>'
 
 file("kumquats.html", 'w').write(Template(filename="test3_mako.html").render(table=table, spacers=spacers))
