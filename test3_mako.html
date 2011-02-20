@@ -29,6 +29,57 @@ td[round='7'] {min-width: 60px; max-width: 60px; }
 <script>
 //TODO: write a dummy console function so console.log doesn't kill shitty browsers
 //TODO: add all my "vars". skipping for now because it eases debug
+//TODO: here's the old randomize function. make it work!
+//function randomize() {
+//  for (i=0; i < 7; i++) {
+//    $("td.top > span.round-" + i).each(function(_) {
+//      var that = $(this);
+//      var atts = that.attr("class");
+//      var game = atts.match(/game-\d+/)[0];
+//      var opp = $("." + game + ":last");
+//      function parsepoints(obj) {
+//        p = obj.html().match(/(.*?) \((.\d+), (\d+\.\d+), (\d+\.\d+)/);
+//        return [p[1], parseFloat(p[2]), parseFloat(p[3]), parseFloat(p[4])]
+//      }
+//      var topp = parsepoints(that);
+//      var oppp = parsepoints(opp);
+//
+//      var favorite = topp[1] > oppp[1] ? that : opp;
+//      var underdog = topp[1] < oppp[1] ? that : opp;
+//
+//      var a = parsepoints(favorite)[1];
+//      var b = parsepoints(underdog)[1];
+//
+//      //use the log5 formula
+//      var log5 = (a - a * b) / (a + b - 2 * a * b);
+//
+//      var pct = (log5 - .5) * 2;
+//      var green = "#00" + parseInt(255 * pct).toString(16) + "00";
+//      var red = "#" + parseInt(255 * pct).toString(16) + "0000";
+//      favorite.css("color", green);
+//      underdog.css("color", red);
+//
+//      //console.log(topp[0] + " vs " + oppp[0] + " %: ", log5);
+//      
+//      if (amount_of_randomness == 0) {
+//        favorite.click();
+//      }
+//      else {
+//        for (j=0; j < (4-amount_of_randomness); j++) {
+//          fav_wins = false;
+//          if (log5 > Math.random()) {
+//            favorite.click();
+//            fav_wins = true;
+//            break;
+//          }
+//        }
+//        if (!fav_wins) {
+//          underdog.click();
+//        }
+//      }
+//    });
+//  }
+//}
 
 function selector(name, value) { return "[" + name + "='" + value + "']" } 
 
