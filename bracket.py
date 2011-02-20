@@ -85,7 +85,7 @@ table[27][-6] = '<td round=6 game=1 lower="" side="right"></td>'
 
 table[22][6] = '<td round=7 game=1 upper="" lower="" side="left"></td>'
 
-file("kumquats.html", 'w').write(Template(filename="test3_mako.html").render(table=table, spacers=spacers))
+file("kumquats.html", 'w').write(Template(filename="bracket_template.html").render(table=table, spacers=spacers))
 
 #kenpom data notes:
 #raw tempo, raw tempo rank, adj tempo, adj tempo rank, raw OE, raw OE rank, adj OE, adj OE rank, raw DE, raw DE rank, adj DE, adjDE rank, kenpom ranking, kenpom rank
