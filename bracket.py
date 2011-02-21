@@ -1,91 +1,142 @@
 from math import floor
 from mako.template import Template
 
-bkt = eval(file("teams.dat").read())
+def output_bracket(kenpom_teams):
+    bkt = eval(file("teams.dat").read())
 
-# 11 columns = len(round 1,2,3,4,5,6,5,4,3,2,1)
-# 64 rows = 2 for every team per side
-table = [['<td></td>']*13 for _ in range(47)]
+    # 13 columns = len(round 0,1,2,3,4,5,6,7,6,5,4,3,2,1,0)
+    # 47 rows = 1 for every team per side + 15 spacers
+    table = [['<td></td>']*17 for _ in range(47)]
 
-#this year the west plays the southeast and the southwest plays the east.
-game_order = [1,8,5,4,6,3,7,2]
-divs = ["West", "Southeast", "Southwest", "East"]
-tid = 1
-teams = {}
-for div in divs:
-    for game in game_order:
-        teams[tid] = bkt[div][game]
-        tid += 1
-        teams[tid] = bkt[div][17-game]
-        tid += 1
-print teams
+    #this year the west plays the southeast and the southwest plays the east.
+    game_order = [1,8,5,4,6,3,7,2,-1]
+    divs = ["West", "Southeast", "Southwest", "East"]
+    tid = 1
+    qtid = -1
+    teams = {}
+    for div in divs:
+        for game in game_order:
+            #TODO
+            #assert bkt[div][game] in kenpom_teams
+            #assert bkt[div][17-game] in kenpom_teams
 
-spacers = []
+            if game == 1:
+                teams[tid] = bkt[div][game]
+                tid += 2
+            elif game == -1:
+                qa, qb = bkt[div][16]
 
-for game in range(1,33):
-    nextroundgame = int(floor((game/2.)+.5))
-    nextup = "u" if game%2==1 else "l"
-    side = "left" if game < 17 else "right"
+                teams[tid] = qa
+                tid += 1
+                teams[tid] = qb
+                tid += 1
+            else:
+                teams[tid] = bkt[div][game]
+                tid += 1
+                teams[tid] = bkt[div][17-game]
+                tid += 1
 
-    col = 0 if game < 17 else -1
-    row = ((game-1)%16) * 3
+    spacers = []
 
-    spacers.append(row+2)
+    #qualifiers
+    table[1][0] = '<td round=0 game=1 upper="" side="left"><a team=17 href="#1-1-l">%s</a></td>' % teams[17]
+    table[2][0] = '<td round=0 game=1 side="left"></td>'
+    table[3][0] = '<td round=0 game=1 lower="" side="left"><a team=18 href="#1-1-l">%s</a></td>' % teams[18]
+    table[1][1] = '<td bottom=""></td>'
 
-    tid = (game-1)*2+1
-    table[row][col] = '<td round=1 game=%s upper="" side="%s"><a team=%s href="#2-%s-%s">%s</a></td>' % (game, side, tid, nextroundgame, nextup, teams[tid])
-    table[row+1][col] = '<td round=1 game=%s lower="" side="%s"><a team=%s href="#2-%s-%s">%s</a></td>' % (game, side, tid+1, nextroundgame, nextup, teams[tid+1])
+    table[25][0] = '<td round=0 game=1 upper="" side="left"><a team=17 href="#1-9-l">%s</a></td>' % teams[35]
+    table[26][0] = '<td round=0 game=1 side="left"></td>'
+    table[27][0] = '<td round=0 game=1 lower="" side="left"><a team=18 href="#1-9-l">%s</a></td>' % teams[36]
+    table[25][1] = '<td bottom=""></td>'
 
-for game in range(1, 17):
-    side = "left" if game < 9 else "right"
-    
-    col = 1 if game < 9 else -2
-    row = ((game-1) % 8)*6
+    table[1][-1] = '<td round=0 game=1 upper="" side="right"><a team=17 href="#1-17-l">%s</a></td>' % teams[17]
+    table[2][-1] = '<td round=0 game=1 side="right"></td>'
+    table[3][-1] = '<td round=0 game=1 lower="" side="right"><a team=18 href="#1-17-l">%s</a></td>' % teams[18]
+    table[1][-2] = '<td bottom=""></td>'
 
-    table[row][col] = '<td round=2 game=%s upper="" side="%s"></td>' % (game, side)
-    for i in range(1, 3):
-        table[row+i][col] = '<td round=2 game=%s side="%s"></td>' % (game, side)
-    table[row+3][col] = '<td round=2 game=%s lower="" side="%s"></td>' % (game, side)
+    table[25][-1] = '<td round=0 game=1 upper="" side="right"><a team=17 href="#1-25-l">%s</a></td>' % teams[35]
+    table[26][-1] = '<td round=0 game=1 side="right"></td>'
+    table[27][-1] = '<td round=0 game=1 lower="" side="right"><a team=18 href="#1-25-l">%s</a></td>' % teams[36]
+    table[25][-2] = '<td bottom=""></td>'
 
-for game in range(1, 9):
-    side = "left" if game < 5 else "right"
-    
-    col = 2 if game < 5 else -3
-    row = ((game-1) % 4)*12+1
+    #round one
+    for game in range(1,33):
+        nextroundgame = int(floor((game/2.)+.5))
+        nextup = "u" if game%2==1 else "l"
+        side = "left" if game < 17 else "right"
 
-    table[row][col] = '<td round=3 game=%s upper="" side="%s"></td>' % (game, side)
-    for i in range(1,6):
-        table[row+i][col] = '<td round=3 game=%s side="%s"></td>' % (game, side)
-    table[row+6][col] = '<td round=3 game=%s lower="" side="%s"></td>' % (game, side)
+        col = 2 if game < 17 else -3
+        row = ((game-1)%16) * 3
 
-for game in range(1, 5):
-    side = "left" if game < 3 else "right"
-    
-    col = 3 if game < 3 else -4
-    row = ((game-1) % 2)*24+4
+        spacers.append(row+2)
 
-    table[row][col] = '<td round=4 game=%s upper="" side="%s"></td>' % (game, side)
-    for i in range(1,14):
-        table[row+i][col] = '<td round=4 game=%s side="%s"></td>' % (game, side)
-    table[row+14][col] = '<td round=4 game=%s lower="" side="%s"></td>' % (game, side)
+        tid = floor((game-1)/8)*18+((game-1)%8)*2+1
+        table[row][col] = '<td round=1 game=%s upper="" side="%s"><a team=%s href="#2-%s-%s">%s</a></td>' % (game, side, tid, nextroundgame, nextup, teams[tid])
+        if game not in [1,9,17,25]:
+            table[row+1][col] = '<td round=1 game=%s lower="" side="%s"><a team=%s href="#2-%s-%s">%s</a></td>' % (game, side, tid+1, nextroundgame, nextup, teams[tid+1])
+        else:
+            table[row+1][col] = '<td round=1 game=%s lower="" side="%s">&nbsp;</td>' % (game, side)
 
-for game in range(1, 3):
-    side = "left" if game == 1 else "right"
-    
-    col = 4 if game == 1 else -5
-    row = 9
+    for game in range(1, 17):
+        side = "left" if game < 9 else "right"
+        
+        col = 3 if game < 9 else -4
+        row = ((game-1) % 8)*6
 
-    table[row][col] = '<td round=5 game=%s upper="" side="%s"></td>' % (game, side)
-    for i in range(1,25):
-        table[row+i][col] = '<td round=5 game=%s side="%s"></td>' % (game, side)
-    table[row+25][col] = '<td round=5 game=%s lower="" side="%s"></td>' % (game, side)
+        table[row][col] = '<td round=2 game=%s upper="" side="%s"></td>' % (game, side)
+        for i in range(1, 3):
+            table[row+i][col] = '<td round=2 game=%s side="%s"></td>' % (game, side)
+        table[row+3][col] = '<td round=2 game=%s lower="" side="%s"></td>' % (game, side)
 
-table[17][5]  = '<td round=6 game=1 upper="" side="left"></td>'
-table[27][-6] = '<td round=6 game=1 lower="" side="right"></td>'
+    for game in range(1, 9):
+        side = "left" if game < 5 else "right"
+        
+        col = 4 if game < 5 else -5
+        row = ((game-1) % 4)*12+1
 
-table[22][6] = '<td round=7 game=1 upper="" lower="" side="left"></td>'
+        table[row][col] = '<td round=3 game=%s upper="" side="%s"></td>' % (game, side)
+        for i in range(1,6):
+            table[row+i][col] = '<td round=3 game=%s side="%s"></td>' % (game, side)
+        table[row+6][col] = '<td round=3 game=%s lower="" side="%s"></td>' % (game, side)
 
-file("kumquats.html", 'w').write(Template(filename="bracket_template.html").render(table=table, spacers=spacers))
+    for game in range(1, 5):
+        side = "left" if game < 3 else "right"
+        
+        col = 5 if game < 3 else -6
+        row = ((game-1) % 2)*24+4
 
-#kenpom data notes:
-#raw tempo, raw tempo rank, adj tempo, adj tempo rank, raw OE, raw OE rank, adj OE, adj OE rank, raw DE, raw DE rank, adj DE, adjDE rank, kenpom ranking, kenpom rank
+        table[row][col] = '<td round=4 game=%s upper="" side="%s"></td>' % (game, side)
+        for i in range(1,14):
+            table[row+i][col] = '<td round=4 game=%s side="%s"></td>' % (game, side)
+        table[row+14][col] = '<td round=4 game=%s lower="" side="%s"></td>' % (game, side)
+
+    for game in range(1, 3):
+        side = "left" if game == 1 else "right"
+        
+        col = 6 if game == 1 else -7
+        row = 9
+
+        table[row][col] = '<td round=5 game=%s upper="" side="%s"></td>' % (game, side)
+        for i in range(1,25):
+            table[row+i][col] = '<td round=5 game=%s side="%s"></td>' % (game, side)
+        table[row+25][col] = '<td round=5 game=%s lower="" side="%s"></td>' % (game, side)
+
+    table[17][7]  = '<td round=6 game=1 upper="" side="left"></td>'
+    table[27][-8] = '<td round=6 game=1 lower="" side="right"></td>'
+
+    table[22][8] = '<td round=7 game=1 upper="" lower="" side="left"></td>'
+
+    file("kumquats.html", 'w').write(Template(filename="bracket_template.html").render(table=table, spacers=spacers))
+
+def read_kenpom():
+    #kenpom data notes:
+    #team, raw tempo, raw tempo rank, adj tempo, adj tempo rank, raw OE, raw OE rank, adj OE, adj OE rank, raw DE, raw DE rank, adj DE, adjDE rank, kenpom ranking, kenpom rank
+    teams = {}
+    for line in file("kenpom_2_17_11.csv"):
+        team, _, _, tempo, temporank, _, _, oe, oerank, _, _, de, derank, kenpom, kenpomrank = line.split(",")
+        teams[team] = (tempo, temporank, oe, oerank, de, derank, kenpom, kenpomrank)
+    return teams
+
+if __name__=="__main__":
+    teams = read_kenpom()
+    output_bracket(teams)

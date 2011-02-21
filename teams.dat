@@ -18,7 +18,7 @@
 
 "West":
 {1: "Connecticut",
-16: "Chattanooga",
+16: ["Alabama St.", "Morehead St."],
 8: "Brigham Young",
 9: "Texas A&M",
 5: "Purdue",
@@ -36,7 +36,7 @@
 
 "East":
 {1: "Pittsburgh",
-16: "East Tennessee St.",
+16: ["Alabama St.", "Morehead St."],
 8: "Oklahoma St.",
 9: "Tennessee",
 5: "Florida St.",
@@ -54,7 +54,7 @@
 
 "Southwest":
 {1: "North Carolina",
-16: "Radford",
+16: ["Alabama St.", "Morehead St."],
 8: "Louisiana St.",
 9: "Butler",
 5: "Illinois",

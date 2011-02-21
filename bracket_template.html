@@ -1,4 +1,6 @@
 <html><head><title>test</title>
+<script src="js/jquery-1.5.min.js" type="text/javascript"></script>
+<script src="js/jquery.ezpz_tooltip.js" type="text/javascript"></script>
 <style>
 table { border-collapse:collapse; table-layout:fixed; }
 tr { overflow:hidden; }
@@ -20,12 +22,14 @@ td[round='7'] {min-width: 60px; max-width: 60px; }
 [upper][side="right"] { border-bottom: 1px solid black; border-left: None; }
 [lower][side='left'] { border-bottom: 1px solid black; border-right: 1px solid black; }
 [lower][side='right'] { border-bottom: 1px solid black; border-left: 1px solid black; border-right: None; }
+[upper][round='0'][side='left'] { border-top: 1px solid black; border-right: 1px solid black; border-bottom: None; }
+[upper][round='0'][side='right'] { border-top: 1px solid black; border-left: 1px solid black; border-bottom: None; }
 [upper][round='1'][side='left'] { border-top: 1px solid black; border-right: 1px solid black; border-bottom: None; }
 [upper][round='1'][side='right'] { border-top: 1px solid black; border-left: 1px solid black; border-bottom: None; }
 [game][round='6'][side='right'] { border-left: None; }
 [game][round='7'] { border-right: None; }
+[bottom] {border-bottom: 1px solid black; width:5px;}
 </style>
-<script src="js/jquery-1.5.min.js" type="text/javascript"></script>
 <script>
 //TODO: write a dummy console function so console.log doesn't kill shitty browsers
 //TODO: add all my "vars". skipping for now because it eases debug
