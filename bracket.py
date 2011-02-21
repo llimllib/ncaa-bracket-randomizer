@@ -17,8 +17,15 @@ def output_bracket(kenpom_teams):
     for div in divs:
         for game in game_order:
             #TODO
-            #assert bkt[div][game] in kenpom_teams
-            #assert bkt[div][17-game] in kenpom_teams
+            if abs(game) == 1:
+                assert bkt[div][1] in kenpom_teams
+
+                a,b = bkt[div][16]
+                assert a in kenpom_teams and b in kenpom_teams
+            else:
+                assert bkt[div][game] in kenpom_teams
+                assert bkt[div][16-game] in kenpom_teams
+                
 
             if game == 1:
                 teams[tid] = bkt[div][game]
