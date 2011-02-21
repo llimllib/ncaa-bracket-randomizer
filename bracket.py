@@ -70,7 +70,7 @@ def output_bracket(kenpom_teams):
 
         spacers.append(row+2)
 
-        tid = floor((game-1)/8)*18+((game-1)%8)*2+1
+        tid = int(floor((game-1)/8)*18+((game-1)%8)*2+1)
         table[row][col] = '<td round=1 game=%s upper="" side="%s"><a team=%s href="#2-%s-%s">%s</a></td>' % (game, side, tid, nextroundgame, nextup, teams[tid])
         if game not in [1,9,17,25]:
             table[row+1][col] = '<td round=1 game=%s lower="" side="%s"><a team=%s href="#2-%s-%s">%s</a></td>' % (game, side, tid+1, nextroundgame, nextup, teams[tid+1])
