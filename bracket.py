@@ -44,19 +44,19 @@ def output_bracket(kenpom_teams):
     table[3][0] = '<td round=0 game=1 lower="" side="left"><a team=18 href="#1-1-l">%s</a></td>' % teams[18]
     table[1][1] = '<td bottom=""></td>'
 
-    table[25][0] = '<td round=0 game=1 upper="" side="left"><a team=17 href="#1-9-l">%s</a></td>' % teams[35]
-    table[26][0] = '<td round=0 game=1 side="left"></td>'
-    table[27][0] = '<td round=0 game=1 lower="" side="left"><a team=18 href="#1-9-l">%s</a></td>' % teams[36]
+    table[25][0] = '<td round=0 game=2 upper="" side="left"><a team=17 href="#1-9-l">%s</a></td>' % teams[35]
+    table[26][0] = '<td round=0 game=2 side="left"></td>'
+    table[27][0] = '<td round=0 game=2 lower="" side="left"><a team=18 href="#1-9-l">%s</a></td>' % teams[36]
     table[25][1] = '<td bottom=""></td>'
 
-    table[1][-1] = '<td round=0 game=1 upper="" side="right"><a team=17 href="#1-17-l">%s</a></td>' % teams[17]
-    table[2][-1] = '<td round=0 game=1 side="right"></td>'
-    table[3][-1] = '<td round=0 game=1 lower="" side="right"><a team=18 href="#1-17-l">%s</a></td>' % teams[18]
+    table[1][-1] = '<td round=0 game=3 upper="" side="right"><a team=17 href="#1-17-l">%s</a></td>' % teams[17]
+    table[2][-1] = '<td round=0 game=3 side="right"></td>'
+    table[3][-1] = '<td round=0 game=3 lower="" side="right"><a team=18 href="#1-17-l">%s</a></td>' % teams[18]
     table[1][-2] = '<td bottom=""></td>'
 
-    table[25][-1] = '<td round=0 game=1 upper="" side="right"><a team=17 href="#1-25-l">%s</a></td>' % teams[35]
-    table[26][-1] = '<td round=0 game=1 side="right"></td>'
-    table[27][-1] = '<td round=0 game=1 lower="" side="right"><a team=18 href="#1-25-l">%s</a></td>' % teams[36]
+    table[25][-1] = '<td round=0 game=4 upper="" side="right"><a team=17 href="#1-25-l">%s</a></td>' % teams[35]
+    table[26][-1] = '<td round=0 game=4 side="right"></td>'
+    table[27][-1] = '<td round=0 game=4 lower="" side="right"><a team=18 href="#1-25-l">%s</a></td>' % teams[36]
     table[25][-2] = '<td bottom=""></td>'
 
     #round one
