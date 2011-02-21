@@ -13,22 +13,22 @@ td[round='5'] {min-width: 60px; max-width: 60px; }
 td[round='6'] {min-width: 60px; max-width: 60px; }
 td[round='7'] {min-width: 60px; max-width: 60px; }
 
-[game][round='1'] { width: 120px; }
-[game][side='left'] { border-right: 1px solid black; }
-[game][side='right'] { border-left: 1px solid black; }
+td[game][round='1'] { width: 120px; }
+td[game][side='left'] { border-right: 1px solid black; }
+td[game][side='right'] { border-left: 1px solid black; }
 
 /* must go after [game] so border-right: None takes effect */
-[upper][side="left"] { border-bottom: 1px solid black; border-right: None; }
-[upper][side="right"] { border-bottom: 1px solid black; border-left: None; }
-[lower][side='left'] { border-bottom: 1px solid black; border-right: 1px solid black; }
-[lower][side='right'] { border-bottom: 1px solid black; border-left: 1px solid black; border-right: None; }
-[upper][round='0'][side='left'] { border-top: 1px solid black; border-right: 1px solid black; border-bottom: None; }
-[upper][round='0'][side='right'] { border-top: 1px solid black; border-left: 1px solid black; border-bottom: None; }
-[upper][round='1'][side='left'] { border-top: 1px solid black; border-right: 1px solid black; border-bottom: None; }
-[upper][round='1'][side='right'] { border-top: 1px solid black; border-left: 1px solid black; border-bottom: None; }
-[game][round='6'][side='right'] { border-left: None; }
-[game][round='7'] { border-right: None; }
-[bottom] {border-bottom: 1px solid black; width:5px;}
+td[upper][side="left"] { border-bottom: 1px solid black; border-right: None; }
+td[upper][side="right"] { border-bottom: 1px solid black; border-left: None; }
+td[lower][side='left'] { border-bottom: 1px solid black; border-right: 1px solid black; }
+td[lower][side='right'] { border-bottom: 1px solid black; border-left: 1px solid black; border-right: None; }
+td[upper][round='0'][side='left'] { border-top: 1px solid black; border-right: 1px solid black; border-bottom: None; }
+td[upper][round='0'][side='right'] { border-top: 1px solid black; border-left: 1px solid black; border-bottom: None; }
+td[upper][round='1'][side='left'] { border-top: 1px solid black; border-right: 1px solid black; border-bottom: None; }
+td[upper][round='1'][side='right'] { border-top: 1px solid black; border-left: 1px solid black; border-bottom: None; }
+td[game][round='6'][side='right'] { border-left: None; }
+td[game][round='7'] { border-right: None; }
+td[bottom] {border-bottom: 1px solid black; width:5px;}
 </style>
 <script>
 //TODO: write a dummy console function so console.log doesn't kill shitty browsers
