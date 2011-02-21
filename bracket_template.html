@@ -31,68 +31,58 @@ td[game][round='7'] { border-right: None; }
 td[bottom] {border-bottom: 1px solid black; width:5px;}
 </style>
 <script>
-//TODO: write a dummy console function so console.log doesn't kill shitty browsers
-//TODO: add all my "vars". skipping for now because it eases debug
-//TODO: here's the old randomize function. make it work!
-//function randomize() {
-//  for (i=0; i < 7; i++) {
-//    $("td.top > span.round-" + i).each(function(_) {
-//      var that = $(this);
-//      var atts = that.attr("class");
-//      var game = atts.match(/game-\d+/)[0];
-//      var opp = $("." + game + ":last");
-//      function parsepoints(obj) {
-//        p = obj.html().match(/(.*?) \((.\d+), (\d+\.\d+), (\d+\.\d+)/);
-//        return [p[1], parseFloat(p[2]), parseFloat(p[3]), parseFloat(p[4])]
-//      }
-//      var topp = parsepoints(that);
-//      var oppp = parsepoints(opp);
+//a dummy console function so console.log doesn't kill shitty browsers
+if(typeof console === "undefined") { console = { log: function() { } }; }
+
+//use the log5 formula
+//var log5 = (a - a * b) / (a + b - 2 * a * b);
 //
-//      var favorite = topp[1] > oppp[1] ? that : opp;
-//      var underdog = topp[1] < oppp[1] ? that : opp;
+//var pct = (log5 - .5) * 2;
+//var green = "#00" + parseInt(255 * pct).toString(16) + "00";
+//var red = "#" + parseInt(255 * pct).toString(16) + "0000";
 //
-//      var a = parsepoints(favorite)[1];
-//      var b = parsepoints(underdog)[1];
-//
-//      //use the log5 formula
-//      var log5 = (a - a * b) / (a + b - 2 * a * b);
-//
-//      var pct = (log5 - .5) * 2;
-//      var green = "#00" + parseInt(255 * pct).toString(16) + "00";
-//      var red = "#" + parseInt(255 * pct).toString(16) + "0000";
-//      favorite.css("color", green);
-//      underdog.css("color", red);
-//
-//      //console.log(topp[0] + " vs " + oppp[0] + " %: ", log5);
+//favorite.css("color", green);
+//underdog.css("color", red);
 //      
-//      if (amount_of_randomness == 0) {
-//        favorite.click();
-//      }
-//      else {
-//        for (j=0; j < (4-amount_of_randomness); j++) {
-//          fav_wins = false;
-//          if (log5 > Math.random()) {
-//            favorite.click();
-//            fav_wins = true;
-//            break;
-//          }
-//        }
-//        if (!fav_wins) {
-//          underdog.click();
-//        }
-//      }
-//    });
+//if (amount_of_randomness == 0) {
+//  favorite.click();
+//}
+//else {
+//  for (j=0; j < (4-amount_of_randomness); j++) {
+//    fav_wins = false;
+//    if (log5 > Math.random()) {
+//      favorite.click();
+//      fav_wins = true;
+//      break;
+//    }
+//  }
+//  if (!fav_wins) {
+//    underdog.click();
 //  }
 //}
+
+function randomize() {
+    //for each round
+    for (i=0; i<8; i++) {
+        //sort each rounds games by game #, then pick a random team
+        $("[game][round='"+i+"'][upper='']").each(function() {
+            var upper = $(this);
+            var lower = $("[round='"+i+"'][game='"+upper.attr("game")+"'][lower='']");
+
+            var teams = [upper.children(0), lower.children(0)];
+
+            var winner = teams[Math.floor(Math.random()*2)];
+
+            $(winner).click();
+        });
+    }
+}
 
 function selector(name, value) { return "[" + name + "='" + value + "']" } 
 
 /* given ints for round and game, return an array
 [next round int, next game int, "u" or "l"] */
 function nextGame(round, game) {
-    console.log("next: ", [round+1,
-            Math.floor((game/2)+.6),
-            game%2 == 1 ? "u"  : "l"], round, game);
     return [round+1,
             Math.floor((game/2)+.6),
             game%2 == 1 ? "u"  : "l"];
@@ -113,24 +103,24 @@ function clearForwardInvalid(opp, round) {
 
 function teamClick(evt) {
     console.log("clicked on ", evt.target.attributes.team);
-    link = $(evt.target);
+    var link = $(evt.target);
     
-    dest = evt.target.attributes.href.value.substr(1).split("-");
+    var dest = evt.target.attributes.href.value.substr(1).split("-");
 
-    roundsel = selector("round", dest[0]);
-    gamesel = selector("game", dest[1]);
-    ulsel = selector(dest[2] == "u" ? "upper" : "lower", "");
+    var roundsel = selector("round", dest[0]);
+    var gamesel = selector("game", dest[1]);
+    var ulsel = selector(dest[2] == "u" ? "upper" : "lower", "");
 
-    next = nextGame(parseInt(dest[0]), parseInt(dest[1]))
+    var next = nextGame(parseInt(dest[0]), parseInt(dest[1]))
 
-    copytgt = $(link.parent().html());
-    nextlink = copytgt.attr("href",  '#' + next.join("-"));
+    var copytgt = $(link.parent().html());
+    var nextlink = copytgt.attr("href",  '#' + next.join("-"));
     nextlink.click(teamClick);
 
-    nextcell = $(roundsel+gamesel+ulsel);
+    var nextcell = $(roundsel+gamesel+ulsel);
 
-    team = link.attr("team")
-    opp = nextcell.children().attr("team")
+    var team = link.attr("team")
+    var opp = nextcell.children().attr("team")
     if (nextcell.children().length && opp != team) {
         clearForwardInvalid(opp, parseInt(dest[0]));
     }
@@ -140,10 +130,12 @@ function teamClick(evt) {
 
 $(document).ready(function() {
     $("a[team]").click(teamClick);
+    $("#randomize").click(randomize);
 });
 </script>
 </head>
 <body>
+<input type="button" id="randomize" value="randomize">
 <table>
 %for i, row in enumerate(table):
     %if i in spacers:
