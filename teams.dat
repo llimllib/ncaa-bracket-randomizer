@@ -1,4 +1,4 @@
-{"Southeast":
+{"East":
 {1: "Ohio St.",
 16: ["Texas San Antonio", "Alabama St."],
 8: "George Mason",
@@ -52,7 +52,7 @@
 2: "San Diego St.",
 15: "Northern Colorado"},
 
-"East":
+"Southeast":
 {1: "Pittsburgh",
 16: ["NC Asheville", "Arkansas Little Rock"],
 8: "Butler",

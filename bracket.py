@@ -10,7 +10,7 @@ def output_bracket(kenpom_teams):
 
     #this year the west plays the southeast and the southwest plays the east.
     game_order = [1,8,5,4,6,3,7,2]
-    divs = ["West", "Southeast", "Southwest", "East"]
+    divs = ["East", "West", "Southwest", "Southeast"]
     kenpom_keep = {}
     tid = 1
     qtid = -1
@@ -48,19 +48,18 @@ def output_bracket(kenpom_teams):
                 kenpom_keep[pro] = kenpom_teams[pro]
                 kenpom_keep[opp] = kenpom_teams[opp]
 
-
     spacers = []
 
     #qualifiers
-    table[25][0] = '<td round=0 game=2 upper="" side="left"><a team=18 href="#1-9-l">%s</a></td>' % teams[18]
-    table[26][0] = '<td round=0 game=2 side="left"></td>'
-    table[27][0] = '<td round=0 game=2 lower="" side="left"><a team=19 href="#1-9-l">%s</a></td>' % teams[19]
-    table[25][1] = '<td bottom=""></td>'
+    table[1][0] = '<td round=0 game=2 upper="" side="left"><a team=18 href="#1-1-l">%s</a></td>' % teams[2]
+    table[2][0] = '<td round=0 game=2 side="left"></td>'
+    table[3][0] = '<td round=0 game=2 lower="" side="left"><a team=19 href="#1-1-l">%s</a></td>' % teams[3]
+    table[1][1] = '<td bottom=""></td>'
 
-    table[31][0] = '<td round=0 game=1 upper="" side="left"><a team=23 href="#1-11-l">%s</a></td>' % teams[23]
-    table[32][0] = '<td round=0 game=1 side="left"></td>'
-    table[33][0] = '<td round=0 game=1 lower="" side="left"><a team=24 href="#1-11-l">%s</a></td>' % teams[24]
-    table[31][1] = '<td bottom=""></td>'
+    table[7][0] = '<td round=0 game=1 upper="" side="left"><a team=23 href="#1-3-l">%s</a></td>' % teams[7]
+    table[8][0] = '<td round=0 game=1 side="left"></td>'
+    table[9][0] = '<td round=0 game=1 lower="" side="left"><a team=24 href="#1-3-l">%s</a></td>' % teams[8]
+    table[7][1] = '<td bottom=""></td>'
 
     table[13][-1] = '<td round=0 game=3 upper="" side="right"><a team=44 href="#1-21-l">%s</a></td>' % teams[44]
     table[14][-1] = '<td round=0 game=3 side="right"></td>'
@@ -73,8 +72,8 @@ def output_bracket(kenpom_teams):
     table[25][-2] = '<td bottom=""></td>'
 
     games = {
-        1: [1,2], 2: [3,4], 3: [5,6], 4: [7,8], 5: [9,10], 6: [11,12], 7: [13,14], 8: [15,16],
-        9: 17, 10: [20,21], 11: 22, 12: [25,26], 13: [27,28], 14: [29,30], 15: [31,32], 16: [33,34],
+        1: 1, 2: [4,5], 3: 6, 4: [9,10], 5: [11,12], 6: [13,14], 7: [15,16], 8: [17,18],
+        9: [19,20], 10: [21,22], 11: [23,24], 12: [25,26], 13: [27,28], 14: [29,30], 15: [31,32], 16: [33,34],
         17: [35,36], 18: [37,38], 19: [39,40], 20: [41,42], 21: 43, 22: [46,47], 23: [48,49], 24: [50,51],
         25: 52, 26: [55, 56], 27: [57,58], 28: [59,60], 29: [61,62], 30: [63,64], 31: [65,66], 32: [67,68]
     }
@@ -89,6 +88,8 @@ def output_bracket(kenpom_teams):
         row = ((game-1)%16) * 3
 
         spacers.append(row+2)
+
+        seed = [1,8,5,4,6,3,7,2][(game-1)%8]
 
         opponents = games[game]
         if isinstance(opponents, list):
