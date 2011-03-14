@@ -92,12 +92,12 @@ def output_bracket(kenpom_teams):
         opponents = games[game]
         if isinstance(opponents, list):
             tid = opponents[0]
-            table[row][col] = '<td round=1 game=%s upper="" side="%s"><a team=%s href="#2-%s-%s">%s</a></td>' % (game, side, tid, nextroundgame, nextup, teams[tid])
-            table[row+1][col] = '<td round=1 game=%s lower="" side="%s"><a team=%s href="#2-%s-%s">%s</a></td>' % (game, side, tid+1, nextroundgame, nextup, teams[tid+1])
+            table[row][col] = '<td round=1 game=%s upper="" side="%s"><a team=%s href="#2-%s-%s">%s. %s</a></td>' % (game, side, tid, nextroundgame, nextup, seed, teams[tid])
+            table[row+1][col] = '<td round=1 game=%s lower="" side="%s"><a team=%s href="#2-%s-%s">%s. %s</a></td>' % (game, side, tid+1, nextroundgame, nextup, 17-seed, teams[tid+1])
         else:
             tid = opponents
-            table[row][col] = '<td round=1 game=%s upper="" side="%s"><a team=%s href="#2-%s-%s">%s</a></td>' % (game, side, tid, nextroundgame, nextup, teams[tid])
-            table[row+1][col] = '<td round=1 game=%s lower="" side="%s">&nbsp;</td>' % (game, side)
+            table[row][col] = '<td round=1 game=%s upper="" side="%s"><a team=%s href="#2-%s-%s">%s. %s</a></td>' % (game, side, tid, nextroundgame, nextup, seed, teams[tid])
+            table[row+1][col] = '<td round=1 game=%s lower="" side="%s">%s. &nbsp;</td>' % (game, side, 17-seed)
 
     for game in range(1, 17):
         side = "left" if game < 9 else "right"
@@ -157,7 +157,7 @@ def read_kenpom():
     teams = {}
     for line in file("kenpom_3_14_11.csv"):
         team, _, _, tempo, temporank, _, _, oe, oerank, _, _, de, derank, kenpom, kenpomrank = line.strip().split(",")
-        teams[team] = map(float, [tempo, temporank, oe, oerank, de, derank, kenpom, kenpomrank])
+        teams[team] = map(float, [tempo, temporank, oe, oerank, de, derank, kenpom, kenpomrank]) + [team]
     return teams
 
 if __name__=="__main__":
