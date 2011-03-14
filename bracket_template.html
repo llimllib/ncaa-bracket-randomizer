@@ -70,19 +70,44 @@ if(typeof console === "undefined") { console = { log: function() { } }; }
 //  }
 //}
 
+var kenpom = ${kenpom}
+
 function randomize() {
     //for each round
-    for (i=0; i<8; i++) {
+    for (i=0; i<7; i++) {
         //sort each rounds games by game #, then pick a random team
         $("[game][round='"+i+"'][upper='']").each(function() {
             var upper = $(this);
             var lower = $("[round='"+i+"'][game='"+upper.attr("game")+"'][lower='']");
 
             var teams = [upper.children(0), lower.children(0)];
+            var names = [$(teams[0]).text(), $(teams[1]).text()];
+            var stats = [kenpom[names[0]], kenpom[names[1]]];
 
-            var winner = teams[Math.floor(Math.random()*2)];
+            var fav = stats[0][6] > stats[1][6] ? 0: 1;
+            var dog = stats[0][6] < stats[1][6] ? 0 : 1;
 
-            $(winner).click();
+            //get the kenpom ratings. a is the fav, b the dog
+            var a = stats[fav][6];
+            var b = stats[dog][6];
+
+            //calculate the likelihood of victory for the fav
+            var log5 = (a - a * b) / (a + b - 2 * a * b);
+
+            if (names[0] == "San Diego St." || names[1] == "San Diego St.")
+                console.log(names, [a,b], log5);
+
+            //if the dog wins two times in a row, advance him
+            var a_wins = true;
+            for (j=0; j < 2; j++) {
+                if (Math.random() < log5) {
+                    a_wins = true;
+                    break;
+                }
+                a_wins = false;
+            }
+
+            a_wins ? $(teams[fav]).click() : $(teams[dog]).click();
         });
     }
 }
@@ -111,7 +136,6 @@ function clearForwardInvalid(opp, round) {
 }
 
 function teamClick(evt) {
-    console.log("clicked on ", evt.target.attributes.team);
     var link = $(evt.target);
     
     var dest = evt.target.attributes.href.value.substr(1).split("-");
