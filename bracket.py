@@ -11,7 +11,11 @@ def output_bracket(kenpom_teams):
     #this year the west plays the east and the southwest plays the southeast.
     game_order = [1,8,5,4,6,3,7,2]
     divs = ["East", "West", "Southwest", "Southeast"]
+
+    #the kenpom stats for the teams that are in the tournament. The key is the
+    #team id, and the value is the team's stats and name
     kenpom_keep = {}
+
     tid = 1
     teams = {}
     for div in divs:
@@ -19,6 +23,7 @@ def output_bracket(kenpom_teams):
             pro = bkt[div][game]
             opp = bkt[div][17-game]
 
+            #assert that the names in teams.dat match up with kenpom's names
             assert pro in kenpom_teams, pro
             if isinstance(opp, list):
                 a,b = opp
@@ -27,6 +32,7 @@ def output_bracket(kenpom_teams):
             else:
                 assert opp in kenpom_teams, opp
 
+            #add each team to the teams and kenpom_keep dictionaries
             if isinstance(opp, list):
                 teams[tid] = pro
                 kenpom_keep[tid] = kenpom_teams[pro]
