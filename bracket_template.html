@@ -65,7 +65,7 @@ function randomize() {
             var tids = [$(teams[0]).attr("team"), $(teams[1]).attr("team")];
             var stats = [kenpom[tids[0]], kenpom[tids[1]]];
 
-            var fav = stats[0][6] > stats[1][6] ? 0: 1;
+            var fav = stats[0][6] > stats[1][6] ? 0 : 1;
             var dog = stats[0][6] < stats[1][6] ? 0 : 1;
 
             //get the kenpom ratings. a is the fav, b the dog
