@@ -9,67 +9,68 @@ def output_bracket(kenpom_teams):
     table = [['<td></td>']*17 for _ in range(47)]
 
     #this year the west plays the southeast and the southwest plays the east.
-    game_order = [1,8,5,4,6,3,7,2,-1]
+    game_order = [1,8,5,4,6,3,7,2]
     divs = ["West", "Southeast", "Southwest", "East"]
     tid = 1
     qtid = -1
     teams = {}
+    zero_round = []
     for div in divs:
-        #a play-in game, if it exists
-        pair = None
-
         for game in game_order:
-            if game > 0:
-                pro = bkt[div][game]
-                opp = bkt[div][16-game]
+            pro = bkt[div][game]
+            opp = bkt[div][17-game]
 
-                assert pro in kenpom_teams, pro
-                if isinstance(opp, list):
-                    a,b = opp
-                    assert a in kenpom_teams, a
-                    assert b in kenpom_teams, b
-                else:
-                    assert opp in kenpom_teams, opp
+            assert pro in kenpom_teams, pro
+            if isinstance(opp, list):
+                a,b = opp
+                assert a in kenpom_teams, a
+                assert b in kenpom_teams, b
+            else:
+                assert opp in kenpom_teams, opp
 
-                if isinstance(opp, list):
-                    teams[tid] = pro
-                    pair = opp
-                    tid += 2
-                else:
-                    teams[tid] = bkt[div][game]
-                    tid += 1
-                    teams[tid] = bkt[div][17-game]
-                    tid += 1
-            elif pair:
-                qa, qb = pair
-
-                teams[tid] = qa
+            if isinstance(opp, list):
+                teams[tid] = pro
                 tid += 1
-                teams[tid] = qb
+                teams[tid] = opp[0]
+                tid += 1
+                teams[tid] = opp[1]
+                tid += 1
+                zero_round.extend(opp)
+            else:
+                teams[tid] = bkt[div][game]
+                tid += 1
+                teams[tid] = bkt[div][17-game]
                 tid += 1
 
     spacers = []
 
     #qualifiers
-    table[1][0] = '<td round=0 game=1 upper="" side="left"><a team=17 href="#1-1-l">%s</a></td>' % teams[17]
-    table[2][0] = '<td round=0 game=1 side="left"></td>'
-    table[3][0] = '<td round=0 game=1 lower="" side="left"><a team=18 href="#1-1-l">%s</a></td>' % teams[18]
-    table[1][1] = '<td bottom=""></td>'
-
-    table[25][0] = '<td round=0 game=2 upper="" side="left"><a team=17 href="#1-9-l">%s</a></td>' % teams[35]
+    table[25][0] = '<td round=0 game=2 upper="" side="left"><a team=17 href="#1-9-l">%s</a></td>' % teams[18]
     table[26][0] = '<td round=0 game=2 side="left"></td>'
-    table[27][0] = '<td round=0 game=2 lower="" side="left"><a team=18 href="#1-9-l">%s</a></td>' % teams[36]
+    table[27][0] = '<td round=0 game=2 lower="" side="left"><a team=18 href="#1-9-l">%s</a></td>' % teams[19]
     table[25][1] = '<td bottom=""></td>'
 
-    table[1][-1] = '<td round=0 game=3 upper="" side="right"><a team=17 href="#1-17-l">%s</a></td>' % teams[17]
-    table[2][-1] = '<td round=0 game=3 side="right"></td>'
-    table[3][-1] = '<td round=0 game=3 lower="" side="right"><a team=18 href="#1-17-l">%s</a></td>' % teams[18]
-    table[1][-2] = '<td bottom=""></td>'
+    table[31][0] = '<td round=0 game=1 upper="" side="left"><a team=17 href="#1-11-l">%s</a></td>' % teams[23]
+    table[32][0] = '<td round=0 game=1 side="left"></td>'
+    table[33][0] = '<td round=0 game=1 lower="" side="left"><a team=18 href="#1-11-l">%s</a></td>' % teams[24]
+    table[31][1] = '<td bottom=""></td>'
 
-    table[25][-1] = '<td round=0 game=4 upper="" side="right"><a team=17 href="#1-25-l">%s</a></td>' % teams[35]
+    table[13][-1] = '<td round=0 game=3 upper="" side="right"><a team=17 href="#1-21-l">%s</a></td>' % teams[44]
+    table[14][-1] = '<td round=0 game=3 side="right"></td>'
+    table[15][-1] = '<td round=0 game=3 lower="" side="right"><a team=18 href="#1-21-l">%s</a></td>' % teams[45]
+    table[13][-2] = '<td bottom=""></td>'
+
+    table[25][-1] = '<td round=0 game=4 upper="" side="right"><a team=17 href="#1-25-l">%s</a></td>' % teams[53]
     table[26][-1] = '<td round=0 game=4 side="right"></td>'
-    table[27][-1] = '<td round=0 game=4 lower="" side="right"><a team=18 href="#1-25-l">%s</a></td>' % teams[36]
+    table[27][-1] = '<td round=0 game=4 lower="" side="right"><a team=18 href="#1-25-l">%s</a></td>' % teams[54]
     table[25][-2] = '<td bottom=""></td>'
+
+    games = {
+        1: [1,2], 2: [3,4], 3: [5,6], 4: [7,8], 5: [9,10], 6: [11,12], 7: [13,14], 8: [15,16],
+        9: 17, 10: [20,21], 11: 22, 12: [25,26], 13: [27,28], 14: [29,30], 15: [31,32], 16: [33,34],
+        17: [35,36], 18: [37,38], 19: [39,40], 20: [41,42], 21: 43, 22: [46,47], 23: [48,49], 24: [50,51],
+        25: 52, 26: [55, 56], 27: [57,58], 28: [59,60], 29: [61,62], 30: [63,64], 31: [65,66], 32: [67,68]
+    }
 
     #round one
     for game in range(1,33):
@@ -82,11 +83,14 @@ def output_bracket(kenpom_teams):
 
         spacers.append(row+2)
 
-        tid = int(floor((game-1)/8)*18+((game-1)%8)*2+1)
-        table[row][col] = '<td round=1 game=%s upper="" side="%s"><a team=%s href="#2-%s-%s">%s</a></td>' % (game, side, tid, nextroundgame, nextup, teams[tid])
-        if game not in [1,9,17,25]:
+        opponents = games[game]
+        if isinstance(opponents, list):
+            tid = opponents[0]
+            table[row][col] = '<td round=1 game=%s upper="" side="%s"><a team=%s href="#2-%s-%s">%s</a></td>' % (game, side, tid, nextroundgame, nextup, teams[tid])
             table[row+1][col] = '<td round=1 game=%s lower="" side="%s"><a team=%s href="#2-%s-%s">%s</a></td>' % (game, side, tid+1, nextroundgame, nextup, teams[tid+1])
         else:
+            tid = opponents
+            table[row][col] = '<td round=1 game=%s upper="" side="%s"><a team=%s href="#2-%s-%s">%s</a></td>' % (game, side, tid, nextroundgame, nextup, teams[tid])
             table[row+1][col] = '<td round=1 game=%s lower="" side="%s">&nbsp;</td>' % (game, side)
 
     for game in range(1, 17):
