@@ -8,7 +8,7 @@ def output_bracket(kenpom_teams):
     # 47 rows = 1 for every team per side + 15 spacers
     table = [['<td></td>']*17 for _ in range(47)]
 
-    #this year the west plays the southeast and the southwest plays the east.
+    #this year the west plays the east and the southwest plays the southeast.
     game_order = [1,8,5,4,6,3,7,2]
     divs = ["East", "West", "Southwest", "Southeast"]
     kenpom_keep = {}
