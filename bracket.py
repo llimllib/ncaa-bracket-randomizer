@@ -4,7 +4,7 @@ from mako.template import Template
 def output_bracket(kenpom_teams):
     bkt = eval(file("teams.dat").read())
 
-    # 13 columns = len(round 0,1,2,3,4,5,6,7,6,5,4,3,2,1,0)
+    # 17 columns = len(round 0,space,1,2,3,4,5,6,7,6,5,4,3,2,1,space,0)
     # 47 rows = 1 for every team per side + 15 spacers
     table = [['<td></td>']*17 for _ in range(47)]
 
@@ -13,7 +13,6 @@ def output_bracket(kenpom_teams):
     divs = ["East", "West", "Southwest", "Southeast"]
     kenpom_keep = {}
     tid = 1
-    qtid = -1
     teams = {}
     for div in divs:
         for game in game_order:
