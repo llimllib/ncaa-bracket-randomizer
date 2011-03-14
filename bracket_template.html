@@ -14,23 +14,32 @@ td[round='6'] {min-width: 60px; max-width: 60px; }
 td[round='7'] {min-width: 60px; max-width: 60px; }
 
 td[game][round='1'] { width: 120px; }
-td[game][side='left'] { border-right: 1px solid black; }
-td[game][side='right'] { border-left: 1px solid black; }
+td[game][side='left'] { border-right: 1px solid #ccc; }
+td[game][side='right'] { border-left: 1px solid #ccc; }
 
 /* must go after [game] so border-right: None takes effect */
-td[upper][side="left"] { border-bottom: 1px solid black; border-right: None; }
-td[upper][side="right"] { border-bottom: 1px solid black; border-left: None; }
-td[lower][side='left'] { border-bottom: 1px solid black; border-right: 1px solid black; }
-td[lower][side='right'] { border-bottom: 1px solid black; border-left: 1px solid black; border-right: None; }
-td[upper][round='0'][side='left'] { border-top: 1px solid black; border-right: 1px solid black; border-bottom: None; }
-td[upper][round='0'][side='right'] { border-top: 1px solid black; border-left: 1px solid black; border-bottom: None; }
-td[upper][round='1'][side='left'] { border-top: 1px solid black; border-right: 1px solid black; border-bottom: None; }
-td[upper][round='1'][side='right'] { border-top: 1px solid black; border-left: 1px solid black; border-bottom: None; }
+td[upper][side="left"] { border-bottom: 1px solid #ccc; border-right: None; }
+td[upper][side="right"] { border-bottom: 1px solid #ccc; border-left: None; }
+td[lower][side='left'] { border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; }
+td[lower][side='right'] { border-bottom: 1px solid #ccc; border-left: 1px solid #ccc; border-right: None; }
+td[upper][round='0'][side='left'] { border-top: 1px solid #ccc; border-right: 1px solid #ccc; border-bottom: None; }
+td[upper][round='0'][side='right'] { border-top: 1px solid #ccc; border-left: 1px solid #ccc; border-bottom: None; }
+td[upper][round='1'][side='left'] { border-top: 1px solid #ccc; border-right: 1px solid #ccc; border-bottom: None; }
+td[upper][round='1'][side='right'] { border-top: 1px solid #ccc; border-left: 1px solid #ccc; border-bottom: None; }
 td[game][round='6'][side='right'] { border-left: None; }
 td[game][round='7'] { border-right: None; }
-td[bottom] {border-bottom: 1px solid black; width:5px;}
+td[bottom] {border-bottom: 1px solid #ccc; width:5px;}
+
+a { text-decoration: None; color: black; font-size: 12px; }
+a:visited { color: black; }
+a:hover   { color: black; }
 </style>
+
 <script>
+//TODO: add seed numbers
+//TODO: make brackets stand out less
+//TODO: color teams according to win prob
+
 //a dummy console function so console.log doesn't kill shitty browsers
 if(typeof console === "undefined") { console = { log: function() { } }; }
 
