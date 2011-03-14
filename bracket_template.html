@@ -30,6 +30,7 @@ td[game][round='6'][side='right'] { border-left: None; }
 td[game][round='7'] { border-right: None; }
 td[bottom] {border-bottom: 1px solid #ccc; width:5px;}
 
+td { font-size: 12px; }
 a { text-decoration: None; color: black; font-size: 12px; }
 a:visited { color: black; }
 a:hover   { color: black; }
@@ -150,10 +151,28 @@ function teamClick(evt) {
 
     var next = nextGame(parseInt(dest[0]), parseInt(dest[1]))
 
+    //copy the link that's been clicked
     var copytgt = $(link.parent().html());
+
+    //if it's a zero round game, add the seed text
+    if (dest[0] == "1") {
+        if (dest[1] == "1" || dest[1] == "25") {
+            copytgt.text("16. " + kenpom[copytgt.attr("team")][8]);
+        } else if (dest[1] == "3") {
+            copytgt.text("12. " + kenpom[copytgt.attr("team")][8]);
+        } else if (dest[1] == "21") {
+            copytgt.text("11. " + kenpom[copytgt.attr("team")][8]);
+        }
+    } else {
+        //set the text to be the team name and omit seed number
+        copytgt.text(kenpom[copytgt.attr("team")][8]);
+    }
+
+    //set the new link, and bind this function to click
     var nextlink = copytgt.attr("href",  '#' + next.join("-"));
     nextlink.click(teamClick);
 
+    //select the cell to which we'll paste the copied link
     var nextcell = $(roundsel+gamesel+ulsel);
 
     var team = link.attr("team")
