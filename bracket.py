@@ -148,8 +148,8 @@ def output_bracket(kenpom_teams):
 
     table[22][8] = '<td round=7 game=1 upper="" lower="" side="left"></td>'
 
-    file("kumquats.html", 'w').write(Template(filename="bracket_template.html")
-                              .render(table=table, spacers=spacers, kenpom=kenpom_keep))
+    file("out.html", 'w').write(Template(filename="bracket_template.html")
+                         .render(table=table, spacers=spacers, kenpom=kenpom_keep))
 
 def read_kenpom():
     #kenpom data notes:
