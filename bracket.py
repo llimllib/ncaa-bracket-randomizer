@@ -15,7 +15,6 @@ def output_bracket(kenpom_teams):
     tid = 1
     qtid = -1
     teams = {}
-    zero_round = []
     for div in divs:
         for game in game_order:
             pro = bkt[div][game]
@@ -31,34 +30,33 @@ def output_bracket(kenpom_teams):
 
             if isinstance(opp, list):
                 teams[tid] = pro
+                kenpom_keep[tid] = kenpom_teams[pro]
                 tid += 1
                 teams[tid] = opp[0]
+                kenpom_keep[tid] = kenpom_teams[opp[0]]
                 tid += 1
                 teams[tid] = opp[1]
+                kenpom_keep[tid] = kenpom_teams[opp[1]]
                 tid += 1
-                zero_round.extend(opp)
-                kenpom_keep[pro] = kenpom_teams[pro]
-                kenpom_keep[opp[0]] = kenpom_teams[opp[0]]
-                kenpom_keep[opp[1]] = kenpom_teams[opp[1]]
             else:
                 teams[tid] = bkt[div][game]
+                kenpom_keep[tid] = kenpom_teams[pro]
                 tid += 1
                 teams[tid] = bkt[div][17-game]
+                kenpom_keep[tid] = kenpom_teams[opp]
                 tid += 1
-                kenpom_keep[pro] = kenpom_teams[pro]
-                kenpom_keep[opp] = kenpom_teams[opp]
 
     spacers = []
 
     #qualifiers
-    table[1][0] = '<td round=0 game=2 upper="" side="left"><a team=18 href="#1-1-l">%s</a></td>' % teams[2]
+    table[1][0] = '<td round=0 game=2 upper="" side="left"><a team=2 href="#1-1-l">%s</a></td>' % teams[2]
     table[2][0] = '<td round=0 game=2 side="left"></td>'
-    table[3][0] = '<td round=0 game=2 lower="" side="left"><a team=19 href="#1-1-l">%s</a></td>' % teams[3]
+    table[3][0] = '<td round=0 game=2 lower="" side="left"><a team=3 href="#1-1-l">%s</a></td>' % teams[3]
     table[1][1] = '<td bottom=""></td>'
 
-    table[7][0] = '<td round=0 game=1 upper="" side="left"><a team=23 href="#1-3-l">%s</a></td>' % teams[7]
+    table[7][0] = '<td round=0 game=1 upper="" side="left"><a team=7 href="#1-3-l">%s</a></td>' % teams[7]
     table[8][0] = '<td round=0 game=1 side="left"></td>'
-    table[9][0] = '<td round=0 game=1 lower="" side="left"><a team=24 href="#1-3-l">%s</a></td>' % teams[8]
+    table[9][0] = '<td round=0 game=1 lower="" side="left"><a team=8 href="#1-3-l">%s</a></td>' % teams[8]
     table[7][1] = '<td bottom=""></td>'
 
     table[13][-1] = '<td round=0 game=3 upper="" side="right"><a team=44 href="#1-21-l">%s</a></td>' % teams[44]

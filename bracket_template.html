@@ -70,6 +70,11 @@ if(typeof console === "undefined") { console = { log: function() { } }; }
 //  }
 //}
 
+
+//            if (tids[0] == "19" || tids[1] == "19")
+//                var names = [$(teams[0]).text(), $(teams[1]).text()];
+//                console.log(tids, names, fav, [a,b], log5);
+
 var kenpom = ${kenpom}
 
 function randomize() {
@@ -81,8 +86,8 @@ function randomize() {
             var lower = $("[round='"+i+"'][game='"+upper.attr("game")+"'][lower='']");
 
             var teams = [upper.children(0), lower.children(0)];
-            var names = [$(teams[0]).text(), $(teams[1]).text()];
-            var stats = [kenpom[names[0]], kenpom[names[1]]];
+            var tids = [$(teams[0]).attr("team"), $(teams[1]).attr("team")];
+            var stats = [kenpom[tids[0]], kenpom[tids[1]]];
 
             var fav = stats[0][6] > stats[1][6] ? 0: 1;
             var dog = stats[0][6] < stats[1][6] ? 0 : 1;
@@ -94,12 +99,10 @@ function randomize() {
             //calculate the likelihood of victory for the fav
             var log5 = (a - a * b) / (a + b - 2 * a * b);
 
-            if (names[0] == "San Diego St." || names[1] == "San Diego St.")
-                console.log(names, [a,b], log5);
-
-            //if the dog wins two times in a row, advance him
+            //if the dog wins n times in a row, advance him
             var a_wins = true;
-            for (j=0; j < 2; j++) {
+            var n = 2;
+            for (j=0; j < n; j++) {
                 if (Math.random() < log5) {
                     a_wins = true;
                     break;
@@ -107,6 +110,7 @@ function randomize() {
                 a_wins = false;
             }
 
+            //click on the winner
             a_wins ? $(teams[fav]).click() : $(teams[dog]).click();
         });
     }
