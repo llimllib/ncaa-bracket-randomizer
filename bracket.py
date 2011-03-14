@@ -15,32 +15,37 @@ def output_bracket(kenpom_teams):
     qtid = -1
     teams = {}
     for div in divs:
+        #a play-in game, if it exists
+        pair = None
+
         for game in game_order:
-            #TODO
-            if abs(game) == 1:
-                assert bkt[div][1] in kenpom_teams
+            if game > 0:
+                pro = bkt[div][game]
+                opp = bkt[div][16-game]
 
-                a,b = bkt[div][16]
-                assert a in kenpom_teams and b in kenpom_teams
-            else:
-                assert bkt[div][game] in kenpom_teams
-                assert bkt[div][16-game] in kenpom_teams
-                
+                assert pro in kenpom_teams, pro
+                if isinstance(opp, list):
+                    a,b = opp
+                    assert a in kenpom_teams, a
+                    assert b in kenpom_teams, b
+                else:
+                    assert opp in kenpom_teams, opp
 
-            if game == 1:
-                teams[tid] = bkt[div][game]
-                tid += 2
-            elif game == -1:
-                qa, qb = bkt[div][16]
+                if isinstance(opp, list):
+                    teams[tid] = pro
+                    pair = opp
+                    tid += 2
+                else:
+                    teams[tid] = bkt[div][game]
+                    tid += 1
+                    teams[tid] = bkt[div][17-game]
+                    tid += 1
+            elif pair:
+                qa, qb = pair
 
                 teams[tid] = qa
                 tid += 1
                 teams[tid] = qb
-                tid += 1
-            else:
-                teams[tid] = bkt[div][game]
-                tid += 1
-                teams[tid] = bkt[div][17-game]
                 tid += 1
 
     spacers = []
@@ -128,7 +133,7 @@ def output_bracket(kenpom_teams):
             table[row+i][col] = '<td round=5 game=%s side="%s"></td>' % (game, side)
         table[row+25][col] = '<td round=5 game=%s lower="" side="%s"></td>' % (game, side)
 
-    table[17][7]  = '<td round=6 game=1 upper="" side="left"></td>'
+    table[16][7]  = '<td round=6 game=1 upper="" side="left"></td>'
     table[27][-8] = '<td round=6 game=1 lower="" side="right"></td>'
 
     table[22][8] = '<td round=7 game=1 upper="" lower="" side="left"></td>'
