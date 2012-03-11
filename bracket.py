@@ -63,7 +63,7 @@ def output_bracket(kenpom_teams):
     table[40][0] = '<td round=0 game=1 upper="" side="left"><a team=29 href="#1-14-l">%s</a></td>' % teams[29]
     table[41][0] = '<td round=0 game=1 side="left"></td>'
     table[42][0] = '<td round=0 game=1 lower="" side="left"><a team=30 href="#1-14-l">%s</a></td>' % teams[30]
-    table[41][1] = '<td bottom=""></td>'
+    table[40][1] = '<td bottom=""></td>'
 
     table[25][-1] = '<td round=0 game=4 upper="" side="right"><a team=52 href="#1-25-l">%s</a></td>' % teams[52]
     table[26][-1] = '<td round=0 game=4 side="right"></td>'
