@@ -137,10 +137,10 @@ function teamClick(evt) {
     if (dest[0] == "1") {
         if (dest[1] == "1" || dest[1] == "25") {
             copytgt.text("16. " + kenpom[copytgt.attr("team")][8]);
-        } else if (dest[1] == "3") {
+        } else if (dest[1] == "14") {
+            copytgt.text("14. " + kenpom[copytgt.attr("team")][8]);
+        } else if (dest[1] == "27") {
             copytgt.text("12. " + kenpom[copytgt.attr("team")][8]);
-        } else if (dest[1] == "21") {
-            copytgt.text("11. " + kenpom[copytgt.attr("team")][8]);
         }
     } else {
         //set the text to be the team name and omit seed number
