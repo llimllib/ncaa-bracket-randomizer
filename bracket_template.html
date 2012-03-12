@@ -53,6 +53,15 @@ var amount_of_randomness = 2;
 
 var kenpom = ${kenpom}
 
+function color(favorite, dog, log5) {
+    var pct = (log5 - .5) * 2;
+    var strength = parseInt(255*pct).toString(16);
+    var red   = "rgb(" + strength + ", 0, 0)";
+    var green = "rgb(0, " + strength + ", 0)";
+    favorite.css("color", green);
+    dog.css("color", red);
+}
+
 function randomize() {
     //for each round
     for (i=0; i<7; i++) {
@@ -74,6 +83,9 @@ function randomize() {
 
             //calculate the likelihood of victory for the fav
             var log5 = (a - a * b) / (a + b - 2 * a * b);
+
+            //color the teams appropriately
+            color(teams[fav], teams[dog], log5);
 
             //if (tids[0] == "19" || tids[1] == "19")
             //    var names = [$(teams[0]).text(), $(teams[1]).text()];
