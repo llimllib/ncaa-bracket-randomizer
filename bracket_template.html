@@ -144,7 +144,7 @@ function teamClick(evt) {
     var roundsel    = selector("round", dest[0]);
     var gamesel     = selector("game", dest[1]);
     var ulsel       = selector(dest[2] == "u" ? "upper" : "lower", "");
-    var opponent_ul = selector(ulsel == "u"   ? "upper" : "lower", "");
+    var opponent_ul = selector(dest[2] == "u" ? "lower" : "upper", "");
 
     var next = nextGame(parseInt(dest[0]), parseInt(dest[1]))
 
@@ -173,14 +173,20 @@ function teamClick(evt) {
     var nextcell = $(roundsel+gamesel+ulsel);
 
     var team = link.attr("team")
-    var opp = nextcell.children().attr("team")
-    if (nextcell.children().length && opp != team) {
-        clearForwardInvalid(opp, parseInt(dest[0]));
+    var team_to_replace = nextcell.children().attr("team")
+    if (nextcell.children().length && team_to_replace != team) {
+        clearForwardInvalid(team_to_replace, parseInt(dest[0]));
     }
 
+    //remove color from the link before advancing it
+    nextlink.css("color", "")
     nextcell.html(nextlink);
 
-
+    var opp = $(roundsel+gamesel+opponent_ul);
+    //if there's an opponent in the next game
+    if (opp.children().length) {
+        calc_fav(nextcell.children(), opp.children());
+    }
 }
 
 $(document).ready(function() {
