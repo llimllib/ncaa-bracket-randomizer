@@ -52,6 +52,19 @@ def output_bracket(kenpom_teams):
                 kenpom_keep[tid] = kenpom_teams[opp]
                 tid += 1
 
+    display_names = {
+        "North Carolina St.": "NC State",
+        "Nevada Las Vegas": "UNLV",
+        "Brigham Young": "BYU",
+        "Virginia Commonwealth": "VCU",
+        "South Florida": "USF",
+    }
+
+    for tid, team in teams.iteritems():
+        if team in display_names:
+            teams[tid] = display_names[team]
+            kenpom_keep[tid][8] = display_names[team]
+
     spacers = []
 
     #qualifiers
@@ -155,6 +168,8 @@ def output_bracket(kenpom_teams):
     table[22][8] = '<td round=7 game=1 upper="" lower="" side="left"></td>'
 
     file("out.html", 'w').write(Template(filename="bracket_template.html")
+                         .render(table=table, spacers=spacers, kenpom=kenpom_keep))
+    file("index.html", 'w').write(Template(filename="bracket_template.html")
                          .render(table=table, spacers=spacers, kenpom=kenpom_keep))
 
 def read_kenpom():
