@@ -121,7 +121,7 @@ def output_bracket(kenpom_teams):
 
     for game in range(1, 17):
         side = "left" if game < 9 else "right"
-        
+
         col = 3 if game < 9 else -4
         row = ((game-1) % 8)*6
 
@@ -132,7 +132,7 @@ def output_bracket(kenpom_teams):
 
     for game in range(1, 9):
         side = "left" if game < 5 else "right"
-        
+
         col = 4 if game < 5 else -5
         row = ((game-1) % 4)*12+1
 
@@ -143,7 +143,7 @@ def output_bracket(kenpom_teams):
 
     for game in range(1, 5):
         side = "left" if game < 3 else "right"
-        
+
         col = 5 if game < 3 else -6
         row = ((game-1) % 2)*24+4
 
@@ -154,7 +154,7 @@ def output_bracket(kenpom_teams):
 
     for game in range(1, 3):
         side = "left" if game == 1 else "right"
-        
+
         col = 6 if game == 1 else -7
         row = 9
 
