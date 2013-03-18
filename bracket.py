@@ -11,7 +11,7 @@ def output_bracket(kenpom_teams):
     game_order = [1,8,5,4,6,3,7,2]
 
     #this year the west plays the east and the southwest plays the southeast.
-    divs = ["South", "West", "East", "Midwest"]
+    divs = ["Midwest", "South", "West", "East"]
 
     #the kenpom stats for the teams that are in the tournament. The key is the
     #team id, and the value is the team's stats and name
@@ -58,6 +58,7 @@ def output_bracket(kenpom_teams):
         "Brigham Young": "BYU",
         "Virginia Commonwealth": "VCU",
         "South Florida": "USF",
+        "Miami FL": "Miami",
     }
 
     for tid, team in teams.iteritems():
@@ -73,26 +74,26 @@ def output_bracket(kenpom_teams):
     table[3][0] = '<td round=0 game=2 lower="" side="left"><a team=3 href="#1-1-l">%s</a></td>' % teams[3]
     table[1][1] = '<td bottom=""></td>'
 
-    table[40][0] = '<td round=0 game=1 upper="" side="left"><a team=29 href="#1-14-l">%s</a></td>' % teams[29]
-    table[41][0] = '<td round=0 game=1 side="left"></td>'
-    table[42][0] = '<td round=0 game=1 lower="" side="left"><a team=30 href="#1-14-l">%s</a></td>' % teams[30]
-    table[40][1] = '<td bottom=""></td>'
+    table[13][0] = '<td round=0 game=1 upper="" side="left"><a team=11 href="#1-5-l">%s</a></td>' % teams[11]
+    table[14][0] = '<td round=0 game=1 side="left"></td>'
+    table[15][0] = '<td round=0 game=1 lower="" side="left"><a team=12 href="#1-5-l">%s</a></td>' % teams[12]
+    table[13][1] = '<td bottom=""></td>'
 
-    table[25][-1] = '<td round=0 game=4 upper="" side="right"><a team=52 href="#1-25-l">%s</a></td>' % teams[52]
-    table[26][-1] = '<td round=0 game=4 side="right"></td>'
-    table[27][-1] = '<td round=0 game=4 lower="" side="right"><a team=53 href="#1-25-l">%s</a></td>' % teams[53]
+    table[10][-1] = '<td round=0 game=4 upper="" side="right"><a team=42 href="#1-20-l">%s</a></td>' % teams[42]
+    table[11][-1] = '<td round=0 game=4 side="right"></td>'
+    table[12][-1] = '<td round=0 game=4 lower="" side="right"><a team=43 href="#1-20-l">%s</a></td>' % teams[43]
+    table[10][-2] = '<td bottom=""></td>'
+
+    table[25][-1] = '<td round=0 game=3 upper="" side="right"><a team=53 href="#1-25-l">%s</a></td>' % teams[53]
+    table[26][-1] = '<td round=0 game=3 side="right"></td>'
+    table[27][-1] = '<td round=0 game=3 lower="" side="right"><a team=54 href="#1-25-l">%s</a></td>' % teams[54]
     table[25][-2] = '<td bottom=""></td>'
 
-    table[31][-1] = '<td round=0 game=3 upper="" side="right"><a team=57 href="#1-27-l">%s</a></td>' % teams[57]
-    table[32][-1] = '<td round=0 game=3 side="right"></td>'
-    table[33][-1] = '<td round=0 game=3 lower="" side="right"><a team=58 href="#1-27-l">%s</a></td>' % teams[58]
-    table[31][-2] = '<td bottom=""></td>'
-
     games = {
-        1: 1, 2: [4,5], 3: [6,7], 4: [8,9], 5: [10,11], 6: [12,13], 7: [14,15], 8: [16,17],
-        9: [18,19], 10: [20,21], 11: [22,23], 12: [24,25], 13: [26,27], 14: 28, 15: [31,32], 16: [33,34],
-        17: [35,36], 18: [37,38], 19: [39,40], 20: [41,42], 21: [43, 44], 22: [45,46], 23: [47,48], 24: [49,50],
-        25: 51, 26: [54, 55], 27: 56, 28: [59,60], 29: [61,62], 30: [63,64], 31: [65,66], 32: [67,68]
+        1: 1, 2: [4,5], 3: [6,7], 4: [8,9], 5: 10, 6: [13,14], 7: [15,16], 8: [17,18],
+        9: [19,20], 10: [21,22], 11: [23,24], 12: [25,26], 13: [27,28], 14: [29,30], 15: [31,32], 16: [33,34],
+        17: [35,36], 18: [37,38], 19: [39,40], 20: 41, 21: [44, 45], 22: [46,47], 23: [48,49], 24: [50,51],
+        25: 52, 26: [55, 56], 27: [57, 58], 28: [59,60], 29: [61,62], 30: [63,64], 31: [65,66], 32: [67,68]
     }
 
     #round one
@@ -176,8 +177,9 @@ def read_kenpom():
     #kenpom data notes:
     #team, raw tempo, raw tempo rank, adj tempo, adj tempo rank, raw OE, raw OE rank, adj OE, adj OE rank, raw DE, raw DE rank, adj DE, adjDE rank, kenpom ranking, kenpom rank
     teams = {}
-    for line in file("kenpom_3_11_12.csv"):
-        team, _, _, tempo, temporank, _, _, oe, oerank, _, _, de, derank, kenpom, kenpomrank = line.strip().split(",")
+    for line in file("kenpom_2013.csv"):
+        kenpomrank, team, _, _, kenpom, oe, oerank, de, derank, tempo, temporank = line.strip().split(",")[:11]
+        print [tempo, temporank, oe, oerank, de, derank, kenpom, kenpomrank, team]
         teams[team] = map(float, [tempo, temporank, oe, oerank, de, derank, kenpom, kenpomrank]) + [team]
     return teams
 
