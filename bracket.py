@@ -79,10 +79,10 @@ def output_bracket(kenpom_teams):
     table[15][0] = '<td round=0 game=1 lower="" side="left"><a team=12 href="#1-5-l">%s</a></td>' % teams[12]
     table[13][1] = '<td bottom=""></td>'
 
-    table[10][-1] = '<td round=0 game=4 upper="" side="right"><a team=42 href="#1-20-l">%s</a></td>' % teams[42]
-    table[11][-1] = '<td round=0 game=4 side="right"></td>'
-    table[12][-1] = '<td round=0 game=4 lower="" side="right"><a team=43 href="#1-20-l">%s</a></td>' % teams[43]
-    table[10][-2] = '<td bottom=""></td>'
+    table[34][0] = '<td round=0 game=4 upper="" side="left"><a team=26 href="#1-12-l">%s</a></td>' % teams[26]
+    table[35][0] = '<td round=0 game=4 side="left"></td>'
+    table[36][0] = '<td round=0 game=4 lower="" side="left"><a team=27 href="#1-12-l">%s</a></td>' % teams[27]
+    table[34][1] = '<td bottom=""></td>'
 
     table[25][-1] = '<td round=0 game=3 upper="" side="right"><a team=53 href="#1-25-l">%s</a></td>' % teams[53]
     table[26][-1] = '<td round=0 game=3 side="right"></td>'
@@ -91,8 +91,8 @@ def output_bracket(kenpom_teams):
 
     games = {
         1: 1, 2: [4,5], 3: [6,7], 4: [8,9], 5: 10, 6: [13,14], 7: [15,16], 8: [17,18],
-        9: [19,20], 10: [21,22], 11: [23,24], 12: [25,26], 13: [27,28], 14: [29,30], 15: [31,32], 16: [33,34],
-        17: [35,36], 18: [37,38], 19: [39,40], 20: 41, 21: [44, 45], 22: [46,47], 23: [48,49], 24: [50,51],
+        9: [19,20], 10: [21,22], 11: [23,24], 12: 25, 13: [28,29], 14: [30,31], 15: [32,33], 16: [34,35],
+        17: [36,37], 18: [38,39], 19: [40,41], 20: [42,43], 21: [44, 45], 22: [46,47], 23: [48,49], 24: [50,51],
         25: 52, 26: [55, 56], 27: [57, 58], 28: [59,60], 29: [61,62], 30: [63,64], 31: [65,66], 32: [67,68]
     }
 
@@ -177,7 +177,6 @@ def read_kenpom():
     teams = {}
     for line in file("kenpom_2013.csv"):
         kenpomrank, team, _, _, kenpom, oe, oerank, de, derank, tempo, temporank = line.strip().split(",")[:11]
-        print [tempo, temporank, oe, oerank, de, derank, kenpom, kenpomrank, team]
         teams[team] = map(float, [tempo, temporank, oe, oerank, de, derank, kenpom, kenpomrank]) + [team]
     return teams
 
