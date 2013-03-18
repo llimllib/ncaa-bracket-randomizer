@@ -11,7 +11,7 @@ def output_bracket(kenpom_teams):
     game_order = [1,8,5,4,6,3,7,2]
 
     #this year the west plays the east and the southwest plays the southeast.
-    divs = ["Midwest", "South", "West", "East"]
+    divs = ["Midwest", "West", "South", "East"]
 
     #the kenpom stats for the teams that are in the tournament. The key is the
     #team id, and the value is the team's stats and name
@@ -168,8 +168,6 @@ def output_bracket(kenpom_teams):
 
     table[22][8] = '<td round=7 game=1 upper="" lower="" side="left"></td>'
 
-    file("out.html", 'w').write(Template(filename="bracket_template.html")
-                         .render(table=table, spacers=spacers, kenpom=kenpom_keep))
     file("index.html", 'w').write(Template(filename="bracket_template.html")
                          .render(table=table, spacers=spacers, kenpom=kenpom_keep))
 
