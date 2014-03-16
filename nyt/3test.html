@@ -11,7 +11,7 @@
 </body>
 <script>
 var width = 1000,
-    height = 600,
+    height = 1000,
     mx = 30, //x margin
     my = 25; //y margin
 
@@ -70,7 +70,7 @@ $.each(rounds, function(i, round) {
 });
 
 roundwidth = 80;
-lineheight = 12;
+lineheight = 14;
 gameheight = 30;
 
 games = bracket.selectAll(".game")
@@ -80,16 +80,35 @@ games = bracket.selectAll(".game")
     .attr("class", "group");
 
 function topliney(game) {
-  var roundlineh = lineheight * Math.pow(2, game.round-1);
-  return roundlineh * (game.roundgame * 2 - 1);
+  // spacing at the top goes half of 0, 1, 3, 7, 15...
+  var topspace = lineheight * ((Math.pow(2, game.round-1)-1) / 2);
+  // the first line is always at ts + lh
+  var start = topspace + lineheight;
+
+  // 1, 2, 4, 8, ...
+  var roundheight = lineheight * Math.pow(2, game.round-1);
+  return start + (game.roundgame-1)*(2*roundheight);
 }
+
+function bottomliney(game) {
+  // spacing at the top goes half of 0, 1, 3, 7, 15...
+  var topspace = lineheight * ((Math.pow(2, game.round-1)-1) / 2);
+  // the first line is always at ts + lh
+  var start = topspace + lineheight;
+
+  // 1, 2, 4, 8, ...
+  var roundheight = lineheight * Math.pow(2, game.round-1);
+  return start + (game.roundgame-1)*(2*roundheight) + roundheight;
+}
+
+linewidth = 2;
 
 // Top line
 games.append("rect")
   .attr("x", function(d) { return d.round * roundwidth; })
   .attr("y", topliney)
   .attr("width", roundwidth)
-  .attr("height", "2")
+  .attr("height", linewidth)
   .attr("fill", "black");
 
 // bottom line
@@ -97,7 +116,15 @@ games.append("rect")
   .attr("x", function(d) { return d.round * roundwidth; })
   .attr("y", bottomliney)
   .attr("width", roundwidth)
-  .attr("height", "2")
+  .attr("height", linewidth)
+  .attr("fill", "black");
+
+// right line
+games.append("rect")
+  .attr("x", function(d) { return d.round * roundwidth + roundwidth; })
+  .attr("y", topliney)
+  .attr("width", linewidth)
+  .attr("height", function(d) { return bottomliney(d) - topliney(d) + linewidth; })
   .attr("fill", "black");
 </script>
 </html>
