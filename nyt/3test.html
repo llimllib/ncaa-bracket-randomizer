@@ -1,0 +1,103 @@
+<html><head><title>yo</title>
+<link rel="stylesheet" href="http://billmill.org/css/960css/reset.css" />
+<link rel="stylesheet" href="http://billmill.org/css/960css/960.css" />
+<link rel="stylesheet" href="http://billmill.org/css/style.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+</head>
+<body>
+  <div id="demo">
+  </div>
+</body>
+<script>
+var width = 1000,
+    height = 600,
+    mx = 30, //x margin
+    my = 25; //y margin
+
+var bracket = d3.select("#demo").append("svg")
+    .attr("class", "bracket")
+    .attr("width", width + 2*mx)
+    .attr("height", height + 2*my)
+
+var line = d3.svg.line();
+
+// idea stolen from the NYT bracket. Thanks mbostock.
+var game = {
+     1: { order: 0,  row: 1, position: 0 },
+    16: { order: 1,  row: 1, position: 1 },
+     8: { order: 2,  row: 2, position: 0 },
+     9: { order: 3,  row: 2, position: 1 },
+     5: { order: 4,  row: 3, position: 0 },
+    12: { order: 5,  row: 3, position: 1 },
+     4: { order: 6,  row: 4, position: 0 },
+    13: { order: 7,  row: 4, position: 1 },
+     6: { order: 8,  row: 5, position: 0 },
+    11: { order: 9,  row: 5, position: 1 },
+     3: { order: 10, row: 6, position: 0 },
+    14: { order: 11, row: 6, position: 1 },
+     7: { order: 12, row: 7, position: 0 },
+    10: { order: 13, row: 7, position: 1 },
+     2: { order: 14, row: 8, position: 0 },
+    15: { order: 15, row: 8, position: 1 }
+}
+
+// returns the y coordinate for the game within its region
+// (hence height/2)
+var gamey = d3.scale.linear()
+  .domain([1, 9])
+  .range([0, height/2]);
+
+var rounds = [1,2,3,4,5,6];
+var ngames = 32;
+var gid = 0;
+var regions = ["west", "east", "south", "midwest"];
+games = [];
+
+$.each(rounds, function(i, round) {
+  var roundgame = 1;
+  for (var i=0; i < ngames; i++) {
+    gid += 1;
+    // TODO set the region
+    games.push({
+      gid: gid,
+      round: round,
+      roundgame: roundgame,
+    });
+    roundgame += 1
+  }
+  ngames /= 2;
+});
+
+roundwidth = 80;
+lineheight = 12;
+gameheight = 30;
+
+games = bracket.selectAll(".game")
+  .data(games)
+  .enter()
+  .append("g")
+    .attr("class", "group");
+
+function topliney(game) {
+  var roundlineh = lineheight * Math.pow(2, game.round-1);
+  return roundlineh * (game.roundgame * 2 - 1);
+}
+
+// Top line
+games.append("rect")
+  .attr("x", function(d) { return d.round * roundwidth; })
+  .attr("y", topliney)
+  .attr("width", roundwidth)
+  .attr("height", "2")
+  .attr("fill", "black");
+
+// bottom line
+games.append("rect")
+  .attr("x", function(d) { return d.round * roundwidth; })
+  .attr("y", bottomliney)
+  .attr("width", roundwidth)
+  .attr("height", "2")
+  .attr("fill", "black");
+</script>
+</html>
