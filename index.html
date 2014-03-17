@@ -6,21 +6,34 @@
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 </head>
 <body>
-  <div id="demo">
+  <input type="button" value="randomize" id="randomize"></input>
+  <div id="bracket">
   </div>
 </body>
 <script>
+function randomize() {
+  console.log("randomize");
+}
+
+$(document).ready(function() {
+    $("#randomize").click(randomize);
+});
+
 var width = 1000,
     height = 1000,
     mx = 30, //x margin
     my = 25; //y margin
 
-var bracket = d3.select("#demo").append("svg")
+var bracket = d3.select("#bracket").append("svg")
     .attr("class", "bracket")
     .attr("width", width + 2*mx)
     .attr("height", height + 2*my)
 
 var line = d3.svg.line();
+
+function log5(a, b) {
+  return (a - a * b) / (a + b - 2 * a * b);
+}
 
 function gameregion(gid) {
   if ((gid >= 1 && gid <= 8) || (gid >= 33 && gid <= 36)
@@ -51,6 +64,7 @@ var gid = 0;
 var regions = ["west", "east", "south", "midwest"];
 games = [];
 
+// create the games array without teams
 $.each(rounds, function(i, round) {
   var roundgame = 1;
   for (var i=0; i < ngames; i++) {
@@ -69,6 +83,15 @@ $.each(rounds, function(i, round) {
   ngames /= 2;
 });
 
+kenpom = {}
+d3.csv("kenpom_2014.csv", function(error, csv) {
+    csv.forEach(function(row) {
+      kenpom[row.TeamName] = {
+        rating: parseFloat(row.Pythag)
+      }
+    });
+});
+
 var regionoffset = {"south": 0, "west": 8, "east": 16, "midwest": 24}
 
 function findgame(region, gameoffset) {
@@ -82,17 +105,12 @@ function findgame(region, gameoffset) {
 function set(region, gameoffset, topteam, bottomteam) {
   var game = findgame(region, gameoffset);
   game.topteam = topteam;
+  if (!kenpom.hasOwnProperty(topteam)) { throw new Error("missing ", topteam); }
+  game.toprating = kenpom[topteam].rating;
   game.bottomteam = bottomteam;
+  if (!kenpom.hasOwnProperty(bottomteam)) { throw new Error("missing ", bottomteam); }
+  game.bottomrating = kenpom[bottomteam].rating;
 }
-
-kenpom = {}
-d3.csv("kenpom_2014.csv", function(error, csv) {
-    csv.forEach(function(row) {
-      kenpom[row.TeamName] = {
-        rating: parseFloat(row.Pythag)
-      }
-    });
-});
 
 d3.json("teams.json", function(error, json) {
     $.each(json, function(region, seeds) {
@@ -114,7 +132,7 @@ d3.json("teams.json", function(error, json) {
       .data(games)
       .enter()
       .append("g")
-        .attr("class", "group");
+        .attr("class", "game");
 
     function topliney(game) {
       // spacing at the top goes half of 0, 1, 3, 7, 15...
