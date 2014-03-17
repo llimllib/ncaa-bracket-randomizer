@@ -7,4 +7,7 @@ push:
 	git push -f -u origin gh-pages
 	git checkout d3version
 
+lint:
+	jshint bracket.js
+
 .PHONY: serve push
