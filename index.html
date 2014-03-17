@@ -4,11 +4,46 @@
 <link rel="stylesheet" href="http://billmill.org/css/style.css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<!-- Bootstrap... because why not the whole kitchen sink -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<style>
+body { margin-top: 20px; }
+.buttons {
+  height: 94px;
+  margin-top: 30px;
+}
+</style>
 </head>
 <body>
-  <input type="button" value="randomize" id="randomize"></input>
-  <div id="bracket">
+<div class="container_16">
+  <div class="grid_3">
+    <a href="http://billmill.org"><img src="http://billmill.org/images/logo.png" width="136" height="94"></a>
   </div>
+  <div class="grid_13 buttons">
+    <div class="btn-group">
+      <button type="button" class="btn btn-default" id="randomize">Randomize</button>
+    </div>
+    <div class="btn-group" data-toggle="buttons" id="randomness">
+      <label class="btn btn-primary">
+        <input type="radio" name="options" randomness="0">None
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="options" randomness="1" id="some" checked>Some
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="options" randomness="2">Lots
+      </label>
+    </div>
+  </div>
+  <div class="clear"></div>
+
+  <div class="grid_16">
+    <div id="bracket">
+    </div>
+  </div>
+</div>
 </body>
 <script>
 function log5(a, b) {
@@ -206,85 +241,86 @@ function main() {
   });
 
   d3.json("teams.json", function(error, json) {
-      $.each(json, function(region, seeds) {
-        set(region, 1, seeds["1"], seeds["16"]);
-        set(region, 2, seeds["8"], seeds["9"]);
-        set(region, 3, seeds["5"], seeds["12"]);
-        set(region, 4, seeds["4"], seeds["13"]);
-        set(region, 5, seeds["6"], seeds["11"]);
-        set(region, 6, seeds["3"], seeds["14"]);
-        set(region, 7, seeds["7"], seeds["10"]);
-        set(region, 8, seeds["2"], seeds["15"]);
-      });
+    $.each(json, function(region, seeds) {
+      set(region, 1, seeds["1"], seeds["16"]);
+      set(region, 2, seeds["8"], seeds["9"]);
+      set(region, 3, seeds["5"], seeds["12"]);
+      set(region, 4, seeds["4"], seeds["13"]);
+      set(region, 5, seeds["6"], seeds["11"]);
+      set(region, 6, seeds["3"], seeds["14"]);
+      set(region, 7, seeds["7"], seeds["10"]);
+      set(region, 8, seeds["2"], seeds["15"]);
+    });
 
-      gamegs = bracket.selectAll(".game")
-        .data(games)
-        .enter()
-        .append("g")
-          .attr("class", function(d) { return "game round" + d.round })
-          .attr("id", function(d) { return "game" + d.gid });
+    gamegs = bracket.selectAll(".game")
+      .data(games)
+      .enter()
+      .append("g")
+        .attr("class", function(d) { return "game round" + d.round })
+        .attr("id", function(d) { return "game" + d.gid });
 
-      linewidth = 1;
+    linewidth = 1;
 
-      // Top line
-      gamegs.append("rect")
-        .attr("x", function(d) { return d.round * roundwidth; })
-        .attr("y", topliney)
-        .attr("width", roundwidth)
-        .attr("height", linewidth)
-        .attr("fill", linecolor);
+    // Top line
+    gamegs.append("rect")
+      .attr("x", function(d) { return d.round * roundwidth; })
+      .attr("y", topliney)
+      .attr("width", roundwidth)
+      .attr("height", linewidth)
+      .attr("fill", linecolor);
 
-      // bottom line
-      gamegs.append("rect")
-        .attr("x", function(d) { return d.round * roundwidth; })
-        .attr("y", bottomliney)
-        .attr("width", roundwidth)
-        .attr("height", linewidth)
-        .attr("fill", linecolor);
+    // bottom line
+    gamegs.append("rect")
+      .attr("x", function(d) { return d.round * roundwidth; })
+      .attr("y", bottomliney)
+      .attr("width", roundwidth)
+      .attr("height", linewidth)
+      .attr("fill", linecolor);
 
-      // right line
-      gamegs.append("rect")
-        .attr("x", function(d) { return d.round * roundwidth + roundwidth; })
-        .attr("y", topliney)
-        .attr("width", linewidth)
-        .attr("height", function(d) { return bottomliney(d) - topliney(d) + linewidth; })
-        .attr("fill", linecolor);
+    // right line
+    gamegs.append("rect")
+      .attr("x", function(d) { return d.round * roundwidth + roundwidth; })
+      .attr("y", topliney)
+      .attr("width", linewidth)
+      .attr("height", function(d) { return bottomliney(d) - topliney(d) + linewidth; })
+      .attr("fill", linecolor);
 
-      //top teams
-      gamegs.append("text")
-        .attr("x", function(d) { return d.round * roundwidth; })
-        .attr("y", function(d) { return topliney(d) - 1; })
-        .style("font", "10px sans-serif")
-        .text(function(d) { if (d.topteam) {return d.topteam.name; }});
+    //top teams
+    gamegs.append("text")
+      .attr("x", function(d) { return d.round * roundwidth; })
+      .attr("y", function(d) { return topliney(d) - 1; })
+      .style("font", "10px sans-serif")
+      .text(function(d) { if (d.topteam) {return d.topteam.name; }});
 
-      //bottom teams
-      gamegs.append("text")
-        .attr("x", function(d) { return d.round * roundwidth; })
-        .attr("y", function(d) { return bottomliney(d) - 1; })
-        .style("font", "10px sans-serif")
-        .text(function(d) { if (d.bottomteam) { return d.bottomteam.name; }});
+    //bottom teams
+    gamegs.append("text")
+      .attr("x", function(d) { return d.round * roundwidth; })
+      .attr("y", function(d) { return bottomliney(d) - 1; })
+      .style("font", "10px sans-serif")
+      .text(function(d) { if (d.bottomteam) { return d.bottomteam.name; }});
 
-      var lastline = (lineheight * ((Math.pow(2, 6)-1) / 2) + lineheight);
+    var lastline = (lineheight * ((Math.pow(2, 6)-1) / 2) + lineheight);
 
-      var winner = [{"winner": undefined}];
+    var winner = [{"winner": undefined}];
 
-      bracket.selectAll(".winner")
-        .data(winner)
-        .enter()
-        .append("g")
-        .attr("class", "winner round7")
-        .append("rect")
-        .attr("x", 7 * roundwidth)
-        .attr("y", lastline)
-        .attr("width", roundwidth)
-        .attr("height", linewidth)
-        .attr("fill", linecolor);
+    bracket.selectAll(".winner")
+      .data(winner)
+      .enter()
+      .append("g")
+      .attr("class", "winner round7")
+      .append("rect")
+      .attr("x", 7 * roundwidth)
+      .attr("y", lastline)
+      .attr("width", roundwidth)
+      .attr("height", linewidth)
+      .attr("fill", linecolor);
   });
 }
 
 $(document).ready(function() {
-    $("#randomize").click(randomize);
-    main();
+  $("#randomize").click(randomize);
+  $("#some").click()
+  main();
 });
 </script>
 <script type="text/javascript">
