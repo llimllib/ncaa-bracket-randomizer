@@ -56,16 +56,27 @@ function nextgame(round, gid) {
 }
 
 // return a if a wins, else b
-function whowins(a, b) {
+function whowins(a, b, randomness) {
   var fav = Math.max(a, b);
   var dog = Math.min(a, b);
   var odds = log5(fav, dog);
 
   // TODO return of the randomness slider
-  if (Math.random() > odds && Math.random() > odds) {
-    return dog;
+  if (randomness == "0") {
+    return fav;
   }
-  return fav;
+  if (randomness == "1") {
+    if (Math.random() > odds && Math.random() > odds) {
+      return dog;
+    }
+    return fav;
+  }
+  if (randomness == "2") {
+    if (Math.random() > odds) {
+      return dog;
+    }
+    return fav;
+  }
 }
 
 function advance(team, nextgid, gid) {
@@ -116,12 +127,13 @@ function drawWinners() {
 }
 
 function randomize() {
+  var randomness = $("#randomness input:checked").attr("randomness");
   for (var round=0; round < 7; round++) {
     d3.selectAll(".round" + round).each(function(d) {
       var nextgid = nextgame(d.round, d.gid);
       if (!(nextgid >= 1 && nextgid <= 64)) { throw new Error("invalid gid ", gid, d.round, d.gid); }
 
-      var winner = whowins(d.topteam.rating, d.bottomteam.rating);
+      var winner = whowins(d.topteam.rating, d.bottomteam.rating, randomness);
       if (winner == d.topteam.rating) {
         //console.log(d.topteam.name, d.topteam.rating, "beats", d.bottomteam.name, d.bottomteam.rating)
         advance(d.topteam, nextgid, d.gid);
