@@ -126,6 +126,7 @@ function set(region, gameoffset, topteam, bottomteam) {
 roundwidth = 100;
 lineheight = 14;
 gameheight = 30;
+linecolor = "#ccc";
 
 function topliney(game) {
   // spacing at the top goes half of 0, 1, 3, 7, 15...
@@ -245,7 +246,7 @@ function main() {
           .attr("y", topliney)
           .attr("width", roundwidth)
           .attr("height", linewidth)
-          .attr("fill", "black");
+          .attr("fill", linecolor);
 
         // bottom line
         gamegs.append("rect")
@@ -253,7 +254,7 @@ function main() {
           .attr("y", bottomliney)
           .attr("width", roundwidth)
           .attr("height", linewidth)
-          .attr("fill", "black");
+          .attr("fill", linecolor);
 
         // right line
         gamegs.append("rect")
@@ -261,7 +262,7 @@ function main() {
           .attr("y", topliney)
           .attr("width", linewidth)
           .attr("height", function(d) { return bottomliney(d) - topliney(d) + linewidth; })
-          .attr("fill", "black");
+          .attr("fill", linecolor);
 
         //top teams
         gamegs.append("text")
@@ -291,7 +292,7 @@ function main() {
           .attr("y", lastline)
           .attr("width", roundwidth)
           .attr("height", linewidth)
-          .attr("fill", "black");
+          .attr("fill", linecolor);
     });
   });
 }
