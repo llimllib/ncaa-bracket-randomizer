@@ -35,6 +35,13 @@ function whowins(a, b) {
 
 function advance(team, rating, nextgid, gid) {
   var is_top = gid % 2 == 1;
+
+  //championship game
+  if (nextgid == 64) {
+    d3.select(".winner").datum().winner = team;
+    return;
+  }
+
   game = d3.select("#game" + nextgid).datum();
   if (is_top) {
     game.topteam = team;
@@ -63,6 +70,16 @@ function drawWinners() {
         .style("font", "10px sans-serif")
         .text(function(d) { return d.topteam; });
   }
+
+  var lastline = (lineheight * ((Math.pow(2, 6)-1) / 2) + lineheight);
+
+  d3.select(".winner text").remove();
+  d3.select(".winner")
+    .append("text")
+    .attr("x", 7 * roundwidth + 3)
+    .attr("y", lastline)
+    .style("font", "10px sans-serif")
+    .text(function(d) { return d.winner; });
 }
 
 function randomize() {
@@ -263,6 +280,22 @@ d3.json("teams.json", function(error, json) {
       .attr("y", function(d) { return bottomliney(d) - 1; })
       .style("font", "10px sans-serif")
       .text(function(d) { return d.bottomteam; });
+
+    var lastline = (lineheight * ((Math.pow(2, 6)-1) / 2) + lineheight);
+
+    var winner = [{"winner": undefined}];
+
+    bracket.selectAll(".winner")
+      .data(winner)
+      .enter()
+      .append("g")
+      .attr("class", "winner round7")
+      .append("rect")
+      .attr("x", 7 * roundwidth)
+      .attr("y", lastline)
+      .attr("width", roundwidth)
+      .attr("height", linewidth)
+      .attr("fill", "black");
 });
 </script>
 </html>
