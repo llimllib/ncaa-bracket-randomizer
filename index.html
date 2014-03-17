@@ -217,82 +217,82 @@ function main() {
           rating: parseFloat(row.Pythag)
         }
       });
-  });
 
-  d3.json("teams.json", function(error, json) {
-      $.each(json, function(region, seeds) {
-        set(region, 1, seeds["1"], seeds["16"]);
-        set(region, 2, seeds["8"], seeds["9"]);
-        set(region, 3, seeds["5"], seeds["12"]);
-        set(region, 4, seeds["4"], seeds["13"]);
-        set(region, 5, seeds["6"], seeds["11"]);
-        set(region, 6, seeds["3"], seeds["14"]);
-        set(region, 7, seeds["7"], seeds["10"]);
-        set(region, 8, seeds["2"], seeds["15"]);
-      });
+    d3.json("teams.json", function(error, json) {
+        $.each(json, function(region, seeds) {
+          set(region, 1, seeds["1"], seeds["16"]);
+          set(region, 2, seeds["8"], seeds["9"]);
+          set(region, 3, seeds["5"], seeds["12"]);
+          set(region, 4, seeds["4"], seeds["13"]);
+          set(region, 5, seeds["6"], seeds["11"]);
+          set(region, 6, seeds["3"], seeds["14"]);
+          set(region, 7, seeds["7"], seeds["10"]);
+          set(region, 8, seeds["2"], seeds["15"]);
+        });
 
-      gamegs = bracket.selectAll(".game")
-        .data(games)
-        .enter()
-        .append("g")
-          .attr("class", function(d) { return "game round" + d.round })
-          .attr("id", function(d) { return "game" + d.gid });
+        gamegs = bracket.selectAll(".game")
+          .data(games)
+          .enter()
+          .append("g")
+            .attr("class", function(d) { return "game round" + d.round })
+            .attr("id", function(d) { return "game" + d.gid });
 
-      linewidth = 1;
+        linewidth = 1;
 
-      // Top line
-      gamegs.append("rect")
-        .attr("x", function(d) { return d.round * roundwidth; })
-        .attr("y", topliney)
-        .attr("width", roundwidth)
-        .attr("height", linewidth)
-        .attr("fill", "black");
+        // Top line
+        gamegs.append("rect")
+          .attr("x", function(d) { return d.round * roundwidth; })
+          .attr("y", topliney)
+          .attr("width", roundwidth)
+          .attr("height", linewidth)
+          .attr("fill", "black");
 
-      // bottom line
-      gamegs.append("rect")
-        .attr("x", function(d) { return d.round * roundwidth; })
-        .attr("y", bottomliney)
-        .attr("width", roundwidth)
-        .attr("height", linewidth)
-        .attr("fill", "black");
+        // bottom line
+        gamegs.append("rect")
+          .attr("x", function(d) { return d.round * roundwidth; })
+          .attr("y", bottomliney)
+          .attr("width", roundwidth)
+          .attr("height", linewidth)
+          .attr("fill", "black");
 
-      // right line
-      gamegs.append("rect")
-        .attr("x", function(d) { return d.round * roundwidth + roundwidth; })
-        .attr("y", topliney)
-        .attr("width", linewidth)
-        .attr("height", function(d) { return bottomliney(d) - topliney(d) + linewidth; })
-        .attr("fill", "black");
+        // right line
+        gamegs.append("rect")
+          .attr("x", function(d) { return d.round * roundwidth + roundwidth; })
+          .attr("y", topliney)
+          .attr("width", linewidth)
+          .attr("height", function(d) { return bottomliney(d) - topliney(d) + linewidth; })
+          .attr("fill", "black");
 
-      //top teams
-      gamegs.append("text")
-        .attr("x", function(d) { return d.round * roundwidth; })
-        .attr("y", function(d) { return topliney(d) - 1; })
-        .style("font", "10px sans-serif")
-        .text(function(d) { return d.topteam; });
+        //top teams
+        gamegs.append("text")
+          .attr("x", function(d) { return d.round * roundwidth; })
+          .attr("y", function(d) { return topliney(d) - 1; })
+          .style("font", "10px sans-serif")
+          .text(function(d) { return d.topteam; });
 
-      //bottom teams
-      gamegs.append("text")
-        .attr("x", function(d) { return d.round * roundwidth; })
-        .attr("y", function(d) { return bottomliney(d) - 1; })
-        .style("font", "10px sans-serif")
-        .text(function(d) { return d.bottomteam; });
+        //bottom teams
+        gamegs.append("text")
+          .attr("x", function(d) { return d.round * roundwidth; })
+          .attr("y", function(d) { return bottomliney(d) - 1; })
+          .style("font", "10px sans-serif")
+          .text(function(d) { return d.bottomteam; });
 
-      var lastline = (lineheight * ((Math.pow(2, 6)-1) / 2) + lineheight);
+        var lastline = (lineheight * ((Math.pow(2, 6)-1) / 2) + lineheight);
 
-      var winner = [{"winner": undefined}];
+        var winner = [{"winner": undefined}];
 
-      bracket.selectAll(".winner")
-        .data(winner)
-        .enter()
-        .append("g")
-        .attr("class", "winner round7")
-        .append("rect")
-        .attr("x", 7 * roundwidth)
-        .attr("y", lastline)
-        .attr("width", roundwidth)
-        .attr("height", linewidth)
-        .attr("fill", "black");
+        bracket.selectAll(".winner")
+          .data(winner)
+          .enter()
+          .append("g")
+          .attr("class", "winner round7")
+          .append("rect")
+          .attr("x", 7 * roundwidth)
+          .attr("y", lastline)
+          .attr("width", roundwidth)
+          .attr("height", linewidth)
+          .attr("fill", "black");
+    });
   });
 }
 
