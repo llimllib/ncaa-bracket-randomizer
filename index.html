@@ -77,7 +77,7 @@ function drawWinners() {
   d3.select(".winner")
     .append("text")
     .attr("x", 7 * roundwidth + 3)
-    .attr("y", lastline)
+    .attr("y", lastline - 1)
     .style("font", "10px sans-serif")
     .text(function(d) { return d.winner; });
 }
