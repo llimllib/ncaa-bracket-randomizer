@@ -11,8 +11,79 @@
   </div>
 </body>
 <script>
+function log5(a, b) {
+  return (a - a * b) / (a + b - 2 * a * b);
+}
+
+var roundOffsets = {1: 0, 2: 32, 3: 48, 4: 56, 5: 60, 6: 62, 7: 63};
+function nextgame(round, gid) {
+  return roundOffsets[round+1] + Math.ceil((gid - roundOffsets[round]) / 2);
+}
+
+// return a if a wins, else b
+function whowins(a, b) {
+  var fav = Math.max(a, b);
+  var dog = Math.min(a, b);
+  var odds = log5(fav, dog);
+
+  // TODO return of the randomness slider
+  if (Math.random() > odds && Math.random() > odds) {
+    return dog;
+  }
+  return fav;
+}
+
+function advance(team, rating, nextgid, gid) {
+  var is_top = gid % 2 == 1;
+  game = d3.select("#game" + nextgid).datum();
+  if (is_top) {
+    game.topteam = team;
+    game.toprating = rating;
+  } else {
+    game.bottomteam = team;
+    game.bottomrating = rating;
+  }
+}
+
+function drawWinners() {
+  for (var round=2; round < 7; round++) {
+    d3.selectAll(".round" + round + " text").remove();
+
+    d3.selectAll(".round" + round)
+      .append("text")
+        .attr("x", function(d) { return d.round * roundwidth + 3; })
+        .attr("y", function(d) { return bottomliney(d) - 1; })
+        .style("font", "10px sans-serif")
+        .text(function(d) { return d.bottomteam; });
+
+    d3.selectAll(".round" + round)
+      .append("text")
+        .attr("x", function(d) { return d.round * roundwidth + 3; })
+        .attr("y", function(d) { return topliney(d) - 1; })
+        .style("font", "10px sans-serif")
+        .text(function(d) { return d.topteam; });
+  }
+}
+
 function randomize() {
-  console.log("randomize");
+  for (var round=0; round < 7; round++) {
+    d3.selectAll(".round" + round).each(function(d) {
+      var nextgid = nextgame(d.round, d.gid);
+      if (!(nextgid >= 1 && nextgid <= 64)) { throw new Error("invalid gid ", gid, d.round, d.gid); }
+
+      var winner = whowins(d.toprating, d.bottomrating);
+      if (winner == d.toprating) {
+        console.log(d.topteam, " beats ", d.bottomteam);
+        advance(d.topteam, d.toprating, nextgid, d.gid);
+      } else {
+        console.log(d.bottomteam, " beats ", d.topteam);
+        advance(d.bottomteam, d.bottomrating, nextgid, d.gid);
+      }
+      //console.log(d.topteam, d.toprating, d.bottomteam, d.bottomrating, log5(d.toprating, d.bottomrating));
+    })
+  }
+
+  drawWinners();
 }
 
 $(document).ready(function() {
@@ -30,10 +101,6 @@ var bracket = d3.select("#bracket").append("svg")
     .attr("height", height + 2*my)
 
 var line = d3.svg.line();
-
-function log5(a, b) {
-  return (a - a * b) / (a + b - 2 * a * b);
-}
 
 function gameregion(gid) {
   if ((gid >= 1 && gid <= 8) || (gid >= 33 && gid <= 36)
@@ -112,6 +179,32 @@ function set(region, gameoffset, topteam, bottomteam) {
   game.bottomrating = kenpom[bottomteam].rating;
 }
 
+roundwidth = 100;
+lineheight = 14;
+gameheight = 30;
+
+function topliney(game) {
+  // spacing at the top goes half of 0, 1, 3, 7, 15...
+  var topspace = lineheight * ((Math.pow(2, game.round-1)-1) / 2);
+  // the first line is always at ts + lh
+  var start = topspace + lineheight;
+
+  // 1, 2, 4, 8, ...
+  var roundheight = lineheight * Math.pow(2, game.round-1);
+  return start + (game.roundgame-1)*(2*roundheight);
+}
+
+function bottomliney(game) {
+  // spacing at the top goes half of 0, 1, 3, 7, 15...
+  var topspace = lineheight * ((Math.pow(2, game.round-1)-1) / 2);
+  // the first line is always at ts + lh
+  var start = topspace + lineheight;
+
+  // 1, 2, 4, 8, ...
+  var roundheight = lineheight * Math.pow(2, game.round-1);
+  return start + (game.roundgame-1)*(2*roundheight) + roundheight;
+}
+
 d3.json("teams.json", function(error, json) {
     $.each(json, function(region, seeds) {
       set(region, 1, seeds["1"], seeds["16"]);
@@ -124,37 +217,12 @@ d3.json("teams.json", function(error, json) {
       set(region, 8, seeds["2"], seeds["15"]);
     });
 
-    roundwidth = 100;
-    lineheight = 14;
-    gameheight = 30;
-
     gamegs = bracket.selectAll(".game")
       .data(games)
       .enter()
       .append("g")
-        .attr("class", "game");
-
-    function topliney(game) {
-      // spacing at the top goes half of 0, 1, 3, 7, 15...
-      var topspace = lineheight * ((Math.pow(2, game.round-1)-1) / 2);
-      // the first line is always at ts + lh
-      var start = topspace + lineheight;
-
-      // 1, 2, 4, 8, ...
-      var roundheight = lineheight * Math.pow(2, game.round-1);
-      return start + (game.roundgame-1)*(2*roundheight);
-    }
-
-    function bottomliney(game) {
-      // spacing at the top goes half of 0, 1, 3, 7, 15...
-      var topspace = lineheight * ((Math.pow(2, game.round-1)-1) / 2);
-      // the first line is always at ts + lh
-      var start = topspace + lineheight;
-
-      // 1, 2, 4, 8, ...
-      var roundheight = lineheight * Math.pow(2, game.round-1);
-      return start + (game.roundgame-1)*(2*roundheight) + roundheight;
-    }
+        .attr("class", function(d) { return "game round" + d.round })
+        .attr("id", function(d) { return "game" + d.gid });
 
     linewidth = 1;
 
