@@ -33,22 +33,20 @@ function whowins(a, b) {
   return fav;
 }
 
-function advance(team, rating, nextgid, gid) {
+function advance(team, nextgid, gid) {
   var is_top = gid % 2 == 1;
 
   //championship game
   if (nextgid == 64) {
-    d3.select(".winner").datum().winner = team;
+    d3.select(".winner").datum().winner = team.name;
     return;
   }
 
   game = d3.select("#game" + nextgid).datum();
   if (is_top) {
     game.topteam = team;
-    game.toprating = rating;
   } else {
     game.bottomteam = team;
-    game.bottomrating = rating;
   }
 }
 
@@ -61,14 +59,14 @@ function drawWinners() {
         .attr("x", function(d) { return d.round * roundwidth + 3; })
         .attr("y", function(d) { return bottomliney(d) - 1; })
         .style("font", "10px sans-serif")
-        .text(function(d) { return d.bottomteam; });
+        .text(function(d) { if (d.bottomteam) { return d.bottomteam.name; }});
 
     d3.selectAll(".round" + round)
       .append("text")
         .attr("x", function(d) { return d.round * roundwidth + 3; })
         .attr("y", function(d) { return topliney(d) - 1; })
         .style("font", "10px sans-serif")
-        .text(function(d) { return d.topteam; });
+        .text(function(d) { if (d.topteam) { return d.topteam.name; }});
   }
 
   var lastline = (lineheight * ((Math.pow(2, 6)-1) / 2) + lineheight);
@@ -88,15 +86,14 @@ function randomize() {
       var nextgid = nextgame(d.round, d.gid);
       if (!(nextgid >= 1 && nextgid <= 64)) { throw new Error("invalid gid ", gid, d.round, d.gid); }
 
-      var winner = whowins(d.toprating, d.bottomrating);
-      if (winner == d.toprating) {
-        console.log(d.topteam, " beats ", d.bottomteam);
-        advance(d.topteam, d.toprating, nextgid, d.gid);
+      var winner = whowins(d.topteam.rating, d.bottomteam.rating);
+      if (winner == d.topteam.rating) {
+        //console.log(d.topteam.name, d.topteam.rating, "beats", d.bottomteam.name, d.bottomteam.rating)
+        advance(d.topteam, nextgid, d.gid);
       } else {
-        console.log(d.bottomteam, " beats ", d.topteam);
-        advance(d.bottomteam, d.bottomrating, nextgid, d.gid);
+        //console.log(d.bottomteam.name, d.bottomteam.rating, "beats", d.topteam.name, d.topteam.rating)
+        advance(d.bottomteam, nextgid, d.gid);
       }
-      //console.log(d.topteam, d.toprating, d.bottomteam, d.bottomrating, log5(d.toprating, d.bottomrating));
     })
   }
 
@@ -107,6 +104,7 @@ var regionoffset = {"south": 0, "west": 8, "east": 16, "midwest": 24}
 
 function findgame(region, gameoffset) {
   var gid = regionoffset[region] + gameoffset;
+  //TODO: grab game by id, rather than iteration
   for (var i=0; i < games.length; i++) {
     if (games[i].gid == gid) return games[i];
   }
@@ -116,11 +114,7 @@ function findgame(region, gameoffset) {
 function set(region, gameoffset, topteam, bottomteam) {
   var game = findgame(region, gameoffset);
   game.topteam = topteam;
-  if (!kenpom.hasOwnProperty(topteam)) { throw new Error("missing ", topteam); }
-  game.toprating = kenpom[topteam].rating;
   game.bottomteam = bottomteam;
-  if (!kenpom.hasOwnProperty(bottomteam)) { throw new Error("missing ", bottomteam); }
-  game.bottomrating = kenpom[bottomteam].rating;
 }
 
 roundwidth = 100;
@@ -211,89 +205,80 @@ function main() {
     ngames /= 2;
   });
 
-  kenpom = {}
-  d3.csv("kenpom_2014.csv", function(error, csv) {
-      csv.forEach(function(row) {
-        kenpom[row.TeamName] = {
-          rating: parseFloat(row.Pythag)
-        }
+  d3.json("teams.json", function(error, json) {
+      $.each(json, function(region, seeds) {
+        set(region, 1, seeds["1"], seeds["16"]);
+        set(region, 2, seeds["8"], seeds["9"]);
+        set(region, 3, seeds["5"], seeds["12"]);
+        set(region, 4, seeds["4"], seeds["13"]);
+        set(region, 5, seeds["6"], seeds["11"]);
+        set(region, 6, seeds["3"], seeds["14"]);
+        set(region, 7, seeds["7"], seeds["10"]);
+        set(region, 8, seeds["2"], seeds["15"]);
       });
 
-    d3.json("teams.json", function(error, json) {
-        $.each(json, function(region, seeds) {
-          set(region, 1, seeds["1"], seeds["16"]);
-          set(region, 2, seeds["8"], seeds["9"]);
-          set(region, 3, seeds["5"], seeds["12"]);
-          set(region, 4, seeds["4"], seeds["13"]);
-          set(region, 5, seeds["6"], seeds["11"]);
-          set(region, 6, seeds["3"], seeds["14"]);
-          set(region, 7, seeds["7"], seeds["10"]);
-          set(region, 8, seeds["2"], seeds["15"]);
-        });
+      gamegs = bracket.selectAll(".game")
+        .data(games)
+        .enter()
+        .append("g")
+          .attr("class", function(d) { return "game round" + d.round })
+          .attr("id", function(d) { return "game" + d.gid });
 
-        gamegs = bracket.selectAll(".game")
-          .data(games)
-          .enter()
-          .append("g")
-            .attr("class", function(d) { return "game round" + d.round })
-            .attr("id", function(d) { return "game" + d.gid });
+      linewidth = 1;
 
-        linewidth = 1;
+      // Top line
+      gamegs.append("rect")
+        .attr("x", function(d) { return d.round * roundwidth; })
+        .attr("y", topliney)
+        .attr("width", roundwidth)
+        .attr("height", linewidth)
+        .attr("fill", linecolor);
 
-        // Top line
-        gamegs.append("rect")
-          .attr("x", function(d) { return d.round * roundwidth; })
-          .attr("y", topliney)
-          .attr("width", roundwidth)
-          .attr("height", linewidth)
-          .attr("fill", linecolor);
+      // bottom line
+      gamegs.append("rect")
+        .attr("x", function(d) { return d.round * roundwidth; })
+        .attr("y", bottomliney)
+        .attr("width", roundwidth)
+        .attr("height", linewidth)
+        .attr("fill", linecolor);
 
-        // bottom line
-        gamegs.append("rect")
-          .attr("x", function(d) { return d.round * roundwidth; })
-          .attr("y", bottomliney)
-          .attr("width", roundwidth)
-          .attr("height", linewidth)
-          .attr("fill", linecolor);
+      // right line
+      gamegs.append("rect")
+        .attr("x", function(d) { return d.round * roundwidth + roundwidth; })
+        .attr("y", topliney)
+        .attr("width", linewidth)
+        .attr("height", function(d) { return bottomliney(d) - topliney(d) + linewidth; })
+        .attr("fill", linecolor);
 
-        // right line
-        gamegs.append("rect")
-          .attr("x", function(d) { return d.round * roundwidth + roundwidth; })
-          .attr("y", topliney)
-          .attr("width", linewidth)
-          .attr("height", function(d) { return bottomliney(d) - topliney(d) + linewidth; })
-          .attr("fill", linecolor);
+      //top teams
+      gamegs.append("text")
+        .attr("x", function(d) { return d.round * roundwidth; })
+        .attr("y", function(d) { return topliney(d) - 1; })
+        .style("font", "10px sans-serif")
+        .text(function(d) { if (d.topteam) {return d.topteam.name; }});
 
-        //top teams
-        gamegs.append("text")
-          .attr("x", function(d) { return d.round * roundwidth; })
-          .attr("y", function(d) { return topliney(d) - 1; })
-          .style("font", "10px sans-serif")
-          .text(function(d) { return d.topteam; });
+      //bottom teams
+      gamegs.append("text")
+        .attr("x", function(d) { return d.round * roundwidth; })
+        .attr("y", function(d) { return bottomliney(d) - 1; })
+        .style("font", "10px sans-serif")
+        .text(function(d) { if (d.bottomteam) { return d.bottomteam.name; }});
 
-        //bottom teams
-        gamegs.append("text")
-          .attr("x", function(d) { return d.round * roundwidth; })
-          .attr("y", function(d) { return bottomliney(d) - 1; })
-          .style("font", "10px sans-serif")
-          .text(function(d) { return d.bottomteam; });
+      var lastline = (lineheight * ((Math.pow(2, 6)-1) / 2) + lineheight);
 
-        var lastline = (lineheight * ((Math.pow(2, 6)-1) / 2) + lineheight);
+      var winner = [{"winner": undefined}];
 
-        var winner = [{"winner": undefined}];
-
-        bracket.selectAll(".winner")
-          .data(winner)
-          .enter()
-          .append("g")
-          .attr("class", "winner round7")
-          .append("rect")
-          .attr("x", 7 * roundwidth)
-          .attr("y", lastline)
-          .attr("width", roundwidth)
-          .attr("height", linewidth)
-          .attr("fill", linecolor);
-    });
+      bracket.selectAll(".winner")
+        .data(winner)
+        .enter()
+        .append("g")
+        .attr("class", "winner round7")
+        .append("rect")
+        .attr("x", 7 * roundwidth)
+        .attr("y", lastline)
+        .attr("width", roundwidth)
+        .attr("height", linewidth)
+        .attr("fill", linecolor);
   });
 }
 
