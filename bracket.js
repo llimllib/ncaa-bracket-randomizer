@@ -152,7 +152,7 @@ function randomize() {
   drawWinners();
 }
 
-var regionoffset = {"south": 0, "west": 8, "east": 16, "midwest": 24};
+var regionoffset = {"south": 0, "east": 8, "west": 16, "midwest": 24};
 
 function findgame(region, gameoffset) {
   var gid = regionoffset[region] + gameoffset;
@@ -298,14 +298,14 @@ function main() {
 
     //top teams
     gamegs.append("text")
-      .attr("x", 0)
+      .attr("x", 2)
       .attr("y", lineheight)
       .style("font", "10px sans-serif")
       .text(function(d) { if (d.topteam) {return d.topteam.seed + ". " + d.topteam.name; }});
 
     //bottom teams
     gamegs.append("text")
-      .attr("x", 0)
+      .attr("x", 2)
       .attr("y", function(d) { return innerpadding(d) + 2* lineheight + textpadding; })
       .style("font", "10px sans-serif")
       .text(function(d) { if (d.bottomteam) {return d.bottomteam.seed + ". " + d.bottomteam.name; }});
