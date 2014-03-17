@@ -96,13 +96,13 @@ function randomize() {
         //console.log(d.bottomteam.name, d.bottomteam.rating, "beats", d.topteam.name, d.topteam.rating)
         advance(d.bottomteam, nextgid, d.gid);
       }
-    })
+    });
   }
 
   drawWinners();
 }
 
-var regionoffset = {"south": 0, "west": 8, "east": 16, "midwest": 24}
+var regionoffset = {"south": 0, "west": 8, "east": 16, "midwest": 24};
 
 function findgame(region, gameoffset) {
   var gid = regionoffset[region] + gameoffset;
@@ -154,19 +154,19 @@ function main() {
   var bracket = d3.select("#bracket").append("svg")
       .attr("class", "bracket")
       .attr("width", width + 2*mx)
-      .attr("height", height + 2*my)
+      .attr("height", height + 2*my);
 
   var line = d3.svg.line();
 
   function gameregion(gid) {
-    if ((gid >= 1 && gid <= 8) || (gid >= 33 && gid <= 36)
-        || (gid >= 49 && gid <= 50) || (gid == 57)) { return "south"; }
-    if ((gid >= 9 && gid <= 16) || (gid >= 37 && gid <= 40)
-        || (gid >= 51 && gid <= 52) || (gid == 58)) { return "west"; }
-    if ((gid >= 17 && gid <= 24) || (gid >= 41 && gid <= 44)
-        || (gid >= 53 && gid <= 54) || (gid == 59)) { return "east"; }
-    if ((gid >= 25 && gid <= 32) || (gid >= 45 && gid <= 48)
-        || (gid >= 55 && gid <= 56) || (gid == 60)) { return "midwest"; }
+    if ((gid >= 1 && gid <= 8) || (gid >= 33 && gid <= 36) ||
+        (gid >= 49 && gid <= 50) || (gid == 57)) { return "south"; }
+    if ((gid >= 9 && gid <= 16) || (gid >= 37 && gid <= 40) ||
+        (gid >= 51 && gid <= 52) || (gid == 58)) { return "west"; }
+    if ((gid >= 17 && gid <= 24) || (gid >= 41 && gid <= 44) ||
+        (gid >= 53 && gid <= 54) || (gid == 59)) { return "east"; }
+    if ((gid >= 25 && gid <= 32) || (gid >= 45 && gid <= 48) ||
+        (gid >= 55 && gid <= 56) || (gid == 60)) { return "midwest"; }
     if (gid == 61) { return "south-west"; }
     if (gid == 62) { return "east-midwest"; }
     if (gid == 63) { return "south-west-east-midwest"; }
@@ -201,7 +201,7 @@ function main() {
         topteam: undefined,
         bottomteam: undefined
       });
-      roundgame += 1
+      roundgame += 1;
     }
     ngames /= 2;
   });
@@ -222,8 +222,8 @@ function main() {
       .data(games)
       .enter()
       .append("g")
-        .attr("class", function(d) { return "game round" + d.round })
-        .attr("id", function(d) { return "game" + d.gid });
+        .attr("class", function(d) { return "game round" + d.round; })
+        .attr("id", function(d) { return "game" + d.gid; });
 
     linewidth = 1;
 
@@ -285,6 +285,6 @@ function main() {
 
 $(document).ready(function() {
   $("#randomize").click(randomize);
-  $("#some").click()
+  $("#some").click();
   main();
 });
