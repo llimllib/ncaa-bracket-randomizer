@@ -33,4 +33,19 @@ for region, teams in bracket.iteritems():
             combined[region][seed] = kenpom[team]
             combined[region][seed]["seed"] = seed
 
+shortnames = {
+    "Stephen F. Austin": "SF Austin",
+    "Louisiana Lafayette": "Louisiana Laf.",
+    "Western Michigan": "Western Mich.",
+    "Eastern Kentucky": "Eastern Ky.",
+    "North Dakota St.": "ND State",
+    "New Mexico St.": "NM State",
+    "George Washington": "George Wash.",
+    "Coastal Carolina": "Coast. Car.",
+}
+for region in combined:
+    for seed in combined[region]:
+        if combined[region][seed]["name"] in shortnames:
+            combined[region][seed]["name"] = shortnames[combined[region][seed]["name"]]
+
 json.dump(combined, open("teams.json", 'w'))
