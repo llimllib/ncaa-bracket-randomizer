@@ -188,7 +188,34 @@ function main() {
       .attr("width", width)
       .attr("height", height);
 
-  var line = d3.svg.line();
+  // Region Titles
+  bracket.append("text")
+    .attr("x", 250)
+    .attr("y", 175)
+    .style("fill", "#999")
+    .style("font", "14px sans-serif")
+    .text("South");
+
+  bracket.append("text")
+    .attr("x", 250)
+    .attr("y", 530)
+    .style("fill", "#999")
+    .style("font", "14px sans-serif")
+    .text("East");
+
+  bracket.append("text")
+    .attr("x", 730)
+    .attr("y", 530)
+    .style("fill", "#999")
+    .style("font", "14px sans-serif")
+    .text("Midwest");
+
+  bracket.append("text")
+    .attr("x", 730)
+    .attr("y", 175)
+    .style("fill", "#999")
+    .style("font", "14px sans-serif")
+    .text("West");
 
   function gameregion(gid) {
     if ((gid >= 1 && gid <= 8) || (gid >= 33 && gid <= 36) ||
