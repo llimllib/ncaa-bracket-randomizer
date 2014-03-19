@@ -11,6 +11,17 @@ with open("kenpom_2014.csv") as kp:
             "rating": float(teamdata["Pythag"])
         }
 
+kenpom_names = {
+    "North Carolina St.": "NC State"
+}
+
+for name in kenpom:
+    if name in kenpom_names:
+        newname = kenpom_names[name]
+        kenpom[newname] = kenpom[name]
+        kenpom[newname]["name"] = newname
+        del kenpom[name]
+
 combined = {}
 
 bracket = json.loads(file("bracket.json").read())

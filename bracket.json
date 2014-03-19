@@ -1,7 +1,7 @@
 {"south":
 {
 "1": "Florida",
-"16": ["Albany", "Mount St. Mary's"],
+"16": "Albany",
 "8": "Colorado",
 "9": "Pittsburgh",
 "5": "VCU",
@@ -43,7 +43,7 @@
 "8": "Kentucky",
 "9": "Kansas St.",
 "5": "Saint Louis",
-"12": ["North Carolina St.", "Xavier"],
+"12": "NC State",
 "4": "Louisville",
 "13": "Manhattan",
 "6": "UMass",
