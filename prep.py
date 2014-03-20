@@ -1,3 +1,5 @@
+# -*- coding: utf8 -*-
+
 import json, csv
 
 kenpom = {}
@@ -53,13 +55,21 @@ with open("natesilver.csv") as ns:
     rows = csv.reader(ns)
     header = rows.next()
     for row in rows:
+        # parse the percentages
+        for rowi in [4,5,6,7,8,9]:
+            if row[rowi] == "√": row[rowi] = "100%"
+            pct = row[rowi][:-1]
+            sigma = False
+            if pct.startswith("<"):
+                sigma = True
+                row[rowi] = .001
+            else:
+                row[rowi] = float(pct)/100
         teamdata = dict(zip(header, row))
         teamdata["team"] = natesilver_names.get(teamdata["team"], teamdata["team"])
         if teamdata["team"] not in kenpom:
             print "missing {}".format(teamdata["team"])
         for key in ["round1", "round2", "round3", "round4", "round5", "round6"]:
-            if teamdata[key] == "<.01":
-                teamdata[key] = .001
             teamdata[key] = float(teamdata[key])
         natesilver[teamdata["team"]] = teamdata
 
@@ -81,7 +91,8 @@ for region, teams in bracket.iteritems():
         seed = int(seed)
         if isinstance(team, list):
             for t in team:
-                assert t in kenpom and t in natesilver
+                assert t in kenpom, "t {} not in kenpom".format(t)
+                assert t in natesilver, "t {} not in natesilver".format(t)
             # for now, ignore the first four... pick the higher ranked team to win
             if kenpom[team[0]]["rating"] > kenpom[team[1]]["rating"]:
                 combined[region][seed] = maketeam(team[0], seed)

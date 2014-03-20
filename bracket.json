@@ -39,7 +39,7 @@
 "midwest":
 {
 "1": "Wichita St.",
-"16": ["Cal Poly", "Texas Southern"],
+"16": "Cal Poly",
 "8": "Kentucky",
 "9": "Kansas St.",
 "5": "Saint Louis",
@@ -47,7 +47,7 @@
 "4": "Louisville",
 "13": "Manhattan",
 "6": "UMass",
-"11": ["Iowa", "Tennessee"],
+"11": "Tennessee",
 "3": "Duke",
 "14": "Mercer",
 "7": "Texas",
