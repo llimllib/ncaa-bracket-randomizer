@@ -1,10 +1,10 @@
 {
   "west": {
-    "10": "Ohio State",
+    "10": "Ohio St.",
     "13": "Harvard",
     "12": "Wofford",
     "15": "Texas Southern",
-    "14": "Georgia State",
+    "14": "Georgia St.",
     "16": "Coastal Carolina",
     "11": "BYU",
     "1": "Wisconsin",
@@ -12,9 +12,9 @@
     "2": "Arizona",
     "5": "Arkansas",
     "4": "North Carolina",
-    "7": "Virginia Commonwealth",
+    "7": "VCU",
     "6": "Xavier",
-    "9": "Oklahoma State",
+    "9": "Oklahoma St.",
     "8": "Oregon"
   },
   "east": {
@@ -30,17 +30,17 @@
     "2": "Virginia",
     "5": "Northern Iowa",
     "4": "Louisville",
-    "7": "Michigan State",
+    "7": "Michigan St.",
     "6": "Providence",
-    "9": "Louisiana State",
-    "8": "North Carolina State"
+    "9": "LSU",
+    "8": "North Carolina St."
   },
   "midwest": {
     "11": "Texas",
     "10": "Indiana",
     "13": "Valparaiso",
     "12": "Buffalo",
-    "15": "New Mexico State",
+    "15": "New Mexico St.",
     "14": "Northeastern",
     "16": "Manhattan",
     "1": "Kentucky",
@@ -48,7 +48,7 @@
     "2": "Kansas",
     "5": "West Virginia",
     "4": "Maryland",
-    "7": "Wichita State",
+    "7": "Wichita St.",
     "6": "Butler",
     "9": "Purdue",
     "8": "Cincinnati"
@@ -58,17 +58,17 @@
     "10": "Davidson",
     "13": "Eastern Washington",
     "12": "Stephen F. Austin",
-    "15": "North Dakota State",
+    "15": "North Dakota St.",
     "14": "UAB",
     "16": "North Florida",
     "1": "Duke",
-    "3": "Iowa State",
+    "3": "Iowa St.",
     "2": "Gonzaga",
     "5": "Utah",
     "4": "Georgetown",
     "7": "Iowa",
-    "6": "Southern Methodist",
+    "6": "SMU",
     "9": "St. John's",
-    "8": "San Diego State"
+    "8": "San Diego St."
   }
 }
