@@ -3,7 +3,7 @@
 import json, csv
 
 kenpom = {}
-with open("kenpom_2014.csv") as kp:
+with open("kenpom_2015.csv") as kp:
     rows = csv.reader(kp)
     header = rows.next()
     for row in rows:
@@ -14,7 +14,7 @@ with open("kenpom_2014.csv") as kp:
         }
 
 kenpom_names = {
-    "North Carolina St.": "NC State"
+#    "North Carolina St.": "NC State"
 }
 
 for name in kenpom:
@@ -38,7 +38,6 @@ natesilver_names = {
     "Kansas State": "Kansas St.",
     "Saint Joseph's": "St. Joseph's",
     "Brigham Young": "BYU",
-    "North Carolina State": "NC State",
     "Massachusetts": "UMass",
     "North Dakota State": "North Dakota St.",
     "New Mexico State": "New Mexico St.",
@@ -48,15 +47,22 @@ natesilver_names = {
     "Weber State": "Weber St.",
     "Massachusetts": "UMass",
     "North Carolina State": "NC State",
+    "Georgia State": "Georgia St.",
+    "Virginia Commonwealth": "VCU",
+    "Boise State": "Boise St.",
+    "Louisiana State": "LSU",
+    "North Carolina State": "North Carolina St.",
+    "Southern Methodist": "SMU",
+    "Ole Miss": "Mississippi",
 }
 
 natesilver = {}
-with open("natesilver.csv") as ns:
-    rows = csv.reader(ns)
+with open("natesilver.tsv") as ns:
+    rows = csv.reader(ns, delimiter='\t')
     header = rows.next()
     for row in rows:
         # parse the percentages
-        for rowi in [4,5,6,7,8,9]:
+        for rowi in [7,8,9,10,11,12]:
             if row[rowi] == "√": row[rowi] = "100%"
             pct = row[rowi][:-1]
             sigma = False
@@ -66,22 +72,22 @@ with open("natesilver.csv") as ns:
             else:
                 row[rowi] = float(pct)/100
         teamdata = dict(zip(header, row))
-        teamdata["team"] = natesilver_names.get(teamdata["team"], teamdata["team"])
+        teamdata["team"] = natesilver_names.get(teamdata["team_name"], teamdata["team_name"])
         if teamdata["team"] not in kenpom:
             print "missing {}".format(teamdata["team"])
-        for key in ["round1", "round2", "round3", "round4", "round5", "round6"]:
+        for key in ["rd1_win", "rd2_win", "rd3_win", "rd4_win", "rd5_win", "rd6_win"]:
             teamdata[key] = float(teamdata[key])
         natesilver[teamdata["team"]] = teamdata
 
 def maketeam(name, seed):
     team = kenpom[name]
     team["seed"] = seed
-    team["round1"] = natesilver[name]["round1"]
-    team["round2"] = natesilver[name]["round2"]
-    team["round3"] = natesilver[name]["round3"]
-    team["round4"] = natesilver[name]["round4"]
-    team["round5"] = natesilver[name]["round5"]
-    team["round6"] = natesilver[name]["round6"]
+    team["round1"] = natesilver[name]["rd1_win"]
+    team["round2"] = natesilver[name]["rd2_win"]
+    team["round3"] = natesilver[name]["rd3_win"]
+    team["round4"] = natesilver[name]["rd4_win"]
+    team["round5"] = natesilver[name]["rd5_win"]
+    team["round6"] = natesilver[name]["rd6_win"]
     return team
 
 bracket = json.loads(file("bracket.json").read())
@@ -91,15 +97,16 @@ for region, teams in bracket.iteritems():
         seed = int(seed)
         if isinstance(team, list):
             for t in team:
-                assert t in kenpom, "t {} not in kenpom".format(t)
-                assert t in natesilver, "t {} not in natesilver".format(t)
+                assert t in kenpom, "{} not in kenpom".format(t)
+                assert t in natesilver, "{} not in natesilver".format(t)
             # for now, ignore the first four... pick the higher ranked team to win
             if kenpom[team[0]]["rating"] > kenpom[team[1]]["rating"]:
                 combined[region][seed] = maketeam(team[0], seed)
             else:
                 combined[region][seed] = maketeam(team[1], seed)
         else:
-            assert team in kenpom and team in natesilver, "couldn't find team {}".format(team)
+            assert team in kenpom, "{} not in kenpom".format(team)
+            assert team in natesilver, "{} not in natesilver".format(team)
             combined[region][seed] = maketeam(team, seed)
 
 shortnames = {
