@@ -118,6 +118,7 @@ shortnames = {
     "New Mexico St.": "NM State",
     "George Washington": "George Wash.",
     "Coastal Carolina": "Coast. Car.",
+    "Eastern Washington": "E Washington",
 }
 for region in combined:
     for seed in combined[region]:
