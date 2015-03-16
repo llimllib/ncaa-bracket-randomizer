@@ -1,0 +1,67 @@
+<html><head><title>Bill Mill Bracket Randomizer</title>
+<style>
+.main { margin-top: 20px; }
+.buttons {
+  height: 94px;
+  margin-top: 30px;
+}
+.github a {
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+<div class="container_16 main">
+  <div class="grid_3">
+    <a href="http://billmill.org"><img src="http://billmill.org/images/logo.png" width="136" height="94"></a>
+  </div>
+  <div class="grid_13 buttons">
+    <div class="btn-group">
+      <button type="button" class="btn btn-default" id="randomize">Randomize</button>
+    </div>
+    <div class="btn-group" data-toggle="buttons" id="randomness">
+      <label class="btn btn-primary">
+        <input type="radio" name="options" randomness="0">No randomness
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="options" randomness="1" id="some" checked>Some
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="options" randomness="2">Lots of randomness
+      </label>
+    </div>
+  </div>
+  <div class="clear"></div>
+
+  <div class="grid_16">
+    <div id="bracket">
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="github">source available <a href="https://github.com/llimllib/ncaa-bracket-randomizer/tree/d3version">on github</a></span>
+  </div>
+</div>
+<link rel="stylesheet" href="http://billmill.org/css/960css/reset.css" />
+<link rel="stylesheet" href="http://billmill.org/css/960css/960.css" />
+<link rel="stylesheet" href="http://billmill.org/css/style.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/bootstrap.min.js"></script>
+<script src="bracket.js"></script>
+</body>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4514581-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</html>
