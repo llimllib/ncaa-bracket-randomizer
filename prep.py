@@ -62,32 +62,32 @@ with open("natesilver.tsv") as ns:
     header = rows.next()
     for row in rows:
         # parse the percentages
-        for rowi in [7,8,9,10,11,12]:
-            if row[rowi] == "√": row[rowi] = "100%"
-            pct = row[rowi][:-1]
-            sigma = False
-            if pct.startswith("<"):
-                sigma = True
-                row[rowi] = .001
-            else:
-                row[rowi] = float(pct)/100
+        #for rowi in range(8,13):
+        #    if row[rowi] == "√": row[rowi] = "100%"
+        #    pct = row[rowi][:-1]
+        #    sigma = False
+        #    if pct.startswith("<"):
+        #        sigma = True
+        #        row[rowi] = .001
+        #    else:
+        #        row[rowi] = pct
         teamdata = dict(zip(header, row))
         teamdata["team"] = natesilver_names.get(teamdata["team_name"], teamdata["team_name"])
         if teamdata["team"] not in kenpom:
             print "missing {}".format(teamdata["team"])
-        for key in ["rd1_win", "rd2_win", "rd3_win", "rd4_win", "rd5_win", "rd6_win"]:
+        for key in ["rd2_win", "rd3_win", "rd4_win", "rd5_win", "rd6_win", "rd7_win"]:
             teamdata[key] = float(teamdata[key])
         natesilver[teamdata["team"]] = teamdata
 
 def maketeam(name, seed):
     team = kenpom[name]
     team["seed"] = seed
-    team["round1"] = natesilver[name]["rd1_win"]
-    team["round2"] = natesilver[name]["rd2_win"]
-    team["round3"] = natesilver[name]["rd3_win"]
-    team["round4"] = natesilver[name]["rd4_win"]
-    team["round5"] = natesilver[name]["rd5_win"]
-    team["round6"] = natesilver[name]["rd6_win"]
+    team["round1"] = natesilver[name]["rd2_win"]
+    team["round2"] = natesilver[name]["rd3_win"]
+    team["round3"] = natesilver[name]["rd4_win"]
+    team["round4"] = natesilver[name]["rd5_win"]
+    team["round5"] = natesilver[name]["rd6_win"]
+    team["round6"] = natesilver[name]["rd7_win"]
     return team
 
 bracket = json.loads(file("bracket.json").read())
