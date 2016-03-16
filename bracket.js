@@ -338,7 +338,7 @@ function main() {
       .text(function(d) { if (d.bottomteam) {return d.bottomteam.seed + ". " + d.bottomteam.name; }});
 
     var regionheight = {"south": 0, "east": 0, "west": height/2, "midwest": height/2,
-                        "south-west": 0, "west-midwest": 0};
+                        "south-west": 0, "east-midwest": 0};
     var roundheight = {1: 0, 2: 10, 3: 30, 4: 75, 5: 155, 6: 80};
     var gamepadding = {1: 5, 2: 24, 3: 66, 4: 0, 5: 0, 6: 0};
 
