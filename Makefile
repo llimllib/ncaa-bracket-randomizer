@@ -1,5 +1,5 @@
 serve:
-	python -m SimpleHTTPServer
+	devd -ol .
 
 push:
 	-git branch -D gh-pages
@@ -11,6 +11,6 @@ lint:
 	jshint bracket.js
 
 update:
-	wget https://raw.githubusercontent.com/fivethirtyeight/data/master/march-madness-predictions-2015/mens/bracket-00.tsv -O natesilver.tsv
+	wget http://projects.fivethirtyeight.com/march-madness-api/2016/fivethirtyeight_ncaa_forecasts.csv -O natesilver.csv
 
 .PHONY: serve push
