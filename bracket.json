@@ -2,7 +2,7 @@
   "south": {
     "1": "Kansas",
     "2": "Villanova",
-    "3": "Miami",
+    "3": "Miami FL",
     "4": "California",
     "5": "Maryland",
     "6": "Arizona",
@@ -10,8 +10,8 @@
     "8": "Colorado",
     "9": "Connecticut",
     "10": "Temple",
-    "11": "Wichita State",
-    "12": "South Dakota State",
+    "11": "Wichita St.",
+    "12": "South Dakota St.",
     "13": "Hawaii",
     "14": "Buffalo",
     "15": "UNC Asheville",
@@ -24,7 +24,7 @@
     "4": "Duke",
     "5": "Baylor",
     "6": "Texas",
-    "7": "Oregon State",
+    "7": "Oregon St.",
     "8": "Saint Joseph's",
     "9": "Cincinnati",
     "10": "VCU",
@@ -32,7 +32,7 @@
     "12": "Yale",
     "13": "UNC Wilmington",
     "14": "Green Bay",
-    "15": "Cal State Bakersfield",
+    "15": "Cal St. Bakersfield",
     "16": "Southern"
   },
   "east": {
@@ -50,14 +50,14 @@
     "12": "Chattanooga",
     "13": "Stony Brook",
     "14": "Stephen F. Austin",
-    "15": "Weber State",
+    "15": "Weber St.",
     "16": "Florida Gulf Coast"
   },
   "midwest": {
     "1": "Virginia",
-    "2": "Michigan State",
+    "2": "Michigan St.",
     "3": "Utah",
-    "4": "Iowa State",
+    "4": "Iowa St.",
     "5": "Purdue",
     "6": "Seton Hall",
     "7": "Dayton",
@@ -65,9 +65,9 @@
     "9": "Butler",
     "10": "Syracuse",
     "11": "Gonzaga",
-    "12": "Arkansas-Little Rock",
+    "12": "Arkansas Little Rock",
     "13": "Iona",
-    "14": "Fresno State",
+    "14": "Fresno St.",
     "15": "Middle Tennessee",
     "16": "Hampton"
   }
