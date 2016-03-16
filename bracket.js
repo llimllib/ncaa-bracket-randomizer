@@ -152,7 +152,7 @@ function randomize() {
   drawWinners();
 }
 
-var regionoffset = {"south": 0, "east": 8, "west": 16, "midwest": 24};
+var regionoffset = {"south": 0, "west": 8, "east": 16, "midwest": 24};
 
 function findgame(region, gameoffset) {
   var gid = regionoffset[region] + gameoffset;
@@ -201,7 +201,7 @@ function main() {
     .attr("y", 530)
     .style("fill", "#999")
     .style("font", "14px sans-serif")
-    .text("East");
+    .text("West");
 
   bracket.append("text")
     .attr("x", 730)
@@ -215,20 +215,20 @@ function main() {
     .attr("y", 175)
     .style("fill", "#999")
     .style("font", "14px sans-serif")
-    .text("West");
+    .text("East");
 
   function gameregion(gid) {
     if ((gid >= 1 && gid <= 8) || (gid >= 33 && gid <= 36) ||
         (gid >= 49 && gid <= 50) || (gid == 57)) { return "south"; }
     if ((gid >= 9 && gid <= 16) || (gid >= 37 && gid <= 40) ||
-        (gid >= 51 && gid <= 52) || (gid == 58)) { return "east"; }
+        (gid >= 51 && gid <= 52) || (gid == 58)) { return "west"; }
     if ((gid >= 17 && gid <= 24) || (gid >= 41 && gid <= 44) ||
-        (gid >= 53 && gid <= 54) || (gid == 59)) { return "west"; }
+        (gid >= 53 && gid <= 54) || (gid == 59)) { return "east"; }
     if ((gid >= 25 && gid <= 32) || (gid >= 45 && gid <= 48) ||
         (gid >= 55 && gid <= 56) || (gid == 60)) { return "midwest"; }
-    if (gid == 61) { return "south-east"; }
-    if (gid == 62) { return "west-midwest"; }
-    if (gid == 63) { return "south-east-west-midwest"; }
+    if (gid == 61) { return "south-west"; }
+    if (gid == 62) { return "east-midwest"; }
+    if (gid == 63) { return "south-west-east-midwest"; }
 
     // raise an error if we fall through
     throw new Error("undefined region for gid " + gid);
@@ -249,7 +249,7 @@ function main() {
   // create the games array without teams
   $.each(rounds, function(i, round) {
     var roundgame = 1;
-    var regiongame = {"south": 1, "west": 1, "east": 1, "midwest": 1, "south-east": 1, "west-midwest": 1};
+    var regiongame = {"south": 1, "west": 1, "east": 1, "midwest": 1, "south-west": 1, "east-midwest": 1};
     for (var i=0; i < ngames; i++) {
       gid += 1;
       region = gameregion(gid);
@@ -308,7 +308,7 @@ function main() {
       .style("stroke", linecolor);
 
     function rightline(d) {
-      if (d.region == "west" || d.region == "midwest" || d.region == "west-midwest") {
+      if (d.region == "east" || d.region == "midwest" || d.region == "east-midwest") {
         return 0;
       } else {
         return roundwidth;
@@ -337,8 +337,8 @@ function main() {
       .style("font", "10px sans-serif")
       .text(function(d) { if (d.bottomteam) {return d.bottomteam.seed + ". " + d.bottomteam.name; }});
 
-    var regionheight = {"south": 0, "west": 0, "east": height/2, "midwest": height/2,
-                        "south-east": 0, "west-midwest": 0};
+    var regionheight = {"south": 0, "east": 0, "west": height/2, "midwest": height/2,
+                        "south-west": 0, "west-midwest": 0};
     var roundheight = {1: 0, 2: 10, 3: 30, 4: 75, 5: 155, 6: 80};
     var gamepadding = {1: 5, 2: 24, 3: 66, 4: 0, 5: 0, 6: 0};
 
@@ -346,7 +346,7 @@ function main() {
       var gameheight = 2*lineheight + innerpadding(d);
       var y = regionheight[d.region] + roundheight[d.round] + (d.regiongame-1) * (gameheight + gamepadding[d.round]);
       // these are on the right side
-      if (d.region == "west" || d.region == "midwest" || d.region == "west-midwest") {
+      if (d.region == "east" || d.region == "midwest" || d.region == "east-midwest") {
         var x = width-(d.round)*roundwidth;
       } else {
         var x = (d.round-1)*roundwidth;
