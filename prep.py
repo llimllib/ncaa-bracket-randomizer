@@ -140,6 +140,7 @@ shortnames = {
     "George Washington": "George Wash.",
     "Coastal Carolina": "Coast. Car.",
     "Eastern Washington": "E Washington",
+    "UC Santa Barbara": "UCSB",
 }
 for region in combined:
     for seed in combined[region]:
