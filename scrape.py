@@ -38,7 +38,14 @@ def parse_kenpom_stats():
         if not values or not values[0].isdigit():
             continue
         # the only thing we use is the overall pythagorean rating
-        data[re.sub(r"\s+\d+$", "", values[1])] = values[4]
+        data[re.sub(r"\s+\d+$", "", values[1])] = float(values[4])
+
+    # now we need to normalize the AdjEM into a pythagorean rating. This is probably completely bogus to just normalize AdjEM, but whatevs it's all just a roll of the dice anyway
+    minv = min(data.values())
+    maxv = max(data.values())
+    for team in data:
+        #            make the value +
+        data[team] = str((data[team] - minv) / (maxv - minv))
 
     with open("kenpom_2021.csv", "w") as csvfile:
         csvw = csv.writer(csvfile)
