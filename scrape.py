@@ -43,9 +43,11 @@ def parse_kenpom_stats():
     # now we need to normalize the AdjEM into a pythagorean rating. This is probably completely bogus to just normalize AdjEM, but whatevs it's all just a roll of the dice anyway
     minv = min(data.values())
     maxv = max(data.values())
+    # increase the spread by 5%
+    spread = (maxv - minv) * 1.05
     for team in data:
         #            make the value +
-        data[team] = str((data[team] - minv) / (maxv - minv))
+        data[team] = str((data[team] - minv) / spread)
 
     with open("kenpom_2021.csv", "w") as csvfile:
         csvw = csv.writer(csvfile)
