@@ -1,20 +1,21 @@
 # -*- coding: utf8 -*-
 
-import json, csv
+import csv
+import json
 
 kenpom = {}
-with open("kenpom_2016.csv") as kp:
+with open("kenpom_2021.csv") as kp:
     rows = csv.reader(kp)
     header = next(rows)
     for row in rows:
         teamdata = dict(zip(header, row))
         kenpom[teamdata["TeamName"]] = {
             "name": teamdata["TeamName"],
-            "rating": float(teamdata["Pythag"])
+            "rating": float(teamdata["Pythag"]),
         }
 
 kenpom_names = {
-#    "North Carolina St.": "NC State"
+    #    "North Carolina St.": "NC State"
 }
 
 for name in kenpom:
@@ -45,7 +46,6 @@ natesilver_names = {
     "American University": "American",
     "Weber State": "Weber St.",
     "Massachusetts": "UMass",
-    "North Carolina State": "NC State",
     "Georgia State": "Georgia St.",
     "Virginia Commonwealth": "VCU",
     "Boise State": "Boise St.",
@@ -72,6 +72,14 @@ natesilver_names = {
     "Pennsylvania": "Penn",
     "Missouri State": "Missouri St.",
     "Alabama State": "Alabama St.",
+    "Loyola (IL)": "Loyola Chicago",
+    "Utah State": "Utah St.",
+    "North Carolina-Greensboro": "UNC Greensboro",
+    "UC-Santa Barbara": "UC Santa Barbara",
+    "Morehead State": "Morehead St.",
+    "Cleveland State": "Cleveland St.",
+    "Appalachian State": "Appalachian St.",
+    "Norfolk State": "Norfolk St.",
 }
 
 natesilver = {}
@@ -80,13 +88,16 @@ with open("natesilver.csv") as ns:
     header = next(rows)
     for row in rows:
         teamdata = dict(zip(header, row))
-        teamdata["team"] = natesilver_names.get(teamdata["team_name"], teamdata["team_name"])
+        teamdata["team"] = natesilver_names.get(
+            teamdata["team_name"], teamdata["team_name"]
+        )
         if teamdata["team"] not in kenpom:
-            #import ipdb; ipdb.set_trace()
+            # import ipdb; ipdb.set_trace()
             print("missing {}".format(teamdata["team"]))
         for key in ["rd2_win", "rd3_win", "rd4_win", "rd5_win", "rd6_win", "rd7_win"]:
             teamdata[key] = float(teamdata[key])
         natesilver[teamdata["team"]] = teamdata
+
 
 def maketeam(name, seed):
     team = kenpom[name]
@@ -98,6 +109,7 @@ def maketeam(name, seed):
     team["round5"] = natesilver[name]["rd6_win"]
     team["round6"] = natesilver[name]["rd7_win"]
     return team
+
 
 bracket = json.loads(open("bracket.json").read())
 for region, teams in bracket.items():
@@ -134,4 +146,4 @@ for region in combined:
         if combined[region][seed]["name"] in shortnames:
             combined[region][seed]["name"] = shortnames[combined[region][seed]["name"]]
 
-json.dump(combined, open("teams.json", 'w'))
+json.dump(combined, open("teams.json", "w"))
