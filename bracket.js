@@ -3,8 +3,9 @@ if (typeof console === 'undefined') {
   console = { log: function() { } };
 }
 
-function log5(a, b) {
-  return (a - a * b) / (a + b - 2 * a * b);
+/* I fitted a curve to kenpom's first 32 games of the NCAA prediction */
+function kenpom(a, b) {
+  return -0.66888151 * Math.exp(Math.abs(a - b) * -0.04322173) + 1.16116838
 }
 
 var roundOffsets = { 1: 0, 2: 32, 3: 48, 4: 56, 5: 60, 6: 62, 7: 63 };
@@ -22,7 +23,7 @@ function whowins(a, b, randomness) {
     var dog = a;
   }
 
-  var odds = log5(fav.rating, dog.rating);
+  var odds = kenpom(fav.rating, dog.rating);
 
   if (randomness == '0') {
     return fav;
@@ -181,7 +182,6 @@ function drawWinners() {
 function randomize() {
   let randomness = document.querySelector('#randomness a.active').attributes
     .randomness.value;
-  console.log(randomness);
   for (var round = 0; round < 7; round++) {
     d3.selectAll('.round' + round).each(function(d) {
       var nextgid = nextgame(d.round, d.gid);
@@ -210,7 +210,7 @@ function findgame(region, gameoffset) {
   for (var i = 0; i < games.length; i++) {
     if (games[i].gid == gid) return games[i];
   }
-  throw new Error("couldn't find game " + gid);
+  throw new Error(`couldn't find game ${gid}, ${region}`);
 }
 
 function set(region, gameoffset, topteam, bottomteam) {
@@ -355,7 +355,7 @@ function main() {
   });
 
   d3.json('teams.json', function(error, json) {
-    $.each(json, function(region, seeds) {
+    for (const [region, seeds] of Object.entries(json)) {
       set(region, 1, seeds['1'], seeds['16']);
       set(region, 2, seeds['8'], seeds['9']);
       set(region, 3, seeds['5'], seeds['12']);
@@ -364,7 +364,7 @@ function main() {
       set(region, 6, seeds['3'], seeds['14']);
       set(region, 7, seeds['7'], seeds['10']);
       set(region, 8, seeds['2'], seeds['15']);
-    });
+    };
 
     gamedivs = bracket
       .selectAll('.game')
@@ -529,7 +529,6 @@ $(document).ready(function() {
     document.querySelector('#randomness a.active').classList.remove('active');
     document.querySelector('#randomness-btn').innerText = evt.target.innerText;
     evt.target.classList.add('active');
-    console.log('click', evt.target);
   });
   main();
 });
