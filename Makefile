@@ -10,7 +10,4 @@ push:
 lint:
 	jshint bracket.js
 
-update:
-	wget https://projects.fivethirtyeight.com/march-madness-api/2021/fivethirtyeight_ncaa_forecasts.csv -O natesilver.csv
-
 .PHONY: serve push
