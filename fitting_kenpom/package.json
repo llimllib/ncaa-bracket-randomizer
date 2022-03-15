@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "puppeteer": "^13.5.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  }
+}

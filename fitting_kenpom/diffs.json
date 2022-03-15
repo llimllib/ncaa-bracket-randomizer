@@ -1,0 +1,226 @@
+{
+  "Georgia St.-Gonzaga": {
+    "ratingDiff": 31.13,
+    "marginOfVictory": 22,
+    "winProb": 0.98,
+    "fav": "Gonzaga",
+    "dog": "Georgia St."
+  },
+  "Kentucky-Saint Peter's": {
+    "ratingDiff": 22.31,
+    "marginOfVictory": 15,
+    "winProb": 0.91,
+    "fav": "Kentucky",
+    "dog": "Saint Peter's"
+  },
+  "Houston-UAB": {
+    "ratingDiff": 12.47,
+    "marginOfVictory": 8,
+    "winProb": 0.77,
+    "fav": "Houston",
+    "dog": "UAB"
+  },
+  "Baylor-Norfolk St.": {
+    "ratingDiff": 26.17,
+    "marginOfVictory": 18,
+    "winProb": 0.94,
+    "fav": "Baylor",
+    "dog": "Norfolk St."
+  },
+  "Longwood-Tennessee": {
+    "ratingDiff": 22.759999999999998,
+    "marginOfVictory": 15,
+    "winProb": 0.92,
+    "fav": "Tennessee",
+    "dog": "Longwood"
+  },
+  "Akron-UCLA": {
+    "ratingDiff": 21.36,
+    "marginOfVictory": 13,
+    "winProb": 0.88,
+    "fav": "UCLA",
+    "dog": "Akron"
+  },
+  "Montana St.-Texas Tech": {
+    "ratingDiff": 20.830000000000002,
+    "marginOfVictory": 14,
+    "winProb": 0.9,
+    "fav": "Texas Tech",
+    "dog": "Montana St."
+  },
+  "Auburn-Jacksonville St.": {
+    "ratingDiff": 22.21,
+    "marginOfVictory": 15,
+    "winProb": 0.91,
+    "fav": "Auburn",
+    "dog": "Jacksonville St."
+  },
+  "Delaware-Villanova": {
+    "ratingDiff": 21.83,
+    "marginOfVictory": 14,
+    "winProb": 0.89,
+    "fav": "Villanova",
+    "dog": "Delaware"
+  },
+  "Cal St. Fullerton-Duke": {
+    "ratingDiff": 21.61,
+    "marginOfVictory": 14,
+    "winProb": 0.9,
+    "fav": "Duke",
+    "dog": "Cal St. Fullerton"
+  },
+  "Iowa-Richmond": {
+    "ratingDiff": 13.71,
+    "marginOfVictory": 9,
+    "winProb": 0.81,
+    "fav": "Iowa",
+    "dog": "Richmond"
+  },
+  "Purdue-Yale": {
+    "ratingDiff": 20.06,
+    "marginOfVictory": 13,
+    "winProb": 0.89,
+    "fav": "Purdue",
+    "dog": "Yale"
+  },
+  "Texas-Virginia Tech": {
+    "ratingDiff": 2.5500000000000007,
+    "marginOfVictory": 1,
+    "winProb": 0.56,
+    "fav": "Texas",
+    "dog": "Virginia Tech"
+  },
+  "Chattanooga-Illinois": {
+    "ratingDiff": 8.32,
+    "marginOfVictory": 5,
+    "winProb": 0.69,
+    "fav": "Illinois",
+    "dog": "Chattanooga"
+  },
+  "Connecticut-New Mexico St.": {
+    "ratingDiff": 9.229999999999999,
+    "marginOfVictory": 6,
+    "winProb": 0.71,
+    "fav": "Connecticut",
+    "dog": "New Mexico St."
+  },
+  "Iowa St.-LSU": {
+    "ratingDiff": 5.129999999999999,
+    "marginOfVictory": 3,
+    "winProb": 0.62,
+    "fav": "LSU",
+    "dog": "Iowa St."
+  },
+  "Arkansas-Vermont": {
+    "ratingDiff": 5.949999999999999,
+    "marginOfVictory": 4,
+    "winProb": 0.64,
+    "fav": "Arkansas",
+    "dog": "Vermont"
+  },
+  "Murray St.-San Francisco": {
+    "ratingDiff": 1.9800000000000004,
+    "marginOfVictory": 1,
+    "winProb": 0.55,
+    "fav": "San Francisco",
+    "dog": "Murray St."
+  },
+  "Creighton-San Diego St.": {
+    "ratingDiff": 4.679999999999998,
+    "marginOfVictory": 3,
+    "winProb": 0.61,
+    "fav": "San Diego St.",
+    "dog": "Creighton"
+  },
+  "Loyola Chicago-Ohio St.": {
+    "ratingDiff": 1.870000000000001,
+    "marginOfVictory": 1,
+    "winProb": 0.54,
+    "fav": "Loyola Chicago",
+    "dog": "Ohio St."
+  },
+  "Boise St.-Memphis": {
+    "ratingDiff": 0.19000000000000128,
+    "marginOfVictory": 1,
+    "winProb": 0.5,
+    "fav": "Boise St.",
+    "dog": "Memphis"
+  },
+  "Marquette-North Carolina": {
+    "ratingDiff": 2.039999999999999,
+    "marginOfVictory": 2,
+    "winProb": 0.55,
+    "fav": "North Carolina",
+    "dog": "Marquette"
+  },
+  "Colorado St.-Michigan": {
+    "ratingDiff": 0.20999999999999908,
+    "marginOfVictory": 1,
+    "winProb": 0.5,
+    "fav": "Colorado St.",
+    "dog": "Michigan"
+  },
+  "Colgate-Wisconsin": {
+    "ratingDiff": 11.36,
+    "marginOfVictory": 7,
+    "winProb": 0.75,
+    "fav": "Wisconsin",
+    "dog": "Colgate"
+  },
+  "Seton Hall-TCU": {
+    "ratingDiff": 0.0600000000000005,
+    "marginOfVictory": 1,
+    "winProb": 0.5,
+    "fav": "Seton Hall",
+    "dog": "TCU"
+  },
+  "Indiana-Wyoming": {
+    "ratingDiff": 1.8399999999999999,
+    "marginOfVictory": 1,
+    "winProb": 0.54,
+    "fav": "Indiana",
+    "dog": "Wyoming"
+  },
+  "Davidson-Michigan St.": {
+    "ratingDiff": 0.06999999999999851,
+    "marginOfVictory": 1,
+    "winProb": 0.5,
+    "fav": "Michigan St.",
+    "dog": "Davidson"
+  },
+  "Miami FL-USC": {
+    "ratingDiff": 1.83,
+    "marginOfVictory": 1,
+    "winProb": 0.54,
+    "fav": "USC",
+    "dog": "Miami FL"
+  },
+  "Providence-South Dakota St.": {
+    "ratingDiff": 2.4400000000000013,
+    "marginOfVictory": 2,
+    "winProb": 0.56,
+    "fav": "Providence",
+    "dog": "South Dakota St."
+  },
+  "Notre Dame-Rutgers": {
+    "ratingDiff": 2.7700000000000014,
+    "marginOfVictory": 2,
+    "winProb": 0.56,
+    "fav": "Notre Dame",
+    "dog": "Rutgers"
+  },
+  "Bryant-Wright St.": {
+    "ratingDiff": 0.07999999999999996,
+    "marginOfVictory": 1,
+    "winProb": 0.5,
+    "fav": "Wright St.",
+    "dog": "Bryant"
+  },
+  "Texas A&M Corpus Chris-Texas Southern": {
+    "ratingDiff": 4.9799999999999995,
+    "marginOfVictory": 3,
+    "winProb": 0.62,
+    "fav": "Texas Southern",
+    "dog": "Texas A&M Corpus Chris"
+  }
+}

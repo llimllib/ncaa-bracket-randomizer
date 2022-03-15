@@ -1,0 +1,2262 @@
+{
+  "Gonzaga": {
+    "overall": 1,
+    "name": "Gonzaga",
+    "teamLink": "team.php?team=Gonzaga",
+    "seed": 1,
+    "conference": "WCC",
+    "record": [
+      26,
+      3
+    ],
+    "adjEM": 32.97,
+    "adjO": 121.8,
+    "adjORank": 1,
+    "adjD": 88.8,
+    "adjDRank": 7,
+    "adjT": 72.5,
+    "adjTRank": 4,
+    "luck": -0.038,
+    "luckRank": 268,
+    "games": [
+      {
+        "oppRank": 151,
+        "opponent": "Georgia St.",
+        "winProb": 0.98,
+        "site": "Neutral",
+        "expectedTempo": 72,
+        "expectedWinOrLoss": "W",
+        "score": [
+          85,
+          63
+        ]
+      }
+    ]
+  },
+  "Arizona": {
+    "overall": 2,
+    "name": "Arizona",
+    "teamLink": "team.php?team=Arizona",
+    "seed": 1,
+    "conference": "P12",
+    "record": [
+      31,
+      3
+    ],
+    "adjEM": 27.21,
+    "adjO": 119.6,
+    "adjORank": 5,
+    "adjD": 92.4,
+    "adjDRank": 20,
+    "adjT": 72.2,
+    "adjTRank": 8,
+    "luck": 0.046,
+    "luckRank": 77,
+    "games": []
+  },
+  "Kentucky": {
+    "overall": 3,
+    "name": "Kentucky",
+    "teamLink": "team.php?team=Kentucky",
+    "seed": 2,
+    "conference": "SEC",
+    "record": [
+      26,
+      7
+    ],
+    "adjEM": 26.59,
+    "adjO": 120.2,
+    "adjORank": 4,
+    "adjD": 93.6,
+    "adjDRank": 27,
+    "adjT": 67.3,
+    "adjTRank": 155,
+    "luck": -0.032,
+    "luckRank": 251,
+    "games": [
+      {
+        "oppRank": 118,
+        "opponent": "Saint Peter's",
+        "winProb": 0.91,
+        "site": "Neutral",
+        "expectedTempo": 66,
+        "expectedWinOrLoss": "W",
+        "score": [
+          74,
+          59
+        ]
+      }
+    ]
+  },
+  "Houston": {
+    "overall": 4,
+    "name": "Houston",
+    "teamLink": "team.php?team=Houston",
+    "seed": 5,
+    "conference": "Amer",
+    "record": [
+      29,
+      5
+    ],
+    "adjEM": 26.5,
+    "adjO": 117.3,
+    "adjORank": 10,
+    "adjD": 90.9,
+    "adjDRank": 11,
+    "adjT": 63.8,
+    "adjTRank": 333,
+    "luck": -0.007,
+    "luckRank": 195,
+    "games": [
+      {
+        "oppRank": 46,
+        "opponent": "UAB",
+        "winProb": 0.77,
+        "site": "Neutral",
+        "expectedTempo": 66,
+        "expectedWinOrLoss": "W",
+        "score": [
+          74,
+          66
+        ]
+      }
+    ]
+  },
+  "Baylor": {
+    "overall": 5,
+    "name": "Baylor",
+    "teamLink": "team.php?team=Baylor",
+    "seed": 1,
+    "conference": "B12",
+    "record": [
+      26,
+      6
+    ],
+    "adjEM": 26.32,
+    "adjO": 117.9,
+    "adjORank": 9,
+    "adjD": 91.6,
+    "adjDRank": 14,
+    "adjT": 67.2,
+    "adjTRank": 169,
+    "luck": 0.019,
+    "luckRank": 138,
+    "games": [
+      {
+        "oppRank": 168,
+        "opponent": "Norfolk St.",
+        "winProb": 0.94,
+        "site": "Neutral",
+        "expectedTempo": 67,
+        "expectedWinOrLoss": "W",
+        "score": [
+          79,
+          61
+        ]
+      }
+    ]
+  },
+  "Kansas": {
+    "overall": 6,
+    "name": "Kansas",
+    "teamLink": "team.php?team=Kansas",
+    "seed": 1,
+    "conference": "B12",
+    "record": [
+      28,
+      6
+    ],
+    "adjEM": 25.49,
+    "adjO": 119.4,
+    "adjORank": 6,
+    "adjD": 93.9,
+    "adjDRank": 29,
+    "adjT": 69.1,
+    "adjTRank": 68,
+    "luck": 0.035,
+    "luckRank": 101,
+    "games": []
+  },
+  "Tennessee": {
+    "overall": 7,
+    "name": "Tennessee",
+    "teamLink": "team.php?team=Tennessee",
+    "seed": 3,
+    "conference": "SEC",
+    "record": [
+      26,
+      7
+    ],
+    "adjEM": 25.24,
+    "adjO": 111.4,
+    "adjORank": 36,
+    "adjD": 86.2,
+    "adjDRank": 3,
+    "adjT": 67.2,
+    "adjTRank": 172,
+    "luck": 0.044,
+    "luckRank": 82,
+    "games": [
+      {
+        "oppRank": 144,
+        "opponent": "Longwood",
+        "winProb": 0.92,
+        "site": "Neutral",
+        "expectedTempo": 66,
+        "expectedWinOrLoss": "W",
+        "score": [
+          74,
+          59
+        ]
+      }
+    ]
+  },
+  "UCLA": {
+    "overall": 8,
+    "name": "UCLA",
+    "teamLink": "team.php?team=UCLA",
+    "seed": 4,
+    "conference": "P12",
+    "record": [
+      25,
+      7
+    ],
+    "adjEM": 24.85,
+    "adjO": 116.1,
+    "adjORank": 15,
+    "adjD": 91.2,
+    "adjDRank": 12,
+    "adjT": 65.5,
+    "adjTRank": 258,
+    "luck": -0.028,
+    "luckRank": 243,
+    "games": [
+      {
+        "oppRank": 131,
+        "opponent": "Akron",
+        "winProb": 0.88,
+        "site": "Neutral",
+        "expectedTempo": 62,
+        "expectedWinOrLoss": "W",
+        "score": [
+          71,
+          58
+        ]
+      }
+    ]
+  },
+  "Texas Tech": {
+    "overall": 9,
+    "name": "Texas Tech",
+    "teamLink": "team.php?team=Texas+Tech",
+    "seed": 3,
+    "conference": "B12",
+    "record": [
+      25,
+      9
+    ],
+    "adjEM": 24.64,
+    "adjO": 109.7,
+    "adjORank": 65,
+    "adjD": 85.1,
+    "adjDRank": 1,
+    "adjT": 66.5,
+    "adjTRank": 211,
+    "luck": -0.025,
+    "luckRank": 233,
+    "games": [
+      {
+        "oppRank": 125,
+        "opponent": "Montana St.",
+        "winProb": 0.9,
+        "site": "Neutral",
+        "expectedTempo": 67,
+        "expectedWinOrLoss": "W",
+        "score": [
+          72,
+          58
+        ]
+      }
+    ]
+  },
+  "Auburn": {
+    "overall": 10,
+    "name": "Auburn",
+    "teamLink": "team.php?team=Auburn",
+    "seed": 2,
+    "conference": "SEC",
+    "record": [
+      27,
+      5
+    ],
+    "adjEM": 24.45,
+    "adjO": 113.6,
+    "adjORank": 24,
+    "adjD": 89.1,
+    "adjDRank": 8,
+    "adjT": 70,
+    "adjTRank": 40,
+    "luck": -0.039,
+    "luckRank": 271,
+    "games": [
+      {
+        "oppRank": 146,
+        "opponent": "Jacksonville St.",
+        "winProb": 0.91,
+        "site": "Neutral",
+        "expectedTempo": 68,
+        "expectedWinOrLoss": "W",
+        "score": [
+          77,
+          62
+        ]
+      }
+    ]
+  },
+  "Villanova": {
+    "overall": 11,
+    "name": "Villanova",
+    "teamLink": "team.php?team=Villanova",
+    "seed": 2,
+    "conference": "BE",
+    "record": [
+      26,
+      7
+    ],
+    "adjEM": 24.11,
+    "adjO": 118,
+    "adjORank": 8,
+    "adjD": 93.8,
+    "adjDRank": 28,
+    "adjT": 62.6,
+    "adjTRank": 345,
+    "luck": 0.051,
+    "luckRank": 71,
+    "games": [
+      {
+        "oppRank": 145,
+        "opponent": "Delaware",
+        "winProb": 0.89,
+        "site": "Neutral",
+        "expectedTempo": 63,
+        "expectedWinOrLoss": "W",
+        "score": [
+          75,
+          61
+        ]
+      }
+    ]
+  },
+  "Duke": {
+    "overall": 12,
+    "name": "Duke",
+    "teamLink": "team.php?team=Duke",
+    "seed": 2,
+    "conference": "ACC",
+    "record": [
+      28,
+      6
+    ],
+    "adjEM": 23.71,
+    "adjO": 119.4,
+    "adjORank": 7,
+    "adjD": 95.7,
+    "adjDRank": 44,
+    "adjT": 67.4,
+    "adjTRank": 150,
+    "luck": -0.011,
+    "luckRank": 204,
+    "games": [
+      {
+        "oppRank": 149,
+        "opponent": "Cal St. Fullerton",
+        "winProb": 0.9,
+        "site": "Neutral",
+        "expectedTempo": 66,
+        "expectedWinOrLoss": "W",
+        "score": [
+          79,
+          65
+        ]
+      }
+    ]
+  },
+  "Iowa": {
+    "overall": 13,
+    "name": "Iowa",
+    "teamLink": "team.php?team=Iowa",
+    "seed": 5,
+    "conference": "B10",
+    "record": [
+      26,
+      9
+    ],
+    "adjEM": 23.53,
+    "adjO": 121.5,
+    "adjORank": 2,
+    "adjD": 98,
+    "adjDRank": 77,
+    "adjT": 69.6,
+    "adjTRank": 52,
+    "luck": -0.05,
+    "luckRank": 295,
+    "games": [
+      {
+        "oppRank": 83,
+        "opponent": "Richmond",
+        "winProb": 0.81,
+        "site": "Neutral",
+        "expectedTempo": 69,
+        "expectedWinOrLoss": "W",
+        "score": [
+          81,
+          72
+        ]
+      }
+    ]
+  },
+  "Purdue": {
+    "overall": 14,
+    "name": "Purdue",
+    "teamLink": "team.php?team=Purdue",
+    "seed": 3,
+    "conference": "B10",
+    "record": [
+      27,
+      7
+    ],
+    "adjEM": 22.29,
+    "adjO": 121.3,
+    "adjORank": 3,
+    "adjD": 99,
+    "adjDRank": 100,
+    "adjT": 65.8,
+    "adjTRank": 248,
+    "luck": 0.035,
+    "luckRank": 100,
+    "games": [
+      {
+        "oppRank": 147,
+        "opponent": "Yale",
+        "winProb": 0.89,
+        "site": "Neutral",
+        "expectedTempo": 67,
+        "expectedWinOrLoss": "W",
+        "score": [
+          79,
+          66
+        ]
+      }
+    ]
+  },
+  "Texas": {
+    "overall": 15,
+    "name": "Texas",
+    "teamLink": "team.php?team=Texas",
+    "seed": 6,
+    "conference": "B12",
+    "record": [
+      21,
+      11
+    ],
+    "adjEM": 20.41,
+    "adjO": 111.8,
+    "adjORank": 32,
+    "adjD": 91.4,
+    "adjDRank": 13,
+    "adjT": 63.1,
+    "adjTRank": 341,
+    "luck": -0.044,
+    "luckRank": 279,
+    "games": [
+      {
+        "oppRank": 23,
+        "opponent": "Virginia Tech",
+        "winProb": 0.56,
+        "site": "Neutral",
+        "expectedTempo": 60,
+        "expectedWinOrLoss": "W",
+        "score": [
+          63,
+          62
+        ]
+      }
+    ]
+  },
+  "Saint Mary's": {
+    "overall": 16,
+    "name": "Saint Mary's",
+    "teamLink": "team.php?team=Saint+Mary%27s",
+    "seed": 5,
+    "conference": "WCC",
+    "record": [
+      25,
+      7
+    ],
+    "adjEM": 19.81,
+    "adjO": 109.8,
+    "adjORank": 63,
+    "adjD": 90,
+    "adjDRank": 9,
+    "adjT": 63.5,
+    "adjTRank": 338,
+    "luck": 0.037,
+    "luckRank": 95,
+    "games": []
+  },
+  "Illinois": {
+    "overall": 17,
+    "name": "Illinois",
+    "teamLink": "team.php?team=Illinois",
+    "seed": 4,
+    "conference": "B10",
+    "record": [
+      22,
+      9
+    ],
+    "adjEM": 19.59,
+    "adjO": 113.7,
+    "adjORank": 23,
+    "adjD": 94.1,
+    "adjDRank": 30,
+    "adjT": 67.1,
+    "adjTRank": 177,
+    "luck": 0.025,
+    "luckRank": 126,
+    "games": [
+      {
+        "oppRank": 72,
+        "opponent": "Chattanooga",
+        "winProb": 0.69,
+        "site": "Neutral",
+        "expectedTempo": 65,
+        "expectedWinOrLoss": "W",
+        "score": [
+          71,
+          66
+        ]
+      }
+    ]
+  },
+  "Connecticut": {
+    "overall": 18,
+    "name": "Connecticut",
+    "teamLink": "team.php?team=Connecticut",
+    "seed": 5,
+    "conference": "BE",
+    "record": [
+      23,
+      9
+    ],
+    "adjEM": 19.33,
+    "adjO": 113.9,
+    "adjORank": 21,
+    "adjD": 94.6,
+    "adjDRank": 35,
+    "adjT": 64.9,
+    "adjTRank": 291,
+    "luck": -0.03,
+    "luckRank": 248,
+    "games": [
+      {
+        "oppRank": 81,
+        "opponent": "New Mexico St.",
+        "winProb": 0.71,
+        "site": "Neutral",
+        "expectedTempo": 65,
+        "expectedWinOrLoss": "W",
+        "score": [
+          70,
+          64
+        ]
+      }
+    ]
+  },
+  "LSU": {
+    "overall": 19,
+    "name": "LSU",
+    "teamLink": "team.php?team=LSU",
+    "seed": 6,
+    "conference": "SEC",
+    "record": [
+      22,
+      11
+    ],
+    "adjEM": 19.08,
+    "adjO": 107.6,
+    "adjORank": 89,
+    "adjD": 88.6,
+    "adjDRank": 5,
+    "adjT": 68.6,
+    "adjTRank": 92,
+    "luck": -0.041,
+    "luckRank": 274,
+    "games": [
+      {
+        "oppRank": 48,
+        "opponent": "Iowa St.",
+        "winProb": 0.62,
+        "site": "Neutral",
+        "expectedTempo": 68,
+        "expectedWinOrLoss": "W",
+        "score": [
+          64,
+          61
+        ]
+      }
+    ]
+  },
+  "Arkansas": {
+    "overall": 20,
+    "name": "Arkansas",
+    "teamLink": "team.php?team=Arkansas",
+    "seed": 4,
+    "conference": "SEC",
+    "record": [
+      25,
+      8
+    ],
+    "adjEM": 19.02,
+    "adjO": 111.1,
+    "adjORank": 40,
+    "adjD": 92.1,
+    "adjDRank": 16,
+    "adjT": 70.6,
+    "adjTRank": 28,
+    "luck": 0.027,
+    "luckRank": 117,
+    "games": [
+      {
+        "oppRank": 59,
+        "opponent": "Vermont",
+        "winProb": 0.64,
+        "site": "Neutral",
+        "expectedTempo": 68,
+        "expectedWinOrLoss": "W",
+        "score": [
+          72,
+          68
+        ]
+      }
+    ]
+  },
+  "San Francisco": {
+    "overall": 21,
+    "name": "San Francisco",
+    "teamLink": "team.php?team=San+Francisco",
+    "seed": 10,
+    "conference": "WCC",
+    "record": [
+      24,
+      9
+    ],
+    "adjEM": 18.37,
+    "adjO": 110.8,
+    "adjORank": 45,
+    "adjD": 92.4,
+    "adjDRank": 19,
+    "adjT": 68.7,
+    "adjTRank": 89,
+    "luck": -0.029,
+    "luckRank": 247,
+    "games": [
+      {
+        "oppRank": 27,
+        "opponent": "Murray St.",
+        "winProb": 0.55,
+        "site": "Neutral",
+        "expectedTempo": 67,
+        "expectedWinOrLoss": "W",
+        "score": [
+          69,
+          68
+        ]
+      }
+    ]
+  },
+  "San Diego St.": {
+    "overall": 22,
+    "name": "San Diego St.",
+    "teamLink": "team.php?team=San+Diego+St.",
+    "seed": 8,
+    "conference": "MWC",
+    "record": [
+      23,
+      8
+    ],
+    "adjEM": 18.15,
+    "adjO": 104.1,
+    "adjORank": 157,
+    "adjD": 85.9,
+    "adjDRank": 2,
+    "adjT": 65.3,
+    "adjTRank": 268,
+    "luck": 0.013,
+    "luckRank": 147,
+    "games": [
+      {
+        "oppRank": 53,
+        "opponent": "Creighton",
+        "winProb": 0.61,
+        "site": "Neutral",
+        "expectedTempo": 65,
+        "expectedWinOrLoss": "W",
+        "score": [
+          61,
+          58
+        ]
+      }
+    ]
+  },
+  "Virginia Tech": {
+    "overall": 23,
+    "name": "Virginia Tech",
+    "teamLink": "team.php?team=Virginia+Tech",
+    "seed": 11,
+    "conference": "ACC",
+    "record": [
+      23,
+      12
+    ],
+    "adjEM": 17.86,
+    "adjO": 114.3,
+    "adjORank": 18,
+    "adjD": 96.4,
+    "adjDRank": 55,
+    "adjT": 62.9,
+    "adjTRank": 344,
+    "luck": -0.054,
+    "luckRank": 302,
+    "games": [
+      {
+        "oppRank": 15,
+        "opponent": "Texas",
+        "winProb": 0.44,
+        "site": "Neutral",
+        "expectedTempo": 60,
+        "expectedWinOrLoss": "L",
+        "score": [
+          63,
+          62
+        ]
+      }
+    ]
+  },
+  "Loyola Chicago": {
+    "overall": 24,
+    "name": "Loyola Chicago",
+    "teamLink": "team.php?team=Loyola+Chicago",
+    "seed": 10,
+    "conference": "MVC",
+    "record": [
+      25,
+      7
+    ],
+    "adjEM": 17.69,
+    "adjO": 110.9,
+    "adjORank": 42,
+    "adjD": 93.2,
+    "adjDRank": 22,
+    "adjT": 64.6,
+    "adjTRank": 308,
+    "luck": 0.016,
+    "luckRank": 143,
+    "games": [
+      {
+        "oppRank": 32,
+        "opponent": "Ohio St.",
+        "winProb": 0.54,
+        "site": "Neutral",
+        "expectedTempo": 63,
+        "expectedWinOrLoss": "W",
+        "score": [
+          69,
+          68
+        ]
+      }
+    ]
+  },
+  "Alabama": {
+    "overall": 25,
+    "name": "Alabama",
+    "teamLink": "team.php?team=Alabama",
+    "seed": 6,
+    "conference": "SEC",
+    "record": [
+      19,
+      13
+    ],
+    "adjEM": 17.36,
+    "adjO": 116.1,
+    "adjORank": 14,
+    "adjD": 98.7,
+    "adjDRank": 94,
+    "adjT": 71.7,
+    "adjTRank": 12,
+    "luck": -0.022,
+    "luckRank": 226,
+    "games": []
+  },
+  "Boise St.": {
+    "overall": 26,
+    "name": "Boise St.",
+    "teamLink": "team.php?team=Boise+St.",
+    "seed": 8,
+    "conference": "MWC",
+    "record": [
+      27,
+      7
+    ],
+    "adjEM": 16.41,
+    "adjO": 108.5,
+    "adjORank": 76,
+    "adjD": 92.1,
+    "adjDRank": 17,
+    "adjT": 64.6,
+    "adjTRank": 307,
+    "luck": 0.027,
+    "luckRank": 118,
+    "games": [
+      {
+        "oppRank": 28,
+        "opponent": "Memphis",
+        "winProb": 0.5,
+        "site": "Neutral",
+        "expectedTempo": 68,
+        "expectedWinOrLoss": "W",
+        "score": [
+          68,
+          67
+        ]
+      }
+    ]
+  },
+  "Murray St.": {
+    "overall": 27,
+    "name": "Murray St.",
+    "teamLink": "team.php?team=Murray+St.",
+    "seed": 7,
+    "conference": "OVC",
+    "record": [
+      30,
+      2
+    ],
+    "adjEM": 16.39,
+    "adjO": 111.5,
+    "adjORank": 35,
+    "adjD": 95.1,
+    "adjDRank": 40,
+    "adjT": 65.8,
+    "adjTRank": 246,
+    "luck": 0.075,
+    "luckRank": 41,
+    "games": [
+      {
+        "oppRank": 21,
+        "opponent": "San Francisco",
+        "winProb": 0.45,
+        "site": "Neutral",
+        "expectedTempo": 67,
+        "expectedWinOrLoss": "L",
+        "score": [
+          69,
+          68
+        ]
+      }
+    ]
+  },
+  "Memphis": {
+    "overall": 28,
+    "name": "Memphis",
+    "teamLink": "team.php?team=Memphis",
+    "seed": 9,
+    "conference": "Amer",
+    "record": [
+      21,
+      10
+    ],
+    "adjEM": 16.22,
+    "adjO": 110.4,
+    "adjORank": 50,
+    "adjD": 94.1,
+    "adjDRank": 31,
+    "adjT": 70.3,
+    "adjTRank": 34,
+    "luck": -0.018,
+    "luckRank": 217,
+    "games": [
+      {
+        "oppRank": 26,
+        "opponent": "Boise St.",
+        "winProb": 0.5,
+        "site": "Neutral",
+        "expectedTempo": 68,
+        "expectedWinOrLoss": "L",
+        "score": [
+          68,
+          67
+        ]
+      }
+    ]
+  },
+  "North Carolina": {
+    "overall": 29,
+    "name": "North Carolina",
+    "teamLink": "team.php?team=North+Carolina",
+    "seed": 8,
+    "conference": "ACC",
+    "record": [
+      24,
+      9
+    ],
+    "adjEM": 16.04,
+    "adjO": 113.1,
+    "adjORank": 27,
+    "adjD": 97,
+    "adjDRank": 64,
+    "adjT": 70.1,
+    "adjTRank": 38,
+    "luck": 0.079,
+    "luckRank": 32,
+    "games": [
+      {
+        "oppRank": 47,
+        "opponent": "Marquette",
+        "winProb": 0.55,
+        "site": "Neutral",
+        "expectedTempo": 73,
+        "expectedWinOrLoss": "W",
+        "score": [
+          77,
+          75
+        ]
+      }
+    ]
+  },
+  "Colorado St.": {
+    "overall": 31,
+    "name": "Colorado St.",
+    "teamLink": "team.php?team=Colorado+St.",
+    "seed": 6,
+    "conference": "MWC",
+    "record": [
+      25,
+      5
+    ],
+    "adjEM": 15.86,
+    "adjO": 114.2,
+    "adjORank": 20,
+    "adjD": 98.3,
+    "adjDRank": 83,
+    "adjT": 65.1,
+    "adjTRank": 280,
+    "luck": 0.13,
+    "luckRank": 6,
+    "games": [
+      {
+        "oppRank": 33,
+        "opponent": "Michigan",
+        "winProb": 0.5,
+        "site": "Neutral",
+        "expectedTempo": 65,
+        "expectedWinOrLoss": "W",
+        "score": [
+          72,
+          71
+        ]
+      }
+    ]
+  },
+  "Ohio St.": {
+    "overall": 32,
+    "name": "Ohio St.",
+    "teamLink": "team.php?team=Ohio+St.",
+    "seed": 7,
+    "conference": "B10",
+    "record": [
+      19,
+      11
+    ],
+    "adjEM": 15.82,
+    "adjO": 116.6,
+    "adjORank": 13,
+    "adjD": 100.8,
+    "adjDRank": 131,
+    "adjT": 65,
+    "adjTRank": 287,
+    "luck": -0.015,
+    "luckRank": 207,
+    "games": [
+      {
+        "oppRank": 24,
+        "opponent": "Loyola Chicago",
+        "winProb": 0.46,
+        "site": "Neutral",
+        "expectedTempo": 63,
+        "expectedWinOrLoss": "L",
+        "score": [
+          69,
+          68
+        ]
+      }
+    ]
+  },
+  "Michigan": {
+    "overall": 33,
+    "name": "Michigan",
+    "teamLink": "team.php?team=Michigan",
+    "seed": 11,
+    "conference": "B10",
+    "record": [
+      17,
+      14
+    ],
+    "adjEM": 15.65,
+    "adjO": 114.2,
+    "adjORank": 19,
+    "adjD": 98.6,
+    "adjDRank": 91,
+    "adjT": 66.3,
+    "adjTRank": 218,
+    "luck": -0.026,
+    "luckRank": 238,
+    "games": [
+      {
+        "oppRank": 31,
+        "opponent": "Colorado St.",
+        "winProb": 0.5,
+        "site": "Neutral",
+        "expectedTempo": 65,
+        "expectedWinOrLoss": "L",
+        "score": [
+          72,
+          71
+        ]
+      }
+    ]
+  },
+  "Wisconsin": {
+    "overall": 34,
+    "name": "Wisconsin",
+    "teamLink": "team.php?team=Wisconsin",
+    "seed": 3,
+    "conference": "B10",
+    "record": [
+      24,
+      7
+    ],
+    "adjEM": 15.58,
+    "adjO": 110.4,
+    "adjORank": 49,
+    "adjD": 94.8,
+    "adjDRank": 38,
+    "adjT": 66.5,
+    "adjTRank": 208,
+    "luck": 0.119,
+    "luckRank": 9,
+    "games": [
+      {
+        "oppRank": 119,
+        "opponent": "Colgate",
+        "winProb": 0.75,
+        "site": "Neutral",
+        "expectedTempo": 67,
+        "expectedWinOrLoss": "W",
+        "score": [
+          74,
+          67
+        ]
+      }
+    ]
+  },
+  "Seton Hall": {
+    "overall": 35,
+    "name": "Seton Hall",
+    "teamLink": "team.php?team=Seton+Hall",
+    "seed": 8,
+    "conference": "BE",
+    "record": [
+      21,
+      10
+    ],
+    "adjEM": 14.97,
+    "adjO": 108.5,
+    "adjORank": 75,
+    "adjD": 93.5,
+    "adjDRank": 26,
+    "adjT": 67.3,
+    "adjTRank": 162,
+    "luck": 0.011,
+    "luckRank": 150,
+    "games": [
+      {
+        "oppRank": 38,
+        "opponent": "TCU",
+        "winProb": 0.5,
+        "site": "Neutral",
+        "expectedTempo": 66,
+        "expectedWinOrLoss": "W",
+        "score": [
+          66,
+          65
+        ]
+      }
+    ]
+  },
+  "Indiana": {
+    "overall": 36,
+    "name": "Indiana",
+    "teamLink": "team.php?team=Indiana",
+    "seed": 12,
+    "conference": "B10",
+    "record": [
+      20,
+      13
+    ],
+    "adjEM": 14.94,
+    "adjO": 107.6,
+    "adjORank": 91,
+    "adjD": 92.6,
+    "adjDRank": 21,
+    "adjT": 67,
+    "adjTRank": 184,
+    "luck": -0.044,
+    "luckRank": 282,
+    "games": [
+      {
+        "oppRank": 58,
+        "opponent": "Wyoming",
+        "winProb": 0.54,
+        "site": "Neutral",
+        "expectedTempo": 66,
+        "expectedWinOrLoss": "W",
+        "score": [
+          67,
+          66
+        ]
+      }
+    ]
+  },
+  "TCU": {
+    "overall": 38,
+    "name": "TCU",
+    "teamLink": "team.php?team=TCU",
+    "seed": 9,
+    "conference": "B12",
+    "record": [
+      20,
+      12
+    ],
+    "adjEM": 14.91,
+    "adjO": 108.2,
+    "adjORank": 80,
+    "adjD": 93.3,
+    "adjDRank": 24,
+    "adjT": 65.9,
+    "adjTRank": 244,
+    "luck": 0.034,
+    "luckRank": 104,
+    "games": [
+      {
+        "oppRank": 35,
+        "opponent": "Seton Hall",
+        "winProb": 0.5,
+        "site": "Neutral",
+        "expectedTempo": 66,
+        "expectedWinOrLoss": "L",
+        "score": [
+          66,
+          65
+        ]
+      }
+    ]
+  },
+  "Michigan St.": {
+    "overall": 40,
+    "name": "Michigan St.",
+    "teamLink": "team.php?team=Michigan+St.",
+    "seed": 7,
+    "conference": "B10",
+    "record": [
+      22,
+      12
+    ],
+    "adjEM": 14.87,
+    "adjO": 111.3,
+    "adjORank": 38,
+    "adjD": 96.4,
+    "adjDRank": 53,
+    "adjT": 67.5,
+    "adjTRank": 141,
+    "luck": 0.05,
+    "luckRank": 73,
+    "games": [
+      {
+        "oppRank": 41,
+        "opponent": "Davidson",
+        "winProb": 0.5,
+        "site": "Neutral",
+        "expectedTempo": 65,
+        "expectedWinOrLoss": "W",
+        "score": [
+          73,
+          72
+        ]
+      }
+    ]
+  },
+  "Davidson": {
+    "overall": 41,
+    "name": "Davidson",
+    "teamLink": "team.php?team=Davidson",
+    "seed": 10,
+    "conference": "A10",
+    "record": [
+      27,
+      6
+    ],
+    "adjEM": 14.8,
+    "adjO": 116.8,
+    "adjORank": 11,
+    "adjD": 102,
+    "adjDRank": 152,
+    "adjT": 64.6,
+    "adjTRank": 304,
+    "luck": -0.004,
+    "luckRank": 186,
+    "games": [
+      {
+        "oppRank": 40,
+        "opponent": "Michigan St.",
+        "winProb": 0.5,
+        "site": "Neutral",
+        "expectedTempo": 65,
+        "expectedWinOrLoss": "L",
+        "score": [
+          73,
+          72
+        ]
+      }
+    ]
+  },
+  "USC": {
+    "overall": 42,
+    "name": "USC",
+    "teamLink": "team.php?team=USC",
+    "seed": 7,
+    "conference": "P12",
+    "record": [
+      26,
+      7
+    ],
+    "adjEM": 14.45,
+    "adjO": 110.5,
+    "adjORank": 47,
+    "adjD": 96,
+    "adjDRank": 49,
+    "adjT": 66,
+    "adjTRank": 237,
+    "luck": 0.077,
+    "luckRank": 34,
+    "games": [
+      {
+        "oppRank": 62,
+        "opponent": "Miami FL",
+        "winProb": 0.54,
+        "site": "Neutral",
+        "expectedTempo": 66,
+        "expectedWinOrLoss": "W",
+        "score": [
+          73,
+          72
+        ]
+      }
+    ]
+  },
+  "UAB": {
+    "overall": 46,
+    "name": "UAB",
+    "teamLink": "team.php?team=UAB",
+    "seed": 12,
+    "conference": "CUSA",
+    "record": [
+      27,
+      7
+    ],
+    "adjEM": 14.03,
+    "adjO": 112.5,
+    "adjORank": 28,
+    "adjD": 98.5,
+    "adjDRank": 89,
+    "adjT": 68.8,
+    "adjTRank": 81,
+    "luck": -0.04,
+    "luckRank": 272,
+    "games": [
+      {
+        "oppRank": 4,
+        "opponent": "Houston",
+        "winProb": 0.23,
+        "site": "Neutral",
+        "expectedTempo": 66,
+        "expectedWinOrLoss": "L",
+        "score": [
+          74,
+          66
+        ]
+      }
+    ]
+  },
+  "Marquette": {
+    "overall": 47,
+    "name": "Marquette",
+    "teamLink": "team.php?team=Marquette",
+    "seed": 9,
+    "conference": "BE",
+    "record": [
+      19,
+      12
+    ],
+    "adjEM": 14,
+    "adjO": 109.8,
+    "adjORank": 62,
+    "adjD": 95.8,
+    "adjDRank": 46,
+    "adjT": 70.7,
+    "adjTRank": 26,
+    "luck": 0,
+    "luckRank": 175,
+    "games": [
+      {
+        "oppRank": 29,
+        "opponent": "North Carolina",
+        "winProb": 0.45,
+        "site": "Neutral",
+        "expectedTempo": 73,
+        "expectedWinOrLoss": "L",
+        "score": [
+          77,
+          75
+        ]
+      }
+    ]
+  },
+  "Iowa St.": {
+    "overall": 48,
+    "name": "Iowa St.",
+    "teamLink": "team.php?team=Iowa+St.",
+    "seed": 11,
+    "conference": "B12",
+    "record": [
+      20,
+      12
+    ],
+    "adjEM": 13.95,
+    "adjO": 104.4,
+    "adjORank": 151,
+    "adjD": 90.4,
+    "adjDRank": 10,
+    "adjT": 66.1,
+    "adjTRank": 232,
+    "luck": 0.038,
+    "luckRank": 91,
+    "games": [
+      {
+        "oppRank": 19,
+        "opponent": "LSU",
+        "winProb": 0.38,
+        "site": "Neutral",
+        "expectedTempo": 68,
+        "expectedWinOrLoss": "L",
+        "score": [
+          64,
+          61
+        ]
+      }
+    ]
+  },
+  "Providence": {
+    "overall": 49,
+    "name": "Providence",
+    "teamLink": "team.php?team=Providence",
+    "seed": 4,
+    "conference": "BE",
+    "record": [
+      25,
+      5
+    ],
+    "adjEM": 13.88,
+    "adjO": 111.9,
+    "adjORank": 31,
+    "adjD": 98,
+    "adjDRank": 79,
+    "adjT": 65.2,
+    "adjTRank": 273,
+    "luck": 0.194,
+    "luckRank": 1,
+    "games": [
+      {
+        "oppRank": 71,
+        "opponent": "South Dakota St.",
+        "winProb": 0.56,
+        "site": "Neutral",
+        "expectedTempo": 67,
+        "expectedWinOrLoss": "W",
+        "score": [
+          77,
+          75
+        ]
+      }
+    ]
+  },
+  "Notre Dame": {
+    "overall": 52,
+    "name": "Notre Dame",
+    "teamLink": "team.php?team=Notre+Dame",
+    "seed": 11,
+    "conference": "ACC",
+    "record": [
+      22,
+      10
+    ],
+    "adjEM": 13.63,
+    "adjO": 112,
+    "adjORank": 29,
+    "adjD": 98.4,
+    "adjDRank": 84,
+    "adjT": 65.7,
+    "adjTRank": 250,
+    "luck": 0.016,
+    "luckRank": 144,
+    "games": [
+      {
+        "oppRank": 74,
+        "opponent": "Rutgers",
+        "winProb": 0.56,
+        "site": "Neutral",
+        "expectedTempo": 64,
+        "expectedWinOrLoss": "W",
+        "score": [
+          67,
+          65
+        ]
+      }
+    ]
+  },
+  "Creighton": {
+    "overall": 53,
+    "name": "Creighton",
+    "teamLink": "team.php?team=Creighton",
+    "seed": 9,
+    "conference": "BE",
+    "record": [
+      22,
+      11
+    ],
+    "adjEM": 13.47,
+    "adjO": 105.6,
+    "adjORank": 124,
+    "adjD": 92.1,
+    "adjDRank": 18,
+    "adjT": 66.9,
+    "adjTRank": 190,
+    "luck": 0.09,
+    "luckRank": 25,
+    "games": [
+      {
+        "oppRank": 22,
+        "opponent": "San Diego St.",
+        "winProb": 0.39,
+        "site": "Neutral",
+        "expectedTempo": 65,
+        "expectedWinOrLoss": "L",
+        "score": [
+          61,
+          58
+        ]
+      }
+    ]
+  },
+  "Wyoming": {
+    "overall": 58,
+    "name": "Wyoming",
+    "teamLink": "team.php?team=Wyoming",
+    "seed": 12,
+    "conference": "MWC",
+    "record": [
+      25,
+      8
+    ],
+    "adjEM": 13.1,
+    "adjO": 110.2,
+    "adjORank": 54,
+    "adjD": 97.1,
+    "adjDRank": 66,
+    "adjT": 66,
+    "adjTRank": 238,
+    "luck": 0.067,
+    "luckRank": 53,
+    "games": [
+      {
+        "oppRank": 36,
+        "opponent": "Indiana",
+        "winProb": 0.46,
+        "site": "Neutral",
+        "expectedTempo": 66,
+        "expectedWinOrLoss": "L",
+        "score": [
+          67,
+          66
+        ]
+      }
+    ]
+  },
+  "Vermont": {
+    "overall": 59,
+    "name": "Vermont",
+    "teamLink": "team.php?team=Vermont",
+    "seed": 13,
+    "conference": "AE",
+    "record": [
+      28,
+      5
+    ],
+    "adjEM": 13.07,
+    "adjO": 110.8,
+    "adjORank": 44,
+    "adjD": 97.7,
+    "adjDRank": 74,
+    "adjT": 65,
+    "adjTRank": 288,
+    "luck": -0.015,
+    "luckRank": 209,
+    "games": [
+      {
+        "oppRank": 20,
+        "opponent": "Arkansas",
+        "winProb": 0.36,
+        "site": "Neutral",
+        "expectedTempo": 68,
+        "expectedWinOrLoss": "L",
+        "score": [
+          72,
+          68
+        ]
+      }
+    ]
+  },
+  "Miami FL": {
+    "overall": 62,
+    "name": "Miami FL",
+    "teamLink": "team.php?team=Miami+FL",
+    "seed": 10,
+    "conference": "ACC",
+    "record": [
+      23,
+      10
+    ],
+    "adjEM": 12.62,
+    "adjO": 114.8,
+    "adjORank": 17,
+    "adjD": 102.1,
+    "adjDRank": 157,
+    "adjT": 67.3,
+    "adjTRank": 160,
+    "luck": 0.069,
+    "luckRank": 50,
+    "games": [
+      {
+        "oppRank": 42,
+        "opponent": "USC",
+        "winProb": 0.46,
+        "site": "Neutral",
+        "expectedTempo": 66,
+        "expectedWinOrLoss": "L",
+        "score": [
+          73,
+          72
+        ]
+      }
+    ]
+  },
+  "South Dakota St.": {
+    "overall": 71,
+    "name": "South Dakota St.",
+    "teamLink": "team.php?team=South+Dakota+St.",
+    "seed": 13,
+    "conference": "Sum",
+    "record": [
+      30,
+      4
+    ],
+    "adjEM": 11.44,
+    "adjO": 116.8,
+    "adjORank": 12,
+    "adjD": 105.3,
+    "adjDRank": 220,
+    "adjT": 69.4,
+    "adjTRank": 59,
+    "luck": 0.061,
+    "luckRank": 58,
+    "games": [
+      {
+        "oppRank": 49,
+        "opponent": "Providence",
+        "winProb": 0.44,
+        "site": "Neutral",
+        "expectedTempo": 67,
+        "expectedWinOrLoss": "L",
+        "score": [
+          77,
+          75
+        ]
+      }
+    ]
+  },
+  "Chattanooga": {
+    "overall": 72,
+    "name": "Chattanooga",
+    "teamLink": "team.php?team=Chattanooga",
+    "seed": 13,
+    "conference": "SC",
+    "record": [
+      27,
+      7
+    ],
+    "adjEM": 11.27,
+    "adjO": 110,
+    "adjORank": 58,
+    "adjD": 98.8,
+    "adjDRank": 95,
+    "adjT": 64.6,
+    "adjTRank": 302,
+    "luck": 0.024,
+    "luckRank": 128,
+    "games": [
+      {
+        "oppRank": 17,
+        "opponent": "Illinois",
+        "winProb": 0.31,
+        "site": "Neutral",
+        "expectedTempo": 65,
+        "expectedWinOrLoss": "L",
+        "score": [
+          71,
+          66
+        ]
+      }
+    ]
+  },
+  "Rutgers": {
+    "overall": 74,
+    "name": "Rutgers",
+    "teamLink": "team.php?team=Rutgers",
+    "seed": 11,
+    "conference": "B10",
+    "record": [
+      18,
+      13
+    ],
+    "adjEM": 10.86,
+    "adjO": 106.4,
+    "adjORank": 107,
+    "adjD": 95.5,
+    "adjDRank": 43,
+    "adjT": 64.9,
+    "adjTRank": 289,
+    "luck": 0.016,
+    "luckRank": 142,
+    "games": [
+      {
+        "oppRank": 52,
+        "opponent": "Notre Dame",
+        "winProb": 0.44,
+        "site": "Neutral",
+        "expectedTempo": 64,
+        "expectedWinOrLoss": "L",
+        "score": [
+          67,
+          65
+        ]
+      }
+    ]
+  },
+  "New Mexico St.": {
+    "overall": 81,
+    "name": "New Mexico St.",
+    "teamLink": "team.php?team=New+Mexico+St.",
+    "seed": 12,
+    "conference": "WAC",
+    "record": [
+      26,
+      6
+    ],
+    "adjEM": 10.1,
+    "adjO": 107.8,
+    "adjORank": 87,
+    "adjD": 97.7,
+    "adjDRank": 73,
+    "adjT": 66.2,
+    "adjTRank": 223,
+    "luck": 0.099,
+    "luckRank": 17,
+    "games": [
+      {
+        "oppRank": 18,
+        "opponent": "Connecticut",
+        "winProb": 0.29,
+        "site": "Neutral",
+        "expectedTempo": 65,
+        "expectedWinOrLoss": "L",
+        "score": [
+          70,
+          64
+        ]
+      }
+    ]
+  },
+  "Richmond": {
+    "overall": 83,
+    "name": "Richmond",
+    "teamLink": "team.php?team=Richmond",
+    "seed": 12,
+    "conference": "A10",
+    "record": [
+      23,
+      12
+    ],
+    "adjEM": 9.82,
+    "adjO": 109.1,
+    "adjORank": 68,
+    "adjD": 99.3,
+    "adjDRank": 104,
+    "adjT": 66.9,
+    "adjTRank": 191,
+    "luck": 0.029,
+    "luckRank": 114,
+    "games": [
+      {
+        "oppRank": 13,
+        "opponent": "Iowa",
+        "winProb": 0.19,
+        "site": "Neutral",
+        "expectedTempo": 69,
+        "expectedWinOrLoss": "L",
+        "score": [
+          81,
+          72
+        ]
+      }
+    ]
+  },
+  "Saint Peter's": {
+    "overall": 118,
+    "name": "Saint Peter's",
+    "teamLink": "team.php?team=Saint+Peter%27s",
+    "seed": 15,
+    "conference": "MAAC",
+    "record": [
+      19,
+      11
+    ],
+    "adjEM": 4.28,
+    "adjO": 98.8,
+    "adjORank": 259,
+    "adjD": 94.5,
+    "adjDRank": 34,
+    "adjT": 66,
+    "adjTRank": 242,
+    "luck": -0.016,
+    "luckRank": 213,
+    "games": [
+      {
+        "oppRank": 3,
+        "opponent": "Kentucky",
+        "winProb": 0.09,
+        "site": "Neutral",
+        "expectedTempo": 66,
+        "expectedWinOrLoss": "L",
+        "score": [
+          74,
+          59
+        ]
+      }
+    ]
+  },
+  "Colgate": {
+    "overall": 119,
+    "name": "Colgate",
+    "teamLink": "team.php?team=Colgate",
+    "seed": 14,
+    "conference": "Pat",
+    "record": [
+      23,
+      11
+    ],
+    "adjEM": 4.22,
+    "adjO": 108.3,
+    "adjORank": 79,
+    "adjD": 104.1,
+    "adjDRank": 203,
+    "adjT": 67.3,
+    "adjTRank": 163,
+    "luck": -0.07,
+    "luckRank": 321,
+    "games": [
+      {
+        "oppRank": 34,
+        "opponent": "Wisconsin",
+        "winProb": 0.25,
+        "site": "Neutral",
+        "expectedTempo": 67,
+        "expectedWinOrLoss": "L",
+        "score": [
+          74,
+          67
+        ]
+      }
+    ]
+  },
+  "Montana St.": {
+    "overall": 125,
+    "name": "Montana St.",
+    "teamLink": "team.php?team=Montana+St.",
+    "seed": 14,
+    "conference": "BSky",
+    "record": [
+      27,
+      7
+    ],
+    "adjEM": 3.81,
+    "adjO": 104.5,
+    "adjORank": 147,
+    "adjD": 100.7,
+    "adjDRank": 129,
+    "adjT": 67.3,
+    "adjTRank": 157,
+    "luck": 0.031,
+    "luckRank": 111,
+    "games": [
+      {
+        "oppRank": 9,
+        "opponent": "Texas Tech",
+        "winProb": 0.1,
+        "site": "Neutral",
+        "expectedTempo": 67,
+        "expectedWinOrLoss": "L",
+        "score": [
+          72,
+          58
+        ]
+      }
+    ]
+  },
+  "Akron": {
+    "overall": 131,
+    "name": "Akron",
+    "teamLink": "team.php?team=Akron",
+    "seed": 13,
+    "conference": "MAC",
+    "record": [
+      24,
+      9
+    ],
+    "adjEM": 3.49,
+    "adjO": 106.2,
+    "adjORank": 113,
+    "adjD": 102.7,
+    "adjDRank": 166,
+    "adjT": 62.1,
+    "adjTRank": 351,
+    "luck": 0.026,
+    "luckRank": 119,
+    "games": [
+      {
+        "oppRank": 8,
+        "opponent": "UCLA",
+        "winProb": 0.12,
+        "site": "Neutral",
+        "expectedTempo": 62,
+        "expectedWinOrLoss": "L",
+        "score": [
+          71,
+          58
+        ]
+      }
+    ]
+  },
+  "Longwood": {
+    "overall": 144,
+    "name": "Longwood",
+    "teamLink": "team.php?team=Longwood",
+    "seed": 14,
+    "conference": "BSth",
+    "record": [
+      26,
+      6
+    ],
+    "adjEM": 2.48,
+    "adjO": 106.1,
+    "adjORank": 115,
+    "adjD": 103.6,
+    "adjDRank": 191,
+    "adjT": 66,
+    "adjTRank": 235,
+    "luck": 0.095,
+    "luckRank": 21,
+    "games": [
+      {
+        "oppRank": 7,
+        "opponent": "Tennessee",
+        "winProb": 0.08,
+        "site": "Neutral",
+        "expectedTempo": 66,
+        "expectedWinOrLoss": "L",
+        "score": [
+          74,
+          59
+        ]
+      }
+    ]
+  },
+  "Delaware": {
+    "overall": 145,
+    "name": "Delaware",
+    "teamLink": "team.php?team=Delaware",
+    "seed": 15,
+    "conference": "CAA",
+    "record": [
+      22,
+      12
+    ],
+    "adjEM": 2.28,
+    "adjO": 106.8,
+    "adjORank": 100,
+    "adjD": 104.6,
+    "adjDRank": 212,
+    "adjT": 66.6,
+    "adjTRank": 199,
+    "luck": 0.023,
+    "luckRank": 130,
+    "games": [
+      {
+        "oppRank": 11,
+        "opponent": "Villanova",
+        "winProb": 0.11,
+        "site": "Neutral",
+        "expectedTempo": 63,
+        "expectedWinOrLoss": "L",
+        "score": [
+          75,
+          61
+        ]
+      }
+    ]
+  },
+  "Jacksonville St.": {
+    "overall": 146,
+    "name": "Jacksonville St.",
+    "teamLink": "team.php?team=Jacksonville+St.",
+    "seed": 15,
+    "conference": "ASun",
+    "record": [
+      21,
+      10
+    ],
+    "adjEM": 2.24,
+    "adjO": 105.3,
+    "adjORank": 132,
+    "adjD": 103.1,
+    "adjDRank": 178,
+    "adjT": 65.1,
+    "adjTRank": 276,
+    "luck": -0.021,
+    "luckRank": 224,
+    "games": [
+      {
+        "oppRank": 10,
+        "opponent": "Auburn",
+        "winProb": 0.09,
+        "site": "Neutral",
+        "expectedTempo": 68,
+        "expectedWinOrLoss": "L",
+        "score": [
+          77,
+          62
+        ]
+      }
+    ]
+  },
+  "Yale": {
+    "overall": 147,
+    "name": "Yale",
+    "teamLink": "team.php?team=Yale",
+    "seed": 14,
+    "conference": "Ivy",
+    "record": [
+      19,
+      11
+    ],
+    "adjEM": 2.23,
+    "adjO": 101.5,
+    "adjORank": 203,
+    "adjD": 99.2,
+    "adjDRank": 103,
+    "adjT": 68.7,
+    "adjTRank": 86,
+    "luck": 0.061,
+    "luckRank": 57,
+    "games": [
+      {
+        "oppRank": 14,
+        "opponent": "Purdue",
+        "winProb": 0.11,
+        "site": "Neutral",
+        "expectedTempo": 67,
+        "expectedWinOrLoss": "L",
+        "score": [
+          79,
+          66
+        ]
+      }
+    ]
+  },
+  "Cal St. Fullerton": {
+    "overall": 149,
+    "name": "Cal St. Fullerton",
+    "teamLink": "team.php?team=Cal+St.+Fullerton",
+    "seed": 15,
+    "conference": "BW",
+    "record": [
+      21,
+      10
+    ],
+    "adjEM": 2.1,
+    "adjO": 104.7,
+    "adjORank": 144,
+    "adjD": 102.6,
+    "adjDRank": 164,
+    "adjT": 66,
+    "adjTRank": 239,
+    "luck": 0.038,
+    "luckRank": 92,
+    "games": [
+      {
+        "oppRank": 12,
+        "opponent": "Duke",
+        "winProb": 0.1,
+        "site": "Neutral",
+        "expectedTempo": 66,
+        "expectedWinOrLoss": "L",
+        "score": [
+          79,
+          65
+        ]
+      }
+    ]
+  },
+  "Georgia St.": {
+    "overall": 151,
+    "name": "Georgia St.",
+    "teamLink": "team.php?team=Georgia+St.",
+    "seed": 16,
+    "conference": "SB",
+    "record": [
+      18,
+      10
+    ],
+    "adjEM": 1.84,
+    "adjO": 101.5,
+    "adjORank": 201,
+    "adjD": 99.7,
+    "adjDRank": 114,
+    "adjT": 67.1,
+    "adjTRank": 174,
+    "luck": 0.062,
+    "luckRank": 56,
+    "games": [
+      {
+        "oppRank": 1,
+        "opponent": "Gonzaga",
+        "winProb": 0.02,
+        "site": "Neutral",
+        "expectedTempo": 72,
+        "expectedWinOrLoss": "L",
+        "score": [
+          85,
+          63
+        ]
+      }
+    ]
+  },
+  "Norfolk St.": {
+    "overall": 168,
+    "name": "Norfolk St.",
+    "teamLink": "team.php?team=Norfolk+St.",
+    "seed": 16,
+    "conference": "MEAC",
+    "record": [
+      24,
+      6
+    ],
+    "adjEM": 0.15,
+    "adjO": 102.4,
+    "adjORank": 190,
+    "adjD": 102.3,
+    "adjDRank": 160,
+    "adjT": 66.9,
+    "adjTRank": 187,
+    "luck": 0.095,
+    "luckRank": 23,
+    "games": [
+      {
+        "oppRank": 5,
+        "opponent": "Baylor",
+        "winProb": 0.06,
+        "site": "Neutral",
+        "expectedTempo": 67,
+        "expectedWinOrLoss": "L",
+        "score": [
+          79,
+          61
+        ]
+      }
+    ]
+  },
+  "Wright St.": {
+    "overall": 182,
+    "name": "Wright St.",
+    "teamLink": "team.php?team=Wright+St.",
+    "seed": 16,
+    "conference": "Horz",
+    "record": [
+      21,
+      13
+    ],
+    "adjEM": -0.87,
+    "adjO": 106.4,
+    "adjORank": 108,
+    "adjD": 107.2,
+    "adjDRank": 262,
+    "adjT": 68.4,
+    "adjTRank": 97,
+    "luck": -0.001,
+    "luckRank": 178,
+    "games": [
+      {
+        "oppRank": 183,
+        "opponent": "Bryant",
+        "winProb": 0.5,
+        "site": "Neutral",
+        "expectedTempo": 73,
+        "expectedWinOrLoss": "W",
+        "score": [
+          80,
+          79
+        ]
+      }
+    ]
+  },
+  "Bryant": {
+    "overall": 183,
+    "name": "Bryant",
+    "teamLink": "team.php?team=Bryant",
+    "seed": 16,
+    "conference": "NEC",
+    "record": [
+      22,
+      9
+    ],
+    "adjEM": -0.95,
+    "adjO": 104.2,
+    "adjORank": 154,
+    "adjD": 105.2,
+    "adjDRank": 218,
+    "adjT": 72.2,
+    "adjTRank": 7,
+    "luck": 0.126,
+    "luckRank": 7,
+    "games": [
+      {
+        "oppRank": 182,
+        "opponent": "Wright St.",
+        "winProb": 0.5,
+        "site": "Neutral",
+        "expectedTempo": 73,
+        "expectedWinOrLoss": "L",
+        "score": [
+          80,
+          79
+        ]
+      }
+    ]
+  },
+  "Texas Southern": {
+    "overall": 188,
+    "name": "Texas Southern",
+    "teamLink": "team.php?team=Texas+Southern",
+    "seed": 16,
+    "conference": "SWAC",
+    "record": [
+      18,
+      12
+    ],
+    "adjEM": -1.33,
+    "adjO": 98.1,
+    "adjORank": 270,
+    "adjD": 99.4,
+    "adjDRank": 107,
+    "adjT": 67.7,
+    "adjTRank": 128,
+    "luck": 0.006,
+    "luckRank": 159,
+    "games": [
+      {
+        "oppRank": 243,
+        "opponent": "Texas A&M Corpus Chris",
+        "winProb": 0.62,
+        "site": "Neutral",
+        "expectedTempo": 69,
+        "expectedWinOrLoss": "W",
+        "score": [
+          68,
+          65
+        ]
+      }
+    ]
+  },
+  "Texas A&M Corpus Chris": {
+    "overall": 243,
+    "name": "Texas A&M Corpus Chris",
+    "teamLink": "team.php?team=Texas+A%26M+Corpus+Chris",
+    "seed": 16,
+    "conference": "Slnd",
+    "record": [
+      23,
+      11
+    ],
+    "adjEM": -6.31,
+    "adjO": 97,
+    "adjORank": 287,
+    "adjD": 103.3,
+    "adjDRank": 181,
+    "adjT": 68.9,
+    "adjTRank": 73,
+    "luck": 0.036,
+    "luckRank": 98,
+    "games": [
+      {
+        "oppRank": 188,
+        "opponent": "Texas Southern",
+        "winProb": 0.38,
+        "site": "Neutral",
+        "expectedTempo": 69,
+        "expectedWinOrLoss": "L",
+        "score": [
+          68,
+          65
+        ]
+      }
+    ]
+  }
+}
