@@ -354,7 +354,7 @@ function main() {
     ngames /= 2;
   });
 
-  d3.json('teams.json', function(error, json) {
+  d3.json('teams.json', function(_, json) {
     for (const [region, seeds] of Object.entries(json)) {
       set(region, 1, seeds['1'], seeds['16']);
       set(region, 2, seeds['8'], seeds['9']);
