@@ -29,5 +29,4 @@ team A will advance.
 
 ## Calculating the Odds
 
-The odds for team A to beat team B are given by the <a
-href="https://en.wikipedia.org/wiki/Log5">log5</a> of their Pomeroy ratings.
+[This ipython notebook](https://github.com/llimllib/ncaa-bracket-randomizer/blob/master/fitting_kenpom/fitting%20kenpom.ipynb) shows how I fit a very simple exponential curve to kenpom's predictions to reverse-engineer his win percentages. I then use the curve that fitted his predctions to decide how likely one team is to beat another, based on the difference between their kenpom ratings.
