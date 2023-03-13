@@ -33,7 +33,7 @@ def parse_kenpom_stats():
     soup = BeautifulSoup(open("kenpom.html"), "html.parser")
     table = soup.find("table", {"id": "ratings-table"})
     data = {}
-    for trs in table.find_all("tr"):
+    for trs in table.select("tr.tourney"):
         values = [x.text for x in trs.find_all("td")]
         if not values or not values[0].isdigit():
             continue
@@ -49,7 +49,7 @@ def parse_kenpom_stats():
         #            make the value +
         data[team] = str((data[team] - minv) / spread)
 
-    with open("kenpom_2021.csv", "w") as csvfile:
+    with open("kenpom_2023.csv", "w") as csvfile:
         csvw = csv.writer(csvfile)
         csvw.writerow(["TeamName", "Pythag"])
         csvw.writerows(data.items())

@@ -6,7 +6,7 @@ import json
 combined = {}
 
 kenpom = {}
-with open("kenpom_2022.csv") as kp:
+with open("kenpom_2023.csv") as kp:
     rows = csv.reader(kp)
     header = next(rows)
     for row in rows:
