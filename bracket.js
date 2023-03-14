@@ -1,6 +1,6 @@
 //a dummy console function so console.log doesn't kill shitty browsers
 if (typeof console === "undefined") {
-  console = { log: function () {} };
+  console = { log: function() { } };
 }
 
 /* I fitted a curve to kenpom's first 32 games of the NCAA prediction */
@@ -64,30 +64,30 @@ function drawWinners() {
     d3.selectAll(".round" + round + " text").remove();
 
     d3.selectAll(".round" + round)
-      .filter(function (d) {
+      .filter(function(d) {
         return d.round < 5;
       })
       .append("text")
       .attr("x", 4)
       .attr("y", lineheight)
       .style("font", "10px sans-serif")
-      .text(function (d) {
+      .text(function(d) {
         if (d.topteam) {
           return d.topteam.name;
         }
       });
 
     d3.selectAll(".round" + round)
-      .filter(function (d) {
+      .filter(function(d) {
         return d.round < 5;
       })
       .append("text")
       .attr("x", 4)
-      .attr("y", function (d) {
+      .attr("y", function(d) {
         return innerpadding(d) + 2 * lineheight + textpadding;
       })
       .style("font", "10px sans-serif")
-      .text(function (d) {
+      .text(function(d) {
         if (d.bottomteam) {
           return d.bottomteam.name;
         }
@@ -99,7 +99,7 @@ function drawWinners() {
     .attr("x", 2)
     .attr("y", lineheight)
     .style("font", "10px sans-serif")
-    .text(function (d) {
+    .text(function(d) {
       if (d.topteam) {
         return d.topteam.name;
       }
@@ -108,11 +108,11 @@ function drawWinners() {
   d3.select("#game61")
     .append("text")
     .attr("x", 2)
-    .attr("y", function (d) {
+    .attr("y", function(d) {
       return innerpadding(d) + 2 * lineheight + textpadding;
     })
     .style("font", "10px sans-serif")
-    .text(function (d) {
+    .text(function(d) {
       if (d.topteam) {
         return d.bottomteam.name;
       }
@@ -123,7 +123,7 @@ function drawWinners() {
     .attr("x", 2)
     .attr("y", lineheight)
     .style("font", "10px sans-serif")
-    .text(function (d) {
+    .text(function(d) {
       if (d.topteam) {
         return d.topteam.name;
       }
@@ -132,11 +132,11 @@ function drawWinners() {
   d3.select("#game62")
     .append("text")
     .attr("x", 2)
-    .attr("y", function (d) {
+    .attr("y", function(d) {
       return innerpadding(d) + 2 * lineheight + textpadding;
     })
     .style("font", "10px sans-serif")
-    .text(function (d) {
+    .text(function(d) {
       if (d.topteam) {
         return d.bottomteam.name;
       }
@@ -147,7 +147,7 @@ function drawWinners() {
     .attr("x", 2)
     .attr("y", lineheight - 2)
     .style("font", "10px sans-serif")
-    .text(function (d) {
+    .text(function(d) {
       if (d.topteam) {
         return d.topteam.name;
       }
@@ -156,11 +156,11 @@ function drawWinners() {
   d3.select("#game63")
     .append("text")
     .attr("x", 30)
-    .attr("y", function (d) {
+    .attr("y", function(d) {
       return innerpadding(d) + 2 * lineheight + textpadding;
     })
     .style("font", "10px sans-serif")
-    .text(function (d) {
+    .text(function(d) {
       if (d.topteam) {
         return d.bottomteam.name;
       }
@@ -174,7 +174,7 @@ function drawWinners() {
     .attr("text-anchor", "middle")
     .style("font", "14px sans-serif")
     .style("font-weight", "bold")
-    .text(function (d) {
+    .text(function(d) {
       return d.winner;
     });
 }
@@ -183,7 +183,7 @@ function randomize() {
   let randomness = document.querySelector("#randomness a.active").attributes
     .randomness.value;
   for (var round = 0; round < 7; round++) {
-    d3.selectAll(".round" + round).each(function (d) {
+    d3.selectAll(".round" + round).each(function(d) {
       var nextgid = nextgame(d.round, d.gid);
       if (!(nextgid >= 1 && nextgid <= 64)) {
         throw new Error("invalid gid ", gid, d.round, d.gid);
@@ -203,7 +203,7 @@ function randomize() {
   drawWinners();
 }
 
-var regionoffset = { west: 0, east: 8, south: 16, midwest: 24 };
+var regionoffset = { south: 0, east: 8, midwest: 16, west: 24 };
 
 function findgame(region, gameoffset) {
   var gid = regionoffset[region] + gameoffset;
@@ -247,7 +247,7 @@ function main() {
     .attr("y", 175)
     .style("fill", "#999")
     .style("font", "14px sans-serif")
-    .text("West");
+    .text("South");
 
   bracket
     .append("text")
@@ -263,7 +263,7 @@ function main() {
     .attr("y", 530)
     .style("fill", "#999")
     .style("font", "14px sans-serif")
-    .text("Midwest");
+    .text("West");
 
   bracket
     .append("text")
@@ -271,7 +271,7 @@ function main() {
     .attr("y", 175)
     .style("fill", "#999")
     .style("font", "14px sans-serif")
-    .text("South");
+    .text("Midwest");
 
   function gameregion(gid) {
     if (
@@ -326,7 +326,7 @@ function main() {
   games = [];
 
   // create the games array without teams
-  $.each(rounds, function (i, round) {
+  $.each(rounds, function(i, round) {
     var roundgame = 1;
     var regiongame = {
       south: 1,
@@ -354,7 +354,7 @@ function main() {
     ngames /= 2;
   });
 
-  d3.json("teams.json", function (_, json) {
+  d3.json("teams.json", function(_, json) {
     for (const [region, seeds] of Object.entries(json)) {
       set(region, 1, seeds["1"], seeds["16"]);
       set(region, 2, seeds["8"], seeds["9"]);
@@ -371,16 +371,16 @@ function main() {
       .data(games)
       .enter()
       .append("g")
-      .attr("class", function (d) {
+      .attr("class", function(d) {
         return "game round" + d.round;
       })
-      .attr("id", function (d) {
+      .attr("id", function(d) {
         return "game" + d.gid;
       });
 
     linewidth = 1;
 
-    gamegs = d3.selectAll(".game").filter(function (g) {
+    gamegs = d3.selectAll(".game").filter(function(g) {
       return g.gid < 63;
     });
 
@@ -398,10 +398,10 @@ function main() {
       .append("line")
       .attr("x1", 0)
       .attr("x2", roundwidth)
-      .attr("y1", function (d) {
+      .attr("y1", function(d) {
         return innerpadding(d) + 2 * lineheight + 2 * textpadding;
       })
-      .attr("y2", function (d) {
+      .attr("y2", function(d) {
         return innerpadding(d) + 2 * lineheight + 2 * textpadding;
       })
       .style("stroke", linecolor);
@@ -424,7 +424,7 @@ function main() {
       .attr("x1", rightline)
       .attr("x2", rightline)
       .attr("y1", lineheight + textpadding)
-      .attr("y2", function (d) {
+      .attr("y2", function(d) {
         return innerpadding(d) + 2 * lineheight + 2 * textpadding;
       })
       .style("stroke", linecolor);
@@ -435,7 +435,7 @@ function main() {
       .attr("x", 2)
       .attr("y", lineheight)
       .style("font", "10px sans-serif")
-      .text(function (d) {
+      .text(function(d) {
         if (d.topteam) {
           return d.topteam.seed + ". " + d.topteam.name;
         }
@@ -445,11 +445,11 @@ function main() {
     gamegs
       .append("text")
       .attr("x", 2)
-      .attr("y", function (d) {
+      .attr("y", function(d) {
         return innerpadding(d) + 2 * lineheight + textpadding;
       })
       .style("font", "10px sans-serif")
-      .text(function (d) {
+      .text(function(d) {
         if (d.bottomteam) {
           return d.bottomteam.seed + ". " + d.bottomteam.name;
         }
@@ -521,7 +521,7 @@ function main() {
   });
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
   $("#randomize").click(randomize);
   $("#some").click();
   document.querySelector("#randomness").addEventListener("click", (evt) => {
