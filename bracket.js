@@ -1,11 +1,11 @@
 //a dummy console function so console.log doesn't kill shitty browsers
-if (typeof console === 'undefined') {
-  console = { log: function() { } };
+if (typeof console === "undefined") {
+  console = { log: function () {} };
 }
 
 /* I fitted a curve to kenpom's first 32 games of the NCAA prediction */
 function kenpom(a, b) {
-  return -0.66888151 * Math.exp(Math.abs(a - b) * -0.04322173) + 1.16116838
+  return -0.66888151 * Math.exp(Math.abs(a - b) * -0.04322173) + 1.16116838;
 }
 
 var roundOffsets = { 1: 0, 2: 32, 3: 48, 4: 56, 5: 60, 6: 62, 7: 63 };
@@ -25,16 +25,16 @@ function whowins(a, b, randomness) {
 
   var odds = kenpom(fav.rating, dog.rating);
 
-  if (randomness == '0') {
+  if (randomness == "0") {
     return fav;
   }
-  if (randomness == '1') {
+  if (randomness == "1") {
     if (Math.random() > odds && Math.random() > odds) {
       return dog;
     }
     return fav;
   }
-  if (randomness == '2') {
+  if (randomness == "2") {
     if (Math.random() > odds) {
       return dog;
     }
@@ -47,11 +47,11 @@ function advance(team, nextgid, gid) {
 
   //championship game
   if (nextgid == 64) {
-    d3.select('.winner').datum().winner = team.name;
+    d3.select(".winner").datum().winner = team.name;
     return;
   }
 
-  game = d3.select('#game' + nextgid).datum();
+  game = d3.select("#game" + nextgid).datum();
   if (is_top) {
     game.topteam = team;
   } else {
@@ -61,132 +61,132 @@ function advance(team, nextgid, gid) {
 
 function drawWinners() {
   for (var round = 2; round < 7; round++) {
-    d3.selectAll('.round' + round + ' text').remove();
+    d3.selectAll(".round" + round + " text").remove();
 
-    d3.selectAll('.round' + round)
-      .filter(function(d) {
+    d3.selectAll(".round" + round)
+      .filter(function (d) {
         return d.round < 5;
       })
-      .append('text')
-      .attr('x', 4)
-      .attr('y', lineheight)
-      .style('font', '10px sans-serif')
-      .text(function(d) {
+      .append("text")
+      .attr("x", 4)
+      .attr("y", lineheight)
+      .style("font", "10px sans-serif")
+      .text(function (d) {
         if (d.topteam) {
           return d.topteam.name;
         }
       });
 
-    d3.selectAll('.round' + round)
-      .filter(function(d) {
+    d3.selectAll(".round" + round)
+      .filter(function (d) {
         return d.round < 5;
       })
-      .append('text')
-      .attr('x', 4)
-      .attr('y', function(d) {
+      .append("text")
+      .attr("x", 4)
+      .attr("y", function (d) {
         return innerpadding(d) + 2 * lineheight + textpadding;
       })
-      .style('font', '10px sans-serif')
-      .text(function(d) {
+      .style("font", "10px sans-serif")
+      .text(function (d) {
         if (d.bottomteam) {
           return d.bottomteam.name;
         }
       });
   }
 
-  d3.select('#game61')
-    .append('text')
-    .attr('x', 2)
-    .attr('y', lineheight)
-    .style('font', '10px sans-serif')
-    .text(function(d) {
+  d3.select("#game61")
+    .append("text")
+    .attr("x", 2)
+    .attr("y", lineheight)
+    .style("font", "10px sans-serif")
+    .text(function (d) {
       if (d.topteam) {
         return d.topteam.name;
       }
     });
 
-  d3.select('#game61')
-    .append('text')
-    .attr('x', 2)
-    .attr('y', function(d) {
+  d3.select("#game61")
+    .append("text")
+    .attr("x", 2)
+    .attr("y", function (d) {
       return innerpadding(d) + 2 * lineheight + textpadding;
     })
-    .style('font', '10px sans-serif')
-    .text(function(d) {
+    .style("font", "10px sans-serif")
+    .text(function (d) {
       if (d.topteam) {
         return d.bottomteam.name;
       }
     });
 
-  d3.select('#game62')
-    .append('text')
-    .attr('x', 2)
-    .attr('y', lineheight)
-    .style('font', '10px sans-serif')
-    .text(function(d) {
+  d3.select("#game62")
+    .append("text")
+    .attr("x", 2)
+    .attr("y", lineheight)
+    .style("font", "10px sans-serif")
+    .text(function (d) {
       if (d.topteam) {
         return d.topteam.name;
       }
     });
 
-  d3.select('#game62')
-    .append('text')
-    .attr('x', 2)
-    .attr('y', function(d) {
+  d3.select("#game62")
+    .append("text")
+    .attr("x", 2)
+    .attr("y", function (d) {
       return innerpadding(d) + 2 * lineheight + textpadding;
     })
-    .style('font', '10px sans-serif')
-    .text(function(d) {
+    .style("font", "10px sans-serif")
+    .text(function (d) {
       if (d.topteam) {
         return d.bottomteam.name;
       }
     });
 
-  d3.select('#game63')
-    .append('text')
-    .attr('x', 2)
-    .attr('y', lineheight - 2)
-    .style('font', '10px sans-serif')
-    .text(function(d) {
+  d3.select("#game63")
+    .append("text")
+    .attr("x", 2)
+    .attr("y", lineheight - 2)
+    .style("font", "10px sans-serif")
+    .text(function (d) {
       if (d.topteam) {
         return d.topteam.name;
       }
     });
 
-  d3.select('#game63')
-    .append('text')
-    .attr('x', 30)
-    .attr('y', function(d) {
+  d3.select("#game63")
+    .append("text")
+    .attr("x", 30)
+    .attr("y", function (d) {
       return innerpadding(d) + 2 * lineheight + textpadding;
     })
-    .style('font', '10px sans-serif')
-    .text(function(d) {
+    .style("font", "10px sans-serif")
+    .text(function (d) {
       if (d.topteam) {
         return d.bottomteam.name;
       }
     });
 
-  d3.selectAll('.winner text').remove();
-  d3.select('.winner')
-    .append('text')
-    .attr('x', 50)
-    .attr('y', 20)
-    .attr('text-anchor', 'middle')
-    .style('font', '14px sans-serif')
-    .style('font-weight', 'bold')
-    .text(function(d) {
+  d3.selectAll(".winner text").remove();
+  d3.select(".winner")
+    .append("text")
+    .attr("x", 50)
+    .attr("y", 20)
+    .attr("text-anchor", "middle")
+    .style("font", "14px sans-serif")
+    .style("font-weight", "bold")
+    .text(function (d) {
       return d.winner;
     });
 }
 
 function randomize() {
-  let randomness = document.querySelector('#randomness a.active').attributes
+  let randomness = document.querySelector("#randomness a.active").attributes
     .randomness.value;
   for (var round = 0; round < 7; round++) {
-    d3.selectAll('.round' + round).each(function(d) {
+    d3.selectAll(".round" + round).each(function (d) {
       var nextgid = nextgame(d.round, d.gid);
       if (!(nextgid >= 1 && nextgid <= 64)) {
-        throw new Error('invalid gid ', gid, d.round, d.gid);
+        throw new Error("invalid gid ", gid, d.round, d.gid);
       }
 
       var winner = whowins(d.topteam, d.bottomteam, randomness);
@@ -225,7 +225,7 @@ var width = 1020,
   lineheight = 18,
   textpadding = 2, // space between bracket line and text
   gameheight = 30,
-  linecolor = '#ddd';
+  linecolor = "#ddd";
 
 var ipad = { 1: 0, 2: 22, 3: 63, 4: 145, 5: 335, 6: 258 };
 function innerpadding(d) {
@@ -234,44 +234,44 @@ function innerpadding(d) {
 
 function main() {
   var bracket = d3
-    .select('#bracket')
-    .append('svg')
-    .attr('class', 'bracket')
-    .attr('width', width)
-    .attr('height', height);
+    .select("#bracket")
+    .append("svg")
+    .attr("class", "bracket")
+    .attr("width", width)
+    .attr("height", height);
 
   // Region Titles
   bracket
-    .append('text')
-    .attr('x', 250)
-    .attr('y', 175)
-    .style('fill', '#999')
-    .style('font', '14px sans-serif')
-    .text('West');
+    .append("text")
+    .attr("x", 250)
+    .attr("y", 175)
+    .style("fill", "#999")
+    .style("font", "14px sans-serif")
+    .text("West");
 
   bracket
-    .append('text')
-    .attr('x', 250)
-    .attr('y', 530)
-    .style('fill', '#999')
-    .style('font', '14px sans-serif')
-    .text('East');
+    .append("text")
+    .attr("x", 250)
+    .attr("y", 530)
+    .style("fill", "#999")
+    .style("font", "14px sans-serif")
+    .text("East");
 
   bracket
-    .append('text')
-    .attr('x', 730)
-    .attr('y', 530)
-    .style('fill', '#999')
-    .style('font', '14px sans-serif')
-    .text('Midwest');
+    .append("text")
+    .attr("x", 730)
+    .attr("y", 530)
+    .style("fill", "#999")
+    .style("font", "14px sans-serif")
+    .text("Midwest");
 
   bracket
-    .append('text')
-    .attr('x', 730)
-    .attr('y', 175)
-    .style('fill', '#999')
-    .style('font', '14px sans-serif')
-    .text('South');
+    .append("text")
+    .attr("x", 730)
+    .attr("y", 175)
+    .style("fill", "#999")
+    .style("font", "14px sans-serif")
+    .text("South");
 
   function gameregion(gid) {
     if (
@@ -280,7 +280,7 @@ function main() {
       (gid >= 49 && gid <= 50) ||
       gid == 57
     ) {
-      return 'south';
+      return "south";
     }
     if (
       (gid >= 9 && gid <= 16) ||
@@ -288,7 +288,7 @@ function main() {
       (gid >= 51 && gid <= 52) ||
       gid == 58
     ) {
-      return 'west';
+      return "west";
     }
     if (
       (gid >= 17 && gid <= 24) ||
@@ -296,7 +296,7 @@ function main() {
       (gid >= 53 && gid <= 54) ||
       gid == 59
     ) {
-      return 'east';
+      return "east";
     }
     if (
       (gid >= 25 && gid <= 32) ||
@@ -304,20 +304,20 @@ function main() {
       (gid >= 55 && gid <= 56) ||
       gid == 60
     ) {
-      return 'midwest';
+      return "midwest";
     }
     if (gid == 61) {
-      return 'south-west';
+      return "south-west";
     }
     if (gid == 62) {
-      return 'east-midwest';
+      return "east-midwest";
     }
     if (gid == 63) {
-      return 'south-west-east-midwest';
+      return "south-west-east-midwest";
     }
 
     // raise an error if we fall through
-    throw new Error('undefined region for gid ' + gid);
+    throw new Error("undefined region for gid " + gid);
   }
 
   var rounds = [1, 2, 3, 4, 5, 6];
@@ -326,15 +326,15 @@ function main() {
   games = [];
 
   // create the games array without teams
-  $.each(rounds, function(i, round) {
+  $.each(rounds, function (i, round) {
     var roundgame = 1;
     var regiongame = {
       south: 1,
       west: 1,
       east: 1,
       midwest: 1,
-      'south-west': 1,
-      'east-midwest': 1,
+      "south-west": 1,
+      "east-midwest": 1,
     };
     for (var i = 0; i < ngames; i++) {
       gid += 1;
@@ -354,63 +354,63 @@ function main() {
     ngames /= 2;
   });
 
-  d3.json('teams.json', function(_, json) {
+  d3.json("teams.json", function (_, json) {
     for (const [region, seeds] of Object.entries(json)) {
-      set(region, 1, seeds['1'], seeds['16']);
-      set(region, 2, seeds['8'], seeds['9']);
-      set(region, 3, seeds['5'], seeds['12']);
-      set(region, 4, seeds['4'], seeds['13']);
-      set(region, 5, seeds['6'], seeds['11']);
-      set(region, 6, seeds['3'], seeds['14']);
-      set(region, 7, seeds['7'], seeds['10']);
-      set(region, 8, seeds['2'], seeds['15']);
-    };
+      set(region, 1, seeds["1"], seeds["16"]);
+      set(region, 2, seeds["8"], seeds["9"]);
+      set(region, 3, seeds["5"], seeds["12"]);
+      set(region, 4, seeds["4"], seeds["13"]);
+      set(region, 5, seeds["6"], seeds["11"]);
+      set(region, 6, seeds["3"], seeds["14"]);
+      set(region, 7, seeds["7"], seeds["10"]);
+      set(region, 8, seeds["2"], seeds["15"]);
+    }
 
     gamedivs = bracket
-      .selectAll('.game')
+      .selectAll(".game")
       .data(games)
       .enter()
-      .append('g')
-      .attr('class', function(d) {
-        return 'game round' + d.round;
+      .append("g")
+      .attr("class", function (d) {
+        return "game round" + d.round;
       })
-      .attr('id', function(d) {
-        return 'game' + d.gid;
+      .attr("id", function (d) {
+        return "game" + d.gid;
       });
 
     linewidth = 1;
 
-    gamegs = d3.selectAll('.game').filter(function(g) {
+    gamegs = d3.selectAll(".game").filter(function (g) {
       return g.gid < 63;
     });
 
     // top line
     gamegs
-      .append('line')
-      .attr('x1', 0)
-      .attr('x2', roundwidth)
-      .attr('y1', lineheight + textpadding)
-      .attr('y2', lineheight + textpadding)
-      .style('stroke', linecolor);
+      .append("line")
+      .attr("x1", 0)
+      .attr("x2", roundwidth)
+      .attr("y1", lineheight + textpadding)
+      .attr("y2", lineheight + textpadding)
+      .style("stroke", linecolor);
 
     // bottom line
     gamegs
-      .append('line')
-      .attr('x1', 0)
-      .attr('x2', roundwidth)
-      .attr('y1', function(d) {
+      .append("line")
+      .attr("x1", 0)
+      .attr("x2", roundwidth)
+      .attr("y1", function (d) {
         return innerpadding(d) + 2 * lineheight + 2 * textpadding;
       })
-      .attr('y2', function(d) {
+      .attr("y2", function (d) {
         return innerpadding(d) + 2 * lineheight + 2 * textpadding;
       })
-      .style('stroke', linecolor);
+      .style("stroke", linecolor);
 
     function rightline(d) {
       if (
-        d.region == 'east' ||
-        d.region == 'midwest' ||
-        d.region == 'east-midwest'
+        d.region == "east" ||
+        d.region == "midwest" ||
+        d.region == "east-midwest"
       ) {
         return 0;
       } else {
@@ -420,38 +420,38 @@ function main() {
 
     // right line
     gamegs
-      .append('line')
-      .attr('x1', rightline)
-      .attr('x2', rightline)
-      .attr('y1', lineheight + textpadding)
-      .attr('y2', function(d) {
+      .append("line")
+      .attr("x1", rightline)
+      .attr("x2", rightline)
+      .attr("y1", lineheight + textpadding)
+      .attr("y2", function (d) {
         return innerpadding(d) + 2 * lineheight + 2 * textpadding;
       })
-      .style('stroke', linecolor);
+      .style("stroke", linecolor);
 
     //top teams
     gamegs
-      .append('text')
-      .attr('x', 2)
-      .attr('y', lineheight)
-      .style('font', '10px sans-serif')
-      .text(function(d) {
+      .append("text")
+      .attr("x", 2)
+      .attr("y", lineheight)
+      .style("font", "10px sans-serif")
+      .text(function (d) {
         if (d.topteam) {
-          return d.topteam.seed + '. ' + d.topteam.name;
+          return d.topteam.seed + ". " + d.topteam.name;
         }
       });
 
     //bottom teams
     gamegs
-      .append('text')
-      .attr('x', 2)
-      .attr('y', function(d) {
+      .append("text")
+      .attr("x", 2)
+      .attr("y", function (d) {
         return innerpadding(d) + 2 * lineheight + textpadding;
       })
-      .style('font', '10px sans-serif')
-      .text(function(d) {
+      .style("font", "10px sans-serif")
+      .text(function (d) {
         if (d.bottomteam) {
-          return d.bottomteam.seed + '. ' + d.bottomteam.name;
+          return d.bottomteam.seed + ". " + d.bottomteam.name;
         }
       });
 
@@ -460,8 +460,8 @@ function main() {
       east: 0,
       west: height / 2,
       midwest: height / 2,
-      'south-west': 0,
-      'east-midwest': 0,
+      "south-west": 0,
+      "east-midwest": 0,
     };
     var roundheight = { 1: 0, 2: 10, 3: 30, 4: 75, 5: 155, 6: 80 };
     var gamepadding = { 1: 5, 2: 24, 3: 66, 4: 0, 5: 0, 6: 0 };
@@ -474,61 +474,61 @@ function main() {
         (d.regiongame - 1) * (gameheight + gamepadding[d.round]);
       // these are on the right side
       if (
-        d.region == 'east' ||
-        d.region == 'midwest' ||
-        d.region == 'east-midwest'
+        d.region == "east" ||
+        d.region == "midwest" ||
+        d.region == "east-midwest"
       ) {
         var x = width - d.round * roundwidth;
       } else {
         var x = (d.round - 1) * roundwidth;
       }
-      return 'translate(' + x + ',' + y + ')';
+      return "translate(" + x + "," + y + ")";
     }
 
-    gamegs.attr('transform', layout);
+    gamegs.attr("transform", layout);
 
     // final
-    var champ = d3.select('#game63').attr('transform', 'translate(450, 205)');
+    var champ = d3.select("#game63").attr("transform", "translate(450, 205)");
     champ
-      .append('line')
-      .attr('x1', 0)
-      .attr('x2', roundwidth)
-      .attr('y1', lineheight)
-      .attr('y2', lineheight)
-      .style('stroke', linecolor);
+      .append("line")
+      .attr("x1", 0)
+      .attr("x2", roundwidth)
+      .attr("y1", lineheight)
+      .attr("y2", lineheight)
+      .style("stroke", linecolor);
     champ
-      .append('line')
-      .attr('x1', 30)
-      .attr('x2', roundwidth + 30)
-      .attr('y1', 300)
-      .attr('y2', 300)
-      .style('stroke', linecolor);
+      .append("line")
+      .attr("x1", 30)
+      .attr("x2", roundwidth + 30)
+      .attr("y1", 300)
+      .attr("y2", 300)
+      .style("stroke", linecolor);
 
     // winner
     winnerbox = bracket
-      .append('g')
+      .append("g")
       .data([{ winner: undefined }])
-      .attr('transform', 'translate(460, 335)')
-      .attr('class', 'winner');
+      .attr("transform", "translate(460, 335)")
+      .attr("class", "winner");
     winnerbox
-      .append('rect')
-      .attr('x', 0)
-      .attr('y', 0)
-      .attr('width', 100)
-      .attr('height', 30)
-      .style('fill', 'white')
-      .style('stroke', '#bbb');
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", 100)
+      .attr("height", 30)
+      .style("fill", "white")
+      .style("stroke", "#bbb");
   });
 }
 
-$(document).ready(function() {
-  $('#randomize').click(randomize);
-  $('#some').click();
-  document.querySelector('#randomness').addEventListener('click', (evt) => {
+$(document).ready(function () {
+  $("#randomize").click(randomize);
+  $("#some").click();
+  document.querySelector("#randomness").addEventListener("click", (evt) => {
     // clear any active element
-    document.querySelector('#randomness a.active').classList.remove('active');
-    document.querySelector('#randomness-btn').innerText = evt.target.innerText;
-    evt.target.classList.add('active');
+    document.querySelector("#randomness a.active").classList.remove("active");
+    document.querySelector("#randomness-btn").innerText = evt.target.innerText;
+    evt.target.classList.add("active");
   });
   main();
 });
