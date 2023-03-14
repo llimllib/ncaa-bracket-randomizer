@@ -45,12 +45,14 @@ shortnames = {
     "Louisiana Lafayette": "Louisiana Laf.",
     "Western Michigan": "Western Mich.",
     "Eastern Kentucky": "Eastern Ky.",
+    "Northern Kentucky": "Northern Ky.",
     "North Dakota St.": "ND State",
     "New Mexico St.": "NM State",
     "George Washington": "George Wash.",
     "Coastal Carolina": "Coast. Car.",
     "Eastern Washington": "E Washington",
     "UC Santa Barbara": "UCSB",
+    "Texas A&M Corpus Christi": "Texas A&M CC",
 }
 for region in combined:
     for seed in combined[region]:
