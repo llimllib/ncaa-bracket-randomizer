@@ -3,6 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: ["main"]
+
 permissions:
   contents: write
 jobs:
@@ -11,12 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./
+          path: .
 
   deploy:
     needs: build
@@ -30,4 +31,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
