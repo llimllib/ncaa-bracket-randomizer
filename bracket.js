@@ -7,7 +7,7 @@ if (typeof console === "undefined") {
  * https://github.com/llimllib/ncaa-bracket-randomizer/blob/main/fitting_kenpom/fitting%20kenpom.ipynb
  **/
 function kenpom(a, b) {
-  Math.min(-0.5885 * Math.exp(Math.abs(a - b) * -0.0513) + 1.092, 100);
+  return Math.min(-0.5885 * Math.exp(Math.abs(a - b) * -0.0513) + 1.092, 100);
 }
 
 var roundOffsets = { 1: 0, 2: 32, 3: 48, 4: 56, 5: 60, 6: 62, 7: 63 };
@@ -42,6 +42,14 @@ function whowins(a, b, randomness) {
       return dog;
     }
     return fav;
+  }
+  if (randomness == "3") {
+    const n = 1000;
+    let favwins = 0;
+    for (let i = 0; i < n; i++) {
+      favwins += Math.random() < odds ? 1 : 0;
+    }
+    return favwins >= n / 2 ? fav : dog;
   }
 }
 
