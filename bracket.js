@@ -23,11 +23,12 @@ function whowins(a, b, randomness) {
     var dog = a;
   }
 
-  var odds = kenpom(fav.rating, dog.rating);
-
   if (randomness == "0") {
     return fav;
   }
+
+  var odds = kenpom(fav.rating, dog.rating);
+
   if (randomness == "1") {
     if (Math.random() > odds && Math.random() > odds) {
       return dog;
@@ -180,14 +181,16 @@ function drawWinners() {
 }
 
 function randomize() {
-  let randomness = document.querySelector("#randomness a.active").attributes
-    .randomness.value;
+  let randomness = document.querySelector("input[type=radio]:checked")
+    .attributes.randomness.value;
   for (var round = 0; round < 7; round++) {
     d3.selectAll(".round" + round).each(function(d) {
       var nextgid = nextgame(d.round, d.gid);
       if (!(nextgid >= 1 && nextgid <= 64)) {
         throw new Error("invalid gid ", gid, d.round, d.gid);
       }
+
+      console.log("randomness: ", randomness);
 
       var winner = whowins(d.topteam, d.bottomteam, randomness);
       if (winner == d.topteam) {
@@ -523,11 +526,5 @@ function main() {
 
 window.addEventListener("DOMContentLoaded", function() {
   document.querySelector("#randomize").addEventListener("click", randomize);
-  document.querySelector("#randomness").addEventListener("click", (evt) => {
-    // clear any active element
-    document.querySelector("#randomness a.active").classList.remove("active");
-    document.querySelector("#randomness-btn").innerText = evt.target.innerText;
-    evt.target.classList.add("active");
-  });
   main();
 });
