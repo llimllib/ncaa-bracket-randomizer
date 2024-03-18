@@ -3,9 +3,9 @@
 Generates a reasonable bracket for you, based on <a href="http://kenpom.com/">Ken Pomeroy's</a>
 college basketball ratings.
 
-This code was a hack when I first wrote it 14 years ago, another hack when I
-re-wrote it 8 years ago, and even worse today. I use it once a year though, and
-it works just fine even though it's still using jQuery and an ancient d3.
+This code was a hack when I first wrote it 15 years ago, another hack when I
+re-wrote it 9 years ago, and even worse today. I use it once a year though, and
+it works just fine.
 
 For each matchup, it compares the two teams in the game, calculates the odds of the favorite
 winning the game, and chooses the winner. There are three settings that determine how it
