@@ -203,7 +203,7 @@ function randomize() {
   drawWinners();
 }
 
-var regionoffset = { south: 0, east: 8, midwest: 16, west: 24 };
+var regionoffset = { east: 0, west: 8, south: 16, midwest: 24 };
 
 function findgame(region, gameoffset) {
   var gid = regionoffset[region] + gameoffset;
@@ -247,19 +247,11 @@ function main() {
     .attr("y", 175)
     .style("fill", "#999")
     .style("font", "14px sans-serif")
-    .text("South");
-
-  bracket
-    .append("text")
-    .attr("x", 250)
-    .attr("y", 530)
-    .style("fill", "#999")
-    .style("font", "14px sans-serif")
     .text("East");
 
   bracket
     .append("text")
-    .attr("x", 730)
+    .attr("x", 250)
     .attr("y", 530)
     .style("fill", "#999")
     .style("font", "14px sans-serif")
@@ -268,10 +260,18 @@ function main() {
   bracket
     .append("text")
     .attr("x", 730)
-    .attr("y", 175)
+    .attr("y", 530)
     .style("fill", "#999")
     .style("font", "14px sans-serif")
     .text("Midwest");
+
+  bracket
+    .append("text")
+    .attr("x", 730)
+    .attr("y", 175)
+    .style("fill", "#999")
+    .style("font", "14px sans-serif")
+    .text("South");
 
   function gameregion(gid) {
     if (
@@ -326,7 +326,7 @@ function main() {
   games = [];
 
   // create the games array without teams
-  $.each(rounds, function(i, round) {
+  rounds.forEach((round) => {
     var roundgame = 1;
     var regiongame = {
       south: 1,
@@ -521,9 +521,8 @@ function main() {
   });
 }
 
-$(document).ready(function() {
-  $("#randomize").click(randomize);
-  $("#some").click();
+window.addEventListener("DOMContentLoaded", function() {
+  document.querySelector("#randomize").addEventListener("click", randomize);
   document.querySelector("#randomness").addEventListener("click", (evt) => {
     // clear any active element
     document.querySelector("#randomness a.active").classList.remove("active");
