@@ -3,9 +3,11 @@ if (typeof console === "undefined") {
   console = { log: function() { } };
 }
 
-/* I fitted a curve to kenpom's first 32 games of the NCAA prediction */
+/* I fitted a curve to kenpom's first 32 games of the NCAA prediction
+ * https://github.com/llimllib/ncaa-bracket-randomizer/blob/main/fitting_kenpom/fitting%20kenpom.ipynb
+ **/
 function kenpom(a, b) {
-  return -0.66888151 * Math.exp(Math.abs(a - b) * -0.04322173) + 1.16116838;
+  Math.min(-0.5885 * Math.exp(Math.abs(a - b) * -0.0513) + 1.092, 100);
 }
 
 var roundOffsets = { 1: 0, 2: 32, 3: 48, 4: 56, 5: 60, 6: 62, 7: 63 };
