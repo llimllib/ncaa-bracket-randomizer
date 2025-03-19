@@ -208,7 +208,7 @@ function randomize() {
   drawWinners();
 }
 
-var regionoffset = { east: 0, west: 8, south: 16, midwest: 24 };
+var regionoffset = { south: 0, west: 8, east: 16, midwest: 24 };
 
 function findgame(region, gameoffset) {
   var gid = regionoffset[region] + gameoffset;
@@ -252,7 +252,7 @@ function main() {
     .attr("y", 175)
     .style("fill", "#999")
     .style("font", "14px sans-serif")
-    .text("East");
+    .text("South");
 
   bracket
     .append("text")
@@ -276,7 +276,7 @@ function main() {
     .attr("y", 175)
     .style("fill", "#999")
     .style("font", "14px sans-serif")
-    .text("South");
+    .text("East");
 
   function gameregion(gid) {
     if (

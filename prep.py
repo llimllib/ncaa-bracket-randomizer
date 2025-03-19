@@ -1,19 +1,21 @@
 # -*- coding: utf8 -*-
-
 import csv
 import json
+import re
 
 combined = {}
 
 kenpom = {}
-with open("kenpom_2024.csv") as kp:
+with open("kenpom_2025.csv") as kp:
     rows = csv.reader(kp)
     header = next(rows)
     for row in rows:
         teamdata = dict(zip(header, row))
-        kenpom[teamdata["TeamName"]] = {
-            "name": teamdata["TeamName"],
-            "rating": float(teamdata["AdjEM"]),
+        # this year I just copied the page and s/<tab>/,/
+        name = re.sub(r"[\d\s]*$", "", teamdata["Team"])
+        kenpom[name] = {
+            "name": name,
+            "rating": float(teamdata["NetRtg"]),
         }
 
 
@@ -23,7 +25,7 @@ def maketeam(name, seed):
     return team
 
 
-bracket = json.loads(open("bracket.json").read())
+bracket = json.loads(open("bracket_2025.json").read())
 for region, teams in bracket.items():
     combined[region] = {}
     for seed, team in teams.items():
