@@ -189,8 +189,25 @@
         cursor: pointer;
       }
 
-      .team.clickable:hover {
+      .team.clickable:hover,
+      .team.clickable:focus-visible {
         background: #e8f4ff;
+      }
+
+      .team.clickable:focus-visible {
+        outline: 2px solid #1a3a5c;
+        outline-offset: -2px;
+        z-index: 1;
+      }
+
+      button:focus-visible {
+        outline: 2px solid #1a3a5c;
+        outline-offset: 2px;
+      }
+
+      input[type="range"]:focus-visible {
+        outline: 2px solid #1a3a5c;
+        outline-offset: 2px;
       }
 
       /* Larger team slots in later rounds to fit logos */
@@ -423,6 +440,7 @@
           max="2"
           step="0.05"
           value="1"
+          aria-label="Chaos to Chalk slider: left for more upsets, right for more favorites"
         />
         <label>Chalk 🏆</label>
       </div>
@@ -696,9 +714,22 @@
           "team" + (team ? (isWinner ? " winner" : "") : " empty");
         if (onClick && team) {
           div.classList.add("clickable");
+          div.setAttribute("tabindex", "0");
+          div.setAttribute("role", "button");
+          div.setAttribute(
+            "aria-label",
+            `Pick ${team.seed} seed ${team.name}`,
+          );
           div.addEventListener("click", (e) => {
             e.stopPropagation();
             onClick(team);
+          });
+          div.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              e.stopPropagation();
+              onClick(team);
+            }
           });
         }
         const seed = document.createElement("span");
@@ -709,7 +740,7 @@
           const logo = document.createElement("img");
           logo.className = "logo";
           logo.src = `${LOGO_URL}/${team.espn_id}.png`;
-          logo.alt = "";
+          logo.alt = team.name + " logo";
           logo.loading = "lazy";
           div.appendChild(logo);
         }
@@ -758,16 +789,28 @@
           ),
         );
 
-        // Hover tooltip
+        // Hover and focus tooltip
         if (teamA && teamB) {
           let tip = null;
-          div.addEventListener("mouseenter", () => {
+          const showTip = () => {
+            if (tip) return;
             tip = makeTooltip(teamA, teamB);
-            if (tip) div.appendChild(tip);
-          });
-          div.addEventListener("mouseleave", () => {
+            if (tip) {
+              tip.setAttribute("role", "tooltip");
+              tip.id = "tip-" + Math.random().toString(36).slice(2, 9);
+              div.appendChild(tip);
+            }
+          };
+          const hideTip = () => {
             if (tip && tip.parentNode) tip.remove();
             tip = null;
+          };
+          div.addEventListener("mouseenter", showTip);
+          div.addEventListener("mouseleave", hideTip);
+          div.addEventListener("focusin", showTip);
+          div.addEventListener("focusout", (e) => {
+            // Only hide if focus left the matchup entirely
+            if (!div.contains(e.relatedTarget)) hideTip();
           });
         }
 
@@ -896,7 +939,7 @@
             const logo = document.createElement("img");
             logo.className = "champion-logo";
             logo.src = `${LOGO_URL}/${ff.champion.espn_id}.png`;
-            logo.alt = "";
+            logo.alt = ff.champion.name + " logo";
             wrap.appendChild(logo);
             banner.appendChild(wrap);
           }
