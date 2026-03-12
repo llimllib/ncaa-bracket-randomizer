@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NCAA Bracket Simulator</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+  }
+
+  h1 {
+    font-size: 16px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .controls {
+    margin-bottom: 8px;
+    display: flex;
+    gap: 8px;
+  }
+
+  button {
+    padding: 5px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 2px solid #333;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+  button:hover { background: #e0e0e0; }
+  button.primary { background: #1a3a5c; color: #fff; border-color: #1a3a5c; }
+  button.primary:hover { background: #2a5a8c; }
+
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+
+  .slider-row label {
+    font-weight: 600;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .slider-row input[type="range"] {
+    width: 180px;
+    cursor: pointer;
+  }
+
+  .bracket {
+    display: grid;
+    grid-template-columns:
+      minmax(90px, 120px)
+      minmax(90px, 120px)
+      minmax(90px, 120px)
+      minmax(90px, 120px)
+      minmax(90px, 120px)
+      minmax(90px, 120px)
+      minmax(90px, 120px)
+      minmax(90px, 120px)
+      minmax(90px, 120px);
+    grid-template-rows: 1fr 1fr;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .region-label {
+    font-weight: 700;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #1a3a5c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .round {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0 2px;
+  }
+
+  .matchup {
+    margin: 2px 0;
+    position: relative;
+  }
+
+  .team {
+    display: flex;
+    align-items: center;
+    border: 1px solid #bbb;
+    background: #fff;
+    height: 16px;
+    font-size: 9px;
+    line-height: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0 3px;
+    gap: 3px;
+  }
+
+  .team + .team {
+    border-top: 1.5px solid #666;
+    margin-top: -1px;
+  }
+
+  .team .seed {
+    font-weight: 700;
+    color: #555;
+    min-width: 13px;
+    text-align: right;
+    font-size: 8px;
+  }
+
+  .team .logo {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .team .name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .team.winner .name {
+    font-weight: 700;
+  }
+
+  .team.empty {
+    background: #f8f8f8;
+    border-color: #ddd;
+  }
+
+  /* Clickable teams */
+  .team.clickable {
+    cursor: pointer;
+  }
+  .team.clickable:hover {
+    background: #e8f4ff;
+  }
+
+  /* Larger team slots in later rounds to fit logos */
+  .round-with-logos .team {
+    height: 22px;
+    font-size: 10px;
+  }
+
+  .round-with-logos .team .logo {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Even larger for E8 and Final Four */
+  .round-large-logos .team {
+    height: 26px;
+    font-size: 11px;
+  }
+
+  .round-large-logos .team .logo {
+    width: 22px;
+    height: 22px;
+  }
+
+  .ff-label {
+    font-weight: 700;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #1a3a5c;
+    text-align: center;
+    margin-bottom: 2px;
+  }
+
+  .champion-banner {
+    margin-top: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #b8860b;
+    text-align: center;
+    white-space: nowrap;
+    min-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .champion-logo-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .champion-logo-wrap::before {
+    content: '';
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      #daa520 0deg, transparent 12deg,
+      transparent 24deg, #daa520 24deg, transparent 36deg,
+      transparent 48deg, #daa520 48deg, transparent 60deg,
+      transparent 72deg, #daa520 72deg, transparent 84deg,
+      transparent 96deg, #daa520 96deg, transparent 108deg,
+      transparent 120deg, #daa520 120deg, transparent 132deg,
+      transparent 144deg, #daa520 144deg, transparent 156deg,
+      transparent 168deg, #daa520 168deg, transparent 180deg,
+      transparent 192deg, #daa520 192deg, transparent 204deg,
+      transparent 216deg, #daa520 216deg, transparent 228deg,
+      transparent 240deg, #daa520 240deg, transparent 252deg,
+      transparent 264deg, #daa520 264deg, transparent 276deg,
+      transparent 288deg, #daa520 288deg, transparent 300deg,
+      transparent 312deg, #daa520 312deg, transparent 324deg,
+      transparent 336deg, #daa520 336deg, transparent 348deg,
+      transparent 360deg
+    );
+    opacity: 0.7;
+    animation: spin-rays 8s linear infinite;
+    z-index: -1;
+  }
+
+  @keyframes spin-rays {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .champion-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+  }
+
+  .semi-matchup {
+    width: 120px;
+  }
+
+  .semi-matchup .team,
+  .center-col > div:first-child .team {
+    height: 26px;
+    font-size: 11px;
+  }
+
+  .semi-matchup .logo,
+  .center-col > div:first-child .logo {
+    width: 22px;
+    height: 22px;
+  }
+
+  .center-col {
+    grid-column: 5;
+    grid-row: 1 / 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 2;
+  }
+
+  .center-col .matchup {
+    width: 130px;
+  }
+
+  /* Tooltip */
+  .tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 100;
+    pointer-events: none;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 4px;
+  }
+
+  .tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.85);
+  }
+
+  @media print {
+    body { padding: 0; background: #fff; }
+    .controls, .slider-row { display: none; }
+    h1 { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<h1>NCAA Tournament Bracket Simulator</h1>
+<div class="controls">
+  <button class="primary" id="randomize">🎲 Randomize</button>
+  <button id="clear">Clear</button>
+</div>
+<div class="slider-row">
+  <label>🎲 Chaos</label>
+  <input type="range" id="chaos-slider" min="0" max="2" step="0.05" value="1">
+  <label>Chalk 🏆</label>
+</div>
+<div class="bracket" id="bracket"></div>
+
+<script>
+let bracketData = null;
+
+// --- Bracket state ---
+// state.regions[pos].rounds[r] = array of teams (or null for unfilled)
+// state.finalFour = { semi1: [t,t], semi1Winner, semi2: [t,t], semi2Winner, champion }
+let state = null;
+
+const POSITIONS = ['topLeft', 'bottomLeft', 'topRight', 'bottomRight'];
+
+const MATCHUP_ORDER = [
+  [1, 16], [8, 9], [5, 12], [4, 13],
+  [6, 11], [3, 14], [7, 10], [2, 15],
+];
+
+// --- Math ---
+
+function log5(pA, pB) {
+  return (pA - pA * pB) / (pA + pB - 2 * pA * pB);
+}
+
+function getK() {
+  const v = parseFloat(document.getElementById('chaos-slider').value);
+  if (v <= 1) return 0.25 * Math.pow(4, v);
+  return Math.pow(5, v - 1);
+}
+
+function adjustProb(p, k) {
+  if (k === 1) return p;
+  const pk = Math.pow(p, k);
+  const qk = Math.pow(1 - p, k);
+  return pk / (pk + qk);
+}
+
+function winProb(teamA, teamB) {
+  if (!teamA || !teamB) return null;
+  const p = log5(teamA.barthag, teamB.barthag);
+  return adjustProb(p, getK());
+}
+
+function simulateGame(teamA, teamB) {
+  const p = winProb(teamA, teamB);
+  return Math.random() < p ? teamA : teamB;
+}
+
+// --- State management ---
+
+function getRegionTeams(regionData) {
+  const teams = [];
+  for (const [a, b] of MATCHUP_ORDER) {
+    teams.push(regionData[String(a)]);
+    teams.push(regionData[String(b)]);
+  }
+  return teams;
+}
+
+function initState() {
+  const layout = bracketData.layout;
+  const regions = {};
+  for (const pos of POSITIONS) {
+    const regionName = layout[pos];
+    const r64 = getRegionTeams(bracketData[regionName]);
+    const rounds = [r64];
+    let n = 8;
+    for (let i = 0; i < 4; i++) {
+      rounds.push(new Array(n).fill(null));
+      n /= 2;
+    }
+    regions[pos] = { name: regionName, rounds };
+  }
+  state = {
+    regions,
+    finalFour: {
+      semi1: [null, null], semi1Winner: null,
+      semi2: [null, null], semi2Winner: null,
+      champion: null,
+    },
+  };
+}
+
+// Advance a team in a region: user picked winner at rounds[roundIdx] matchup matchIdx
+function advanceInRegion(pos, roundIdx, matchIdx, team) {
+  const rounds = state.regions[pos].rounds;
+  const nextRound = roundIdx + 1;
+  if (nextRound > 4) return; // region winner feeds to final four
+
+  const oldWinner = rounds[nextRound][matchIdx];
+
+  // Set the winner
+  rounds[nextRound][matchIdx] = team;
+
+  // If winner changed, cascade clear downstream
+  if (oldWinner && oldWinner.name !== team.name) {
+    clearDownstream(pos, nextRound, matchIdx);
+  }
+
+  // Update final four if this was the region winner (round 4, index 0)
+  if (nextRound === 4) {
+    updateFinalFourTeam(pos, team, oldWinner);
+  }
+}
+
+function clearDownstream(pos, roundIdx, slotIdx) {
+  const rounds = state.regions[pos].rounds;
+  // This slot feeds into rounds[roundIdx+1][floor(slotIdx/2)]
+  const nextRound = roundIdx + 1;
+  if (nextRound > 4) {
+    // Clearing a region winner — clear from final four
+    clearFinalFourForRegion(pos);
+    return;
+  }
+  const nextSlot = Math.floor(slotIdx / 2);
+  const occupant = rounds[nextRound][nextSlot];
+  if (occupant) {
+    rounds[nextRound][nextSlot] = null;
+    clearDownstream(pos, nextRound, nextSlot);
+  }
+}
+
+function updateFinalFourTeam(pos, team, oldTeam) {
+  const ff = state.finalFour;
+  if (pos === 'topLeft') {
+    ff.semi1[0] = team;
+    if (ff.semi1Winner && oldTeam && ff.semi1Winner.name === oldTeam.name) {
+      ff.semi1Winner = null;
+      clearChampionship();
+    }
+  } else if (pos === 'bottomLeft') {
+    ff.semi1[1] = team;
+    if (ff.semi1Winner && oldTeam && ff.semi1Winner.name === oldTeam.name) {
+      ff.semi1Winner = null;
+      clearChampionship();
+    }
+  } else if (pos === 'topRight') {
+    ff.semi2[0] = team;
+    if (ff.semi2Winner && oldTeam && ff.semi2Winner.name === oldTeam.name) {
+      ff.semi2Winner = null;
+      clearChampionship();
+    }
+  } else if (pos === 'bottomRight') {
+    ff.semi2[1] = team;
+    if (ff.semi2Winner && oldTeam && ff.semi2Winner.name === oldTeam.name) {
+      ff.semi2Winner = null;
+      clearChampionship();
+    }
+  }
+}
+
+function clearFinalFourForRegion(pos) {
+  const ff = state.finalFour;
+  if (pos === 'topLeft') {
+    ff.semi1[0] = null;
+    ff.semi1Winner = null;
+  } else if (pos === 'bottomLeft') {
+    ff.semi1[1] = null;
+    ff.semi1Winner = null;
+  } else if (pos === 'topRight') {
+    ff.semi2[0] = null;
+    ff.semi2Winner = null;
+  } else if (pos === 'bottomRight') {
+    ff.semi2[1] = null;
+    ff.semi2Winner = null;
+  }
+  clearChampionship();
+}
+
+function clearChampionship() {
+  state.finalFour.champion = null;
+}
+
+function advanceSemi(semiNum, team) {
+  const ff = state.finalFour;
+  if (semiNum === 1) {
+    const old = ff.semi1Winner;
+    ff.semi1Winner = team;
+    if (old && old.name !== team.name && ff.champion && ff.champion.name === old.name) {
+      ff.champion = null;
+    }
+  } else {
+    const old = ff.semi2Winner;
+    ff.semi2Winner = team;
+    if (old && old.name !== team.name && ff.champion && ff.champion.name === old.name) {
+      ff.champion = null;
+    }
+  }
+}
+
+function advanceChampionship(team) {
+  state.finalFour.champion = team;
+}
+
+// --- Simulate all (randomize) ---
+
+function simulateAll() {
+  initState();
+  for (const pos of POSITIONS) {
+    const rounds = state.regions[pos].rounds;
+    for (let r = 0; r < 4; r++) {
+      for (let i = 0; i < rounds[r].length; i += 2) {
+        rounds[r + 1][i / 2] = simulateGame(rounds[r][i], rounds[r][i + 1]);
+      }
+    }
+  }
+
+  const ff = state.finalFour;
+  ff.semi1 = [state.regions.topLeft.rounds[4][0], state.regions.bottomLeft.rounds[4][0]];
+  ff.semi1Winner = simulateGame(ff.semi1[0], ff.semi1[1]);
+  ff.semi2 = [state.regions.topRight.rounds[4][0], state.regions.bottomRight.rounds[4][0]];
+  ff.semi2Winner = simulateGame(ff.semi2[0], ff.semi2[1]);
+  ff.champion = simulateGame(ff.semi1Winner, ff.semi2Winner);
+}
+
+// --- Rendering ---
+
+const LOGO_URL = 'logos';
+
+function makeTeamEl(team, isWinner, showLogo, onClick) {
+  const div = document.createElement('div');
+  div.className = 'team' + (team ? (isWinner ? ' winner' : '') : ' empty');
+  if (onClick && team) {
+    div.classList.add('clickable');
+    div.addEventListener('click', (e) => {
+      e.stopPropagation();
+      onClick(team);
+    });
+  }
+  const seed = document.createElement('span');
+  seed.className = 'seed';
+  seed.textContent = team ? team.seed : '';
+  div.appendChild(seed);
+  if (showLogo && team && team.espn_id) {
+    const logo = document.createElement('img');
+    logo.className = 'logo';
+    logo.src = `${LOGO_URL}/${team.espn_id}.png`;
+    logo.alt = '';
+    logo.loading = 'lazy';
+    div.appendChild(logo);
+  }
+  const name = document.createElement('span');
+  name.className = 'name';
+  name.textContent = team ? team.name : '';
+  div.appendChild(name);
+  return div;
+}
+
+function makeTooltip(teamA, teamB) {
+  const p = winProb(teamA, teamB);
+  if (p === null) return null;
+  const pctA = (p * 100).toFixed(0);
+  const pctB = ((1 - p) * 100).toFixed(0);
+  const tip = document.createElement('div');
+  tip.className = 'tooltip';
+  tip.textContent = `${teamA.name} ${pctA}% — ${pctB}% ${teamB.name}`;
+  return tip;
+}
+
+function makeMatchupEl(teamA, teamB, winner, roundIndex, onClickTeam) {
+  const div = document.createElement('div');
+  div.className = 'matchup';
+  const showLogo = roundIndex >= 2;
+
+  // Both teams present and no winner yet = clickable
+  const canClick = teamA && teamB;
+  const clickA = canClick ? onClickTeam : null;
+  const clickB = canClick ? onClickTeam : null;
+
+  div.appendChild(makeTeamEl(teamA, winner && teamA && winner.name === teamA.name, showLogo, clickA));
+  div.appendChild(makeTeamEl(teamB, winner && teamB && winner.name === teamB.name, showLogo, clickB));
+
+  // Hover tooltip
+  if (teamA && teamB) {
+    let tip = null;
+    div.addEventListener('mouseenter', () => {
+      tip = makeTooltip(teamA, teamB);
+      if (tip) div.appendChild(tip);
+    });
+    div.addEventListener('mouseleave', () => {
+      if (tip && tip.parentNode) tip.remove();
+      tip = null;
+    });
+  }
+
+  return div;
+}
+
+function makeRoundCol(teams, winners, roundIndex, onClickTeamForMatchup) {
+  const div = document.createElement('div');
+  div.className = 'round';
+  if (roundIndex === 2) div.classList.add('round-with-logos');
+  if (roundIndex >= 3) div.classList.add('round-large-logos');
+  for (let i = 0; i < teams.length; i += 2) {
+    const a = teams[i] || null;
+    const b = teams[i + 1] || null;
+    const matchIdx = i / 2;
+    const w = winners ? (winners[matchIdx] || null) : null;
+    const onClick = onClickTeamForMatchup ? (team) => onClickTeamForMatchup(roundIndex, matchIdx, team) : null;
+    div.appendChild(makeMatchupEl(a, b, w, roundIndex, onClick));
+  }
+  return div;
+}
+
+function render() {
+  const el = document.getElementById('bracket');
+  el.innerHTML = '';
+  const layout = bracketData.layout;
+  const ff = state.finalFour;
+
+  // --- Left regions ---
+  for (const [pos, row] of [['topLeft', '1'], ['bottomLeft', '2']]) {
+    const { name, rounds } = state.regions[pos];
+
+    const lbl = document.createElement('div');
+    lbl.className = 'region-label';
+    lbl.textContent = name.toUpperCase();
+    lbl.style.gridColumn = '1 / 5';
+    lbl.style.gridRow = row;
+    el.appendChild(lbl);
+
+    for (let r = 0; r < 4; r++) {
+      const onClick = (roundIdx, matchIdx, team) => {
+        advanceInRegion(pos, roundIdx, matchIdx, team);
+        render();
+      };
+      const col = makeRoundCol(rounds[r], rounds[r + 1], r, onClick);
+      col.style.gridColumn = String(r + 1);
+      col.style.gridRow = row;
+      el.appendChild(col);
+    }
+  }
+
+  // --- Right regions ---
+  for (const [pos, row] of [['topRight', '1'], ['bottomRight', '2']]) {
+    const { name, rounds } = state.regions[pos];
+
+    const lbl = document.createElement('div');
+    lbl.className = 'region-label';
+    lbl.textContent = name.toUpperCase();
+    lbl.style.gridColumn = '6 / 10';
+    lbl.style.gridRow = row;
+    el.appendChild(lbl);
+
+    for (let r = 0; r < 4; r++) {
+      const onClick = (roundIdx, matchIdx, team) => {
+        advanceInRegion(pos, roundIdx, matchIdx, team);
+        render();
+      };
+      const col = makeRoundCol(rounds[r], rounds[r + 1], r, onClick);
+      col.style.gridColumn = String(9 - r);
+      col.style.gridRow = row;
+      el.appendChild(col);
+    }
+  }
+
+  // --- Center column ---
+  const centerCol = document.createElement('div');
+  centerCol.className = 'center-col';
+
+  // Championship
+  const champBlock = document.createElement('div');
+  champBlock.style.display = 'flex';
+  champBlock.style.flexDirection = 'column';
+  champBlock.style.alignItems = 'center';
+  const clabel = document.createElement('div');
+  clabel.className = 'ff-label';
+  clabel.textContent = 'Championship';
+  champBlock.appendChild(clabel);
+
+  const champOnClick = (team) => {
+    advanceChampionship(team);
+    render();
+  };
+  champBlock.appendChild(makeMatchupEl(
+    ff.semi1Winner, ff.semi2Winner, ff.champion, 5, champOnClick
+  ));
+
+  const banner = document.createElement('div');
+  banner.className = 'champion-banner';
+  if (ff.champion) {
+    banner.textContent = '🏆 ';
+    if (ff.champion.espn_id) {
+      const wrap = document.createElement('span');
+      wrap.className = 'champion-logo-wrap';
+      const logo = document.createElement('img');
+      logo.className = 'champion-logo';
+      logo.src = `${LOGO_URL}/${ff.champion.espn_id}.png`;
+      logo.alt = '';
+      wrap.appendChild(logo);
+      banner.appendChild(wrap);
+    }
+    banner.appendChild(document.createTextNode(ff.champion.name));
+  }
+  champBlock.appendChild(banner);
+  centerCol.appendChild(champBlock);
+
+  // Semis
+  const semisRow = document.createElement('div');
+  semisRow.style.display = 'flex';
+  semisRow.style.gap = '8px';
+
+  // Semi 1
+  const s1block = document.createElement('div');
+  s1block.style.display = 'flex';
+  s1block.style.flexDirection = 'column';
+  s1block.style.alignItems = 'center';
+  const s1label = document.createElement('div');
+  s1label.className = 'ff-label';
+  s1label.textContent = 'Semifinal';
+  s1block.appendChild(s1label);
+  const s1onClick = (team) => { advanceSemi(1, team); render(); };
+  const s1m = makeMatchupEl(ff.semi1[0], ff.semi1[1], ff.semi1Winner, 4, s1onClick);
+  s1m.classList.add('semi-matchup');
+  s1block.appendChild(s1m);
+  semisRow.appendChild(s1block);
+
+  // Semi 2
+  const s2block = document.createElement('div');
+  s2block.style.display = 'flex';
+  s2block.style.flexDirection = 'column';
+  s2block.style.alignItems = 'center';
+  const s2label = document.createElement('div');
+  s2label.className = 'ff-label';
+  s2label.textContent = 'Semifinal';
+  s2block.appendChild(s2label);
+  const s2onClick = (team) => { advanceSemi(2, team); render(); };
+  const s2m = makeMatchupEl(ff.semi2[0], ff.semi2[1], ff.semi2Winner, 4, s2onClick);
+  s2m.classList.add('semi-matchup');
+  s2block.appendChild(s2m);
+  semisRow.appendChild(s2block);
+
+  centerCol.appendChild(semisRow);
+  el.appendChild(centerCol);
+}
+
+// --- Events ---
+document.getElementById('randomize').addEventListener('click', () => {
+  if (!bracketData) return;
+  simulateAll();
+  render();
+});
+
+document.getElementById('clear').addEventListener('click', () => {
+  if (!bracketData) return;
+  initState();
+  render();
+});
+
+// --- Load ---
+fetch('2025.bracket.json')
+  .then(r => r.json())
+  .then(data => {
+    bracketData = data;
+    initState();
+    render();
+  })
+  .catch(err => {
+    document.getElementById('bracket').textContent = 'Error loading bracket data: ' + err;
+  });
+</script>
+</body>
+</html>
