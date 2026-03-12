@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NCAA Bracket Simulator</title>
+    <title>NCAA Bracket Randomizer</title>
     <style>
       * {
         margin: 0;
@@ -100,8 +100,11 @@
           minmax(90px, 120px) minmax(90px, 120px) minmax(90px, 120px) minmax(
             90px,
             120px
-          ) minmax(90px, 120px) minmax(90px, 120px) minmax(90px, 120px)
-          minmax(90px, 120px) minmax(90px, 120px);
+          )
+          minmax(90px, 120px) minmax(90px, 120px) minmax(90px, 120px) minmax(
+            90px,
+            120px
+          ) minmax(90px, 120px);
         grid-template-rows: 1fr 1fr;
         width: fit-content;
         margin: 0 auto;
@@ -424,7 +427,9 @@
         <label>Chalk 🏆</label>
       </div>
     </div>
-    <div class="bracket-scroll"><div class="bracket" id="bracket"></div></div>
+    <div class="bracket-scroll">
+      <div class="bracket" id="bracket"></div>
+    </div>
 
     <script>
       let bracketData = null;
@@ -815,6 +820,10 @@
             const col = makeRoundCol(rounds[r], rounds[r + 1], r, onClick);
             col.style.gridColumn = String(r + 1);
             col.style.gridRow = row;
+            if (r === 3) {
+              col.style.position = "relative";
+              col.style.left = "-40%";
+            }
             el.appendChild(col);
           }
         }
@@ -841,6 +850,10 @@
             const col = makeRoundCol(rounds[r], rounds[r + 1], r, onClick);
             col.style.gridColumn = String(9 - r);
             col.style.gridRow = row;
+            if (r === 3) {
+              col.style.position = "relative";
+              col.style.left = "40%";
+            }
             el.appendChild(col);
           }
         }
