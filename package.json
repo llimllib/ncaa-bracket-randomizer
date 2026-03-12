@@ -1,0 +1,16 @@
+{
+  "name": "newbracket",
+  "version": "1.0.0",
+  "description": "Torvik data: http://barttorvik.com/2026_team_results.csv",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "playwright": "^1.58.2"
+  }
+}
