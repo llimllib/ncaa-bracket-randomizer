@@ -142,12 +142,47 @@ Requires `playwright` npm package and a dev server on port 8000 (e.g., `devd .`)
 
 Tests cover: initial state, click-to-advance with cascade clearing, hover tooltips, randomize, clear, chaos slider behavior.
 
+## Updating Torvik Data & Regenerating Bracket
+
+1. **Download fresh Torvik CSV:**
+   ```bash
+   curl -s "https://barttorvik.com/2026_team_results.csv" -o 2026_team_results.csv
+   ```
+
+2. **Regenerate bracket JSON** (picks up new barthag values):
+   ```bash
+   python3 generate_bracket.py
+   ```
+
+3. **Check for missing logos:**
+   ```python
+   python3 -c "
+   import json, os
+   with open('2026.bracket.json') as f:
+       b = json.load(f)
+   for region in ['east','south','west','midwest']:
+       for seed, team in b[region].items():
+           if not os.path.exists(f'logos/{team[\"espn_id\"]}.png'):
+               print(f'Missing: {team[\"name\"]} -> logos/{team[\"espn_id\"]}.png')
+   "
+   ```
+
+4. **Download any missing logos:**
+   ```bash
+   curl -s -o logos/{espn_id}.png "https://a.espncdn.com/i/teamlogos/ncaa/500/{espn_id}.png"
+   ```
+
+5. **Run tests** (requires dev server on port 8000):
+   ```bash
+   node --test bracket.test.mjs
+   ```
+
+If the bracket itself changes (not just barthag updates), edit `generate_bracket.py` to reflect the new regions/seeds/teams, then re-run steps 2–5. If the first team in the top-left region changes, update the hardcoded team names in `bracket.test.mjs` too (tests reference the 1-seed and 16-seed of that region).
+
 ## What's Not Done Yet
 
 - **First Four play-in games** — depends on Selection Sunday announcement
-- **Real 2026 bracket data** — need `generate_teams.py` script to build JSON from bracket announcement + Torvik CSV + ESPN IDs. Use `espn_ids.json` for ESPN ID lookups.
 - **Print stylesheet polish** — basic `@media print` exists but not tested
-- **Downloading logos for new teams** — most projected bracket teams already have logos downloaded. When the real bracket drops, check for any missing logos and download from `https://a.espncdn.com/i/teamlogos/ncaa/500/{espn_id}.png`.
 
 ## Dev Server
 
