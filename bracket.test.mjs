@@ -64,15 +64,15 @@ describe('click to advance', () => {
     let r32Text = await page.locator('.round').nth(1).locator('.team:not(.empty)').first().textContent();
     assert.match(r32Text, /Duke/);
 
-    // Now click Furman instead (second team in first matchup)
+    // Now click Siena instead (second team in first matchup)
     const firstMatchup = page.locator('.matchup').first();
-    const furman = firstMatchup.locator('.team').nth(1);
-    await furman.click();
+    const siena = firstMatchup.locator('.team').nth(1);
+    await siena.click();
     await page.waitForTimeout(100);
 
-    // R32 should now show Furman, not Duke
+    // R32 should now show Siena, not Duke
     r32Text = await page.locator('.round').nth(1).locator('.team:not(.empty)').first().textContent();
-    assert.match(r32Text, /Furman/);
+    assert.match(r32Text, /Siena/);
   });
 
   test('can advance teams all the way through a region', async () => {
@@ -125,7 +125,7 @@ describe('hover tooltip', () => {
 
     const text = await tooltip.textContent();
     assert.match(text, /Duke/);
-    assert.match(text, /Furman/);
+    assert.match(text, /Siena/);
     assert.match(text, /%/);
   });
 
