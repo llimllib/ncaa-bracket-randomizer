@@ -21,10 +21,10 @@ beforeEach(async () => {
 
 describe('initial state', () => {
   test('loads with R64 teams visible', async () => {
-    // First team in south region should be Auburn (1 seed)
+    // First team in east region should be Duke (1 seed)
     const firstTeam = page.locator('.team').first();
     const text = await firstTeam.textContent();
-    assert.match(text, /Auburn/);
+    assert.match(text, /Duke/);
   });
 
   test('later rounds are empty', async () => {
@@ -43,36 +43,36 @@ describe('initial state', () => {
 
 describe('click to advance', () => {
   test('clicking a team advances them to the next round', async () => {
-    // Click Auburn (first clickable team)
+    // Click Duke (first clickable team)
     await page.locator('.team.clickable').first().click();
     await page.waitForTimeout(100);
 
-    // Auburn should now appear in R32 (second column)
+    // Duke should now appear in R32 (second column)
     const r32Teams = page.locator('.round').nth(1).locator('.team:not(.empty)');
     const count = await r32Teams.count();
     assert.ok(count >= 1, 'Expected at least one team in R32');
     const text = await r32Teams.first().textContent();
-    assert.match(text, /Auburn/);
+    assert.match(text, /Duke/);
   });
 
   test('changing a pick clears downstream', async () => {
-    // Advance Auburn to R32
+    // Advance Duke to R32
     await page.locator('.team.clickable').first().click();
     await page.waitForTimeout(100);
 
-    // Verify Auburn is in R32
+    // Verify Duke is in R32
     let r32Text = await page.locator('.round').nth(1).locator('.team:not(.empty)').first().textContent();
-    assert.match(r32Text, /Auburn/);
+    assert.match(r32Text, /Duke/);
 
-    // Now click Alabama St. instead (second team in first matchup)
+    // Now click Furman instead (second team in first matchup)
     const firstMatchup = page.locator('.matchup').first();
-    const alabamaSt = firstMatchup.locator('.team').nth(1);
-    await alabamaSt.click();
+    const furman = firstMatchup.locator('.team').nth(1);
+    await furman.click();
     await page.waitForTimeout(100);
 
-    // R32 should now show Alabama St., not Auburn
+    // R32 should now show Furman, not Duke
     r32Text = await page.locator('.round').nth(1).locator('.team:not(.empty)').first().textContent();
-    assert.match(r32Text, /Alabama St/);
+    assert.match(r32Text, /Furman/);
   });
 
   test('can advance teams all the way through a region', async () => {
@@ -124,8 +124,8 @@ describe('hover tooltip', () => {
     assert.strictEqual(count, 1, 'Expected one tooltip');
 
     const text = await tooltip.textContent();
-    assert.match(text, /Auburn/);
-    assert.match(text, /Alabama St/);
+    assert.match(text, /Duke/);
+    assert.match(text, /Furman/);
     assert.match(text, /%/);
   });
 
