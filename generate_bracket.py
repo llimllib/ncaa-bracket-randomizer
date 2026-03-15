@@ -57,7 +57,7 @@ east = {
     "8": get_team("Georgia", 8),
     "9": get_team("Villanova", 9),
     "5": get_team("St. John's", 5),
-    "12": get_team("Yale", 12),
+    "12": get_team("Penn", 12),
     "4": get_team("Kansas", 4),
     "13": get_team("High Point", 13),
     "6": get_team("Tennessee", 6),
