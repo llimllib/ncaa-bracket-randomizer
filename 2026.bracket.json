@@ -9,97 +9,97 @@
     "1": {
       "name": "Duke",
       "seed": 1,
-      "barthag": 0.981415,
+      "barthag": 0.981276,
       "espn_id": 150
     },
     "16": {
       "name": "Siena",
       "seed": 16,
-      "barthag": 0.454047,
+      "barthag": 0.454976,
       "espn_id": 2561
     },
     "8": {
       "name": "Ohio St.",
       "seed": 8,
-      "barthag": 0.917735,
+      "barthag": 0.917032,
       "espn_id": 194
     },
     "9": {
       "name": "TCU",
       "seed": 9,
-      "barthag": 0.837223,
+      "barthag": 0.836443,
       "espn_id": 2628
     },
     "5": {
       "name": "St. John's",
       "seed": 5,
-      "barthag": 0.941703,
+      "barthag": 0.941438,
       "espn_id": 2599
     },
     "12": {
       "name": "N. Iowa",
       "seed": 12,
-      "barthag": 0.77422,
+      "barthag": 0.773832,
       "espn_id": 2460
     },
     "4": {
       "name": "Kansas",
       "seed": 4,
-      "barthag": 0.928297,
+      "barthag": 0.927938,
       "espn_id": 2305
     },
     "13": {
       "name": "Cal Baptist",
       "seed": 13,
-      "barthag": 0.688953,
+      "barthag": 0.688725,
       "espn_id": 2856
     },
     "6": {
       "name": "Louisville",
       "seed": 6,
-      "barthag": 0.936674,
+      "barthag": 0.936422,
       "espn_id": 97
     },
     "11": {
       "name": "South Florida",
       "seed": 11,
-      "barthag": 0.827814,
+      "barthag": 0.83507,
       "espn_id": 58
     },
     "3": {
       "name": "Michigan St.",
       "seed": 3,
-      "barthag": 0.944135,
+      "barthag": 0.943781,
       "espn_id": 127
     },
     "14": {
       "name": "N. Dakota St.",
       "seed": 14,
-      "barthag": 0.639261,
+      "barthag": 0.639273,
       "espn_id": 2449
     },
     "7": {
       "name": "UCLA",
       "seed": 7,
-      "barthag": 0.910833,
+      "barthag": 0.910603,
       "espn_id": 26
     },
     "10": {
       "name": "UCF",
       "seed": 10,
-      "barthag": 0.812657,
+      "barthag": 0.811864,
       "espn_id": 2116
     },
     "2": {
       "name": "UConn",
       "seed": 2,
-      "barthag": 0.952047,
+      "barthag": 0.951805,
       "espn_id": 41
     },
     "15": {
       "name": "Furman",
       "seed": 15,
-      "barthag": 0.443541,
+      "barthag": 0.444128,
       "espn_id": 231
     }
   },
@@ -107,97 +107,97 @@
     "1": {
       "name": "Florida",
       "seed": 1,
-      "barthag": 0.973424,
+      "barthag": 0.973217,
       "espn_id": 57
     },
     "16": {
       "name": "Lehigh",
       "seed": 16,
-      "barthag": 0.250907,
+      "barthag": 0.251708,
       "espn_id": 2329
     },
     "8": {
       "name": "Clemson",
       "seed": 8,
-      "barthag": 0.892926,
+      "barthag": 0.89245,
       "espn_id": 228
     },
     "9": {
       "name": "Iowa",
       "seed": 9,
-      "barthag": 0.907156,
+      "barthag": 0.906968,
       "espn_id": 2294
     },
     "5": {
       "name": "Vanderbilt",
       "seed": 5,
-      "barthag": 0.948654,
+      "barthag": 0.946142,
       "espn_id": 238
     },
     "12": {
       "name": "McNeese",
       "seed": 12,
-      "barthag": 0.76437,
+      "barthag": 0.763927,
       "espn_id": 2377
     },
     "4": {
       "name": "Nebraska",
       "seed": 4,
-      "barthag": 0.931316,
+      "barthag": 0.931209,
       "espn_id": 158
     },
     "13": {
       "name": "Troy",
       "seed": 13,
-      "barthag": 0.543409,
+      "barthag": 0.543798,
       "espn_id": 2653
     },
     "6": {
       "name": "N. Carolina",
       "seed": 6,
-      "barthag": 0.903395,
+      "barthag": 0.902945,
       "espn_id": 153
     },
     "11": {
       "name": "VCU",
       "seed": 11,
-      "barthag": 0.834648,
+      "barthag": 0.842667,
       "espn_id": 2670
     },
     "3": {
       "name": "Illinois",
       "seed": 3,
-      "barthag": 0.967746,
+      "barthag": 0.967592,
       "espn_id": 356
     },
     "14": {
       "name": "Penn",
       "seed": 14,
-      "barthag": 0.520412,
+      "barthag": 0.531471,
       "espn_id": 219
     },
     "7": {
       "name": "Saint Mary's",
       "seed": 7,
-      "barthag": 0.910939,
+      "barthag": 0.910444,
       "espn_id": 2608
     },
     "10": {
       "name": "Texas A&M",
       "seed": 10,
-      "barthag": 0.873442,
+      "barthag": 0.872939,
       "espn_id": 245
     },
     "2": {
       "name": "Houston",
       "seed": 2,
-      "barthag": 0.971104,
+      "barthag": 0.970969,
       "espn_id": 248
     },
     "15": {
       "name": "Idaho",
       "seed": 15,
-      "barthag": 0.570347,
+      "barthag": 0.570124,
       "espn_id": 70
     }
   },
@@ -205,97 +205,97 @@
     "1": {
       "name": "Arizona",
       "seed": 1,
-      "barthag": 0.977749,
+      "barthag": 0.977619,
       "espn_id": 12
     },
     "16": {
       "name": "LIU",
       "seed": 16,
-      "barthag": 0.340311,
+      "barthag": 0.341044,
       "espn_id": 112358
     },
     "8": {
       "name": "Villanova",
       "seed": 8,
-      "barthag": 0.881012,
+      "barthag": 0.880551,
       "espn_id": 222
     },
     "9": {
       "name": "Utah St.",
       "seed": 9,
-      "barthag": 0.895346,
+      "barthag": 0.895292,
       "espn_id": 328
     },
     "5": {
       "name": "Wisconsin",
       "seed": 5,
-      "barthag": 0.929745,
+      "barthag": 0.929394,
       "espn_id": 275
     },
     "12": {
       "name": "High Point",
       "seed": 12,
-      "barthag": 0.698336,
+      "barthag": 0.698753,
       "espn_id": 2272
     },
     "4": {
       "name": "Arkansas",
       "seed": 4,
-      "barthag": 0.931102,
+      "barthag": 0.933595,
       "espn_id": 8
     },
     "13": {
       "name": "Hawaii",
       "seed": 13,
-      "barthag": 0.635949,
+      "barthag": 0.635764,
       "espn_id": 62
     },
     "6": {
       "name": "BYU",
       "seed": 6,
-      "barthag": 0.887105,
+      "barthag": 0.886526,
       "espn_id": 252
     },
     "11": {
       "name": "NC State",
       "seed": 11,
-      "barthag": 0.876915,
+      "barthag": 0.876545,
       "espn_id": 152
     },
     "3": {
       "name": "Gonzaga",
       "seed": 3,
-      "barthag": 0.94474,
+      "barthag": 0.944434,
       "espn_id": 2250
     },
     "14": {
       "name": "Kennesaw St.",
       "seed": 14,
-      "barthag": 0.533583,
+      "barthag": 0.533858,
       "espn_id": 338
     },
     "7": {
       "name": "Miami",
       "seed": 7,
-      "barthag": 0.884614,
+      "barthag": 0.884131,
       "espn_id": 2390
     },
     "10": {
       "name": "Missouri",
       "seed": 10,
-      "barthag": 0.851768,
+      "barthag": 0.851461,
       "espn_id": 142
     },
     "2": {
       "name": "Purdue",
       "seed": 2,
-      "barthag": 0.961425,
+      "barthag": 0.963582,
       "espn_id": 2509
     },
     "15": {
       "name": "Queens",
       "seed": 15,
-      "barthag": 0.43925,
+      "barthag": 0.439497,
       "espn_id": 2511
     }
   },
@@ -303,97 +303,97 @@
     "1": {
       "name": "Michigan",
       "seed": 1,
-      "barthag": 0.981229,
+      "barthag": 0.979859,
       "espn_id": 130
     },
     "16": {
       "name": "UMBC",
       "seed": 16,
-      "barthag": 0.454799,
+      "barthag": 0.455687,
       "espn_id": 2378
     },
     "8": {
       "name": "Georgia",
       "seed": 8,
-      "barthag": 0.877985,
+      "barthag": 0.877434,
       "espn_id": 61
     },
     "9": {
       "name": "Saint Louis",
       "seed": 9,
-      "barthag": 0.858716,
+      "barthag": 0.858398,
       "espn_id": 139
     },
     "5": {
       "name": "Texas Tech",
       "seed": 5,
-      "barthag": 0.94412,
+      "barthag": 0.943994,
       "espn_id": 2641
     },
     "12": {
       "name": "Akron",
       "seed": 12,
-      "barthag": 0.772437,
+      "barthag": 0.772734,
       "espn_id": 2006
     },
     "4": {
       "name": "Alabama",
       "seed": 4,
-      "barthag": 0.934592,
+      "barthag": 0.934414,
       "espn_id": 333
     },
     "13": {
       "name": "Hofstra",
       "seed": 13,
-      "barthag": 0.703971,
+      "barthag": 0.704466,
       "espn_id": 2275
     },
     "6": {
       "name": "Tennessee",
       "seed": 6,
-      "barthag": 0.941301,
+      "barthag": 0.940776,
       "espn_id": 2633
     },
     "11": {
       "name": "SMU",
       "seed": 11,
-      "barthag": 0.862029,
+      "barthag": 0.861385,
       "espn_id": 2567
     },
     "3": {
       "name": "Virginia",
       "seed": 3,
-      "barthag": 0.943024,
+      "barthag": 0.942682,
       "espn_id": 258
     },
     "14": {
       "name": "Wright St.",
       "seed": 14,
-      "barthag": 0.586941,
+      "barthag": 0.586939,
       "espn_id": 2750
     },
     "7": {
       "name": "Kentucky",
       "seed": 7,
-      "barthag": 0.890548,
+      "barthag": 0.889907,
       "espn_id": 96
     },
     "10": {
       "name": "Santa Clara",
       "seed": 10,
-      "barthag": 0.89573,
+      "barthag": 0.895359,
       "espn_id": 2541
     },
     "2": {
       "name": "Iowa St.",
       "seed": 2,
-      "barthag": 0.965668,
+      "barthag": 0.965524,
       "espn_id": 66
     },
     "15": {
       "name": "Tennessee St.",
       "seed": 15,
-      "barthag": 0.392909,
+      "barthag": 0.393637,
       "espn_id": 2634
     }
   }
