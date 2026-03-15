@@ -216,7 +216,7 @@ describe('clear', () => {
 });
 
 describe('chaos slider', () => {
-  test('max chalk produces chalky results', async () => {
+  test('max chalk is fully deterministic', async () => {
     // Set slider to max chalk
     await page.evaluate(() => {
       const slider = document.getElementById('chaos-slider');
@@ -224,21 +224,23 @@ describe('chaos slider', () => {
       slider.dispatchEvent(new Event('input'));
     });
 
-    // Run 20 times, count how often a 1-seed wins
-    let oneSeedWins = 0;
-    for (let i = 0; i < 20; i++) {
+    // Run 10 times, results should be identical every time
+    const results = [];
+    for (let i = 0; i < 10; i++) {
       await page.click('#randomize');
       await page.waitForTimeout(30);
       const text = await page.locator('.champion-banner').textContent();
-      // Check if champion is a 1-seed by looking at semis/championship
-      const championSeed = await page.evaluate(() => {
-        const s = document.querySelector('.center-col .matchup .team.winner .seed');
-        return s ? s.textContent : '';
-      });
-      if (championSeed === '1') oneSeedWins++;
+      results.push(text);
     }
-    // At heavy chalk, 1-seeds should win most of the time
-    assert.ok(oneSeedWins >= 10, `Expected mostly 1-seed champions at max chalk, got ${oneSeedWins}/20`);
+    const unique = new Set(results);
+    assert.strictEqual(unique.size, 1, `Expected identical results at max chalk, got ${unique.size} unique: ${[...unique].join(', ')}`);
+
+    // Champion should be a 1-seed
+    const championSeed = await page.evaluate(() => {
+      const s = document.querySelector('.center-col .matchup .team.winner .seed');
+      return s ? s.textContent : '';
+    });
+    assert.strictEqual(championSeed, '1', `Expected 1-seed champion at max chalk, got seed ${championSeed}`);
   });
 
   test('tooltip probabilities change with slider', async () => {

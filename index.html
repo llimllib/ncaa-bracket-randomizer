@@ -498,6 +498,10 @@
 
       function simulateGame(teamA, teamB) {
         const p = winProb(teamA, teamB);
+        // Full chalk mode: always pick the favorite
+        if (parseFloat(document.getElementById("chaos-slider").value) === 2) {
+          return p >= 0.5 ? teamA : teamB;
+        }
         return Math.random() < p ? teamA : teamB;
       }
 
